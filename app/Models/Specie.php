@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property boolean $is_aggressive
  * @property BeeFamily[] $beeFamilies
  */
-class Species extends Model
+class Specie extends Model
 {
     /**
      * The primary key for the model.
