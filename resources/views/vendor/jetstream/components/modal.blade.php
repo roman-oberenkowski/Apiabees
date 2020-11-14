@@ -21,6 +21,7 @@ switch ($maxWidth ?? '2xl') {
         $maxWidth = 'sm:max-w-2xl';
         break;
 }
+
 @endphp
 
 <div

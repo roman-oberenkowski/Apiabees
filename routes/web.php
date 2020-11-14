@@ -13,8 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/table', function (){
-    return view('table');
+Route::get('/table', function () {
+    return view('example');
 });
 
 Route::middleware(['auth:sanctum'])->group(function () {
