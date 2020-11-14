@@ -19,20 +19,23 @@
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.js" defer></script>
     </head>
     <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
-            @livewire('navigation-dropdown')
+        <div class="min-h-screen bg-gray-100 flex flex-wrap overflow-hidden">
 
-            <!-- Page Heading -->
-            <header class="bg-white shadow">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            <div class="w-full md:w-1/3 lg:w-3/10 xl:w-1/6 shadow md:h-full">
+                <x-sidebar-nav></x-sidebar-nav>
+            </div>
+
+            <div class="w-full h-screen overflow-hidden md:w-2/3 lg:w-7/10 xl:w-5/6 order-first md:order-none md:h-screen">
+                <x-header>
                     {{ $header }}
-                </div>
-            </header>
-
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
+                </x-header>
+                <main class="px-2 max-h-full overflow-y-auto">
+                    <!-- Page Content -->
+                    <section class="px-2 w-full overflow-hidden">
+                        {{ $slot }}
+                    </section>
+                </main>
+            </div>
         </div>
 
         @stack('modals')
