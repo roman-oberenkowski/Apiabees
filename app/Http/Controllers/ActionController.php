@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Action;
 use Illuminate\Http\Request;
-use \App\Models\Action;
 
 class ActionController extends Controller
 {
@@ -35,29 +35,31 @@ class ActionController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
-        
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Action  $action
      * @return \Illuminate\Http\Response
      */
-    public function show($PESEL,$performed_at)
+    //return Action::findOrFail(['employee_PESEL'=>'12212862899','performed_at'=>'2020-11-14 16:59:06.0'])->getKey();
+    public function show($PESEL, $performed_at)
     {
         //return 'show action of ' . $PESEL . ', performed at: '.$performed_at;
-        return Action::where('employee_PESEL',$PESEL)->where('performed_at',$performed_at)->first();
+        //return Action::where('employee_PESEL',$PESEL)->where('performed_at',$performed_at)->first();
+        
+        return  Action::where('employee_PESEL',$PESEL)->where('performed_at',$performed_at)->get();
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Action  $action
      * @return \Illuminate\Http\Response
      */
-    public function edit($PESEL,$performed_at)
+    public function edit(Action $action)
     {
         //
     }
@@ -66,10 +68,10 @@ class ActionController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Action  $action
      * @return \Illuminate\Http\Response
      */
-    public function update($PESEL,$performed_at)
+    public function update(Request $request, Action $action)
     {
         //
     }
@@ -77,10 +79,10 @@ class ActionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Action  $action
      * @return \Illuminate\Http\Response
      */
-    public function destroy($PESEL,$performed_at)
+    public function destroy(Action $action)
     {
         //
     }
