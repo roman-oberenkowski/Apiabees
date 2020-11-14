@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use \App\Models\Action;
 
 class ActionController extends Controller
 {
@@ -11,9 +12,9 @@ class ActionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($PESEL)
     {
-        //
+        return Action::where('employee_PESEL',$PESEL)->get();
     }
 
     /**
@@ -34,7 +35,8 @@ class ActionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request);
+        
     }
 
     /**
@@ -43,9 +45,10 @@ class ActionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($PESEL,$performed_at)
     {
-        //
+        //return 'show action of ' . $PESEL . ', performed at: '.$performed_at;
+        return Action::where('employee_PESEL',$PESEL)->where('performed_at',$performed_at)->first();
     }
 
     /**
@@ -54,7 +57,7 @@ class ActionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($PESEL,$performed_at)
     {
         //
     }
@@ -66,7 +69,7 @@ class ActionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($PESEL,$performed_at)
     {
         //
     }
@@ -77,7 +80,7 @@ class ActionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($PESEL,$performed_at)
     {
         //
     }

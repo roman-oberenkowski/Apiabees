@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\FamilyState;
 
 class FamilyStateController extends Controller
 {
@@ -13,7 +14,7 @@ class FamilyStateController extends Controller
      */
     public function index()
     {
-        //
+        return FamilyState::all();
     }
 
     /**

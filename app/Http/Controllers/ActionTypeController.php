@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use \App\Models\ActionType;
 
 class ActionTypeController extends Controller
 {
@@ -13,7 +14,7 @@ class ActionTypeController extends Controller
      */
     public function index()
     {
-        //
+        return ActionType::all();
     }
 
     /**
@@ -23,7 +24,7 @@ class ActionTypeController extends Controller
      */
     public function create()
     {
-        //
+        return 'create form';
     }
 
     /**
@@ -34,7 +35,7 @@ class ActionTypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return 'store';
     }
 
     /**
@@ -45,7 +46,7 @@ class ActionTypeController extends Controller
      */
     public function show($id)
     {
-        //
+        //not implement
     }
 
     /**
@@ -56,7 +57,7 @@ class ActionTypeController extends Controller
      */
     public function edit($id)
     {
-        //
+
     }
 
     /**
@@ -68,7 +69,7 @@ class ActionTypeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
     }
 
     /**
@@ -79,6 +80,6 @@ class ActionTypeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //only if empty
     }
 }

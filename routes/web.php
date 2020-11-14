@@ -13,6 +13,7 @@ use App\Http\Controllers\HiveController;
 use App\Http\Controllers\HoneyProducionController;
 use App\Http\Controllers\HoneyTypeController;
 use App\Http\Controllers\SpecieController;
+use App\Http\Controllers\StateTypeController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\WaxProductionController;
 
@@ -104,21 +105,21 @@ Route::middleware(['auth:sanctum'])->group(function () {
         'index', 'create', 'store', 'show', 'edit', 'update', 'destroy'
     ]);
 
-    //DICTIONARY TABLES (oprogramować destroy, że jeśli nigdzie nie jest używane, to można usunąć)
-    Route::resource('action_types', ActionTypesController::class)->only([
-        'index', 'create', 'store','destroy'
+    //DICTIONARY TABLES //opcjonalnie dodac destroy lub 
+    Route::resource('action_types', ActionTypeController::class)->only([
+        'index', 'create', 'store'
     ]);
 
     Route::resource('honey_types', HoneyTypeController::class)->only([
-        'index', 'create', 'store','destroy'
+        'index', 'create', 'store'
     ]);
 
     Route::resource('species', SpecieController::class)->only([
-        'index', 'create', 'store','destroy'
+        'index', 'create', 'store'
     ]);
     
     Route::resource('state_types', StateTypeController::class)->only([
-        'index', 'create', 'store','destroy'
+        'index', 'create', 'store'
     ]);
 });
 

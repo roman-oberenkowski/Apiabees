@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\HoneyType;
 
 class HoneyTypeController extends Controller
 {
@@ -13,7 +14,7 @@ class HoneyTypeController extends Controller
      */
     public function index()
     {
-        //
+        return HoneyType::all();
     }
 
     /**
