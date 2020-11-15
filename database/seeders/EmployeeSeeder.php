@@ -19,7 +19,7 @@ class EmployeeSeeder extends Seeder
 
         $f=\Faker\Factory::create('pl_PL');
         $employees=array();
-        for ($i=0;$i<5;$i++){
+        for ($i=0;$i<10;$i++){
             array_push($employees,$f->unique()->PESEL);
         }
         foreach($employees as $pesel){

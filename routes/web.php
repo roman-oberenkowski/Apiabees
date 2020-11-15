@@ -1,6 +1,21 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ActionController;
+use App\Http\Controllers\ActionTypeController;
+use App\Http\Controllers\ApiaryController;
+use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\BeeFamilyController;
+use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\EmployeeTaskController;
+use App\Http\Controllers\FamilyStateController;
+use App\Http\Controllers\HiveController;
+use App\Http\Controllers\HoneyProducionController;
+use App\Http\Controllers\HoneyTypeController;
+use App\Http\Controllers\SpecieController;
+use App\Http\Controllers\StateTypeController;
+use App\Http\Controllers\TaskController;
+use App\Http\Controllers\WaxProductionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,393 +33,93 @@ Route::get('/table', function (){
 });
 
 Route::middleware(['auth:sanctum'])->group(function () {
-
     Route::get('/', function () {
         return view('dashboard');
     })->name('dashboard');
+    
+    
+    //APIARIES
+    Route::resource('apiaries', ApiaryController::class)->only([
+        'index', 'create', 'store', 'show'
+    ]);
+    Route::resource('apiaries.hives', HiveController::class)->shallow()->only([
+        'index', 'create', 'store', 'show'
+    ]);
+    Route::resource('apiaries.waxproducions', WaxProducionController::class)->only([
+        'index', 'create', 'store', 'show'
+    ]);
+    Route::resource('apiaries.honeyproducions', HoneyProducionController::class)->only([
+        'index', 'create', 'store', 'show'
+    ]);
+    
 
-    Route::prefix('/actions')->group(function () {
-        Route::get('/', function () {
-            return 'index';
-        });
-        Route::get('/create', function () {
-            return 'create';
-        });
-        Route::post('/', function () {
-            return 'store';
-        });
-        Route::get('/{action}/edit', function () {
-            return 'edit';
-        });
-        Route::put('/', function () {
-            return 'update';
-        });
-        // Route::delete('/{action}', function () {
-        //     return 'delete';
-        // });
-        // Route::get('/{action}', function () {
-        //     return 'show';
-        // });
+    //BEE_FAMILIIES  
+    Route::resource('bee_families', BeeFamilyController::class)->only([
+        'index', 'create', 'store', 'show', 'edit', 'update'
+    ]);
+    Route::resource('bee_families.family_states', FamilyStateController::class)->only([
+        'index', 'create', 'store', 'show'
+    ]);
 
-    });
+    
+    //EMPLOYEES
+    Route::resource('employees', EmployeeController::class)->only([
+        'index', 'create', 'store', 'show', 'edit', 'update'
+    ]);
+    //jeśli do action będzie slug to: Route::resource('employees.actions', ActionController::class)->shallow()->only([
+    Route::resource('employees.actions', ActionController::class)->only([
+        'index', 'create', 'store', 'show'
+    ]);
 
-    Route::prefix('/action_types')->group(function () {
-        Route::get('/', function () {
-            return 'index';
-        });
-        Route::get('/create', function () {
-            return 'create';
-        });
-        Route::post('/', function () {
-            return 'store';
-        });
-        // Route::get('/{action_type}/edit', function () {
-        //     return 'edit';
-        // });
-        // Route::put('/', function () {
-        //     return 'update';
-        // });
-        // Route::delete('/{action_type}', function () {
-        //     return 'delete';
-        // });
-        // Route::get('/{action_type}', function () {
-        //     return 'show';
-        // });
-    });
+    Route::resource('employees.attendances', AttendanceController::class)->only([
+        'index', 'create', 'store', 'show' 
+    ]);
+ 
+    Route::resource('employees.employee_tasks', EmployeeTaskController::class)->only([
+        'index', 'create', 'store', 'show'
+    ]);
 
-    Route::prefix('/apiaries')->group(function () {
-        Route::get('/', function () {
-            return 'index';
-        });
-        Route::get('/create', function () {
-            return 'create';
-        });
-        Route::post('/', function () {
-            return 'store';
-        });
-        Route::get('/{apiary}/edit', function () {
-            return 'edit';
-        });
-        Route::put('/', function () {
-            return 'update';
-        });
-        Route::delete('/{apiary}', function () {
-            return 'delete';
-        });
-        Route::get('/{apiary}/hives', function () {
-            return 'hives';
-        });
-        Route::get('/{apiary}/productions', function () {
-            return 'productions';
-        });
-        // Route::get('/{apiary}', function () {
-        //     return 'show';
-        // });
-    });
+    //HIVES
+    Route::resource('hives', HiveController::class)->only([
+        'index', 'create', 'store', 'show', 'edit', 'update'
+    ]);
+    Route::resource('hives.family_states', FamilyStateController::class)->only([
+        'index', 'create', 'store', 'show', 'edit', 'update'
+    ]);
 
-    Route::prefix('/attendances')->group(function () {
-        Route::get('/', function () {
-            return 'index';
-        });
-        Route::get('/create', function () {
-            return 'create';
-        });
-        Route::post('/', function () {
-            return 'store';
-        });
-        Route::get('/{attendance}/finish', function () {
-            return 'finish';
-        });
-        Route::put('/{attendance}', function () {
-            return 'update';
-        });
-        // Route::get('/{attendance}', function () {
-        //     return 'show';
-        // });
-    });
+    //OTHER
+    Route::resource('employee_tasks', EmployeeTaskController::class)->only([
+        'index', 'create', 'store', 'show', 'destroy'
+    ]);
+    
+    Route::resource('tasks', TaskController::class)->only([
+        'index', 'create', 'store', 'show', 'edit', 'update', 'destroy'
+    ]);
+    
+    Route::resource('honey_productions', HoneyProductionController::class)->only([
+        'index', 'create', 'store', 'show', 'edit', 'update', 'destroy'
+    ]);
 
+    Route::resource('wax_productions', WaxProductionController::class)->only([
+        'index', 'create', 'store', 'show', 'edit', 'update', 'destroy'
+    ]);
 
-    Route::prefix('/bee_families')->group(function () {
-        Route::get('/', function () {
-            return 'index';
-        });
-        Route::get('/create', function () {
-            return 'create';
-        });
-        Route::post('/', function () {
-            return 'store';
-        });
-        Route::get('/{bee_family}/edit', function () {
-            return 'edit';
-        });
-        Route::put('/{bee_family}', function () {
-            return 'update';
-        });
-        Route::delete('/{bee_family}', function () {
-            return 'delete';
-        });
-        Route::get('/{bee_family}/states', function () {
-            return 'states';
-        });
-        Route::get('/{bee_family}', function () {
-            return 'show';
-        });
-    });
+    //DICTIONARY TABLES //opcjonalnie dodac destroy lub 
+    Route::resource('action_types', ActionTypeController::class)->only([
+        'index', 'create', 'store'
+    ]);
 
-//may be incomplete
-    Route::prefix('/employees')->group(function () {
-        Route::get('/', function () {
-            return 'index';
-        });
-        Route::get('/create', function () {
-            return 'create';
-        });
-        Route::post('/', function () {
-            return 'store';
-        });
-        Route::get('/{employee}/edit', function () {
-            return 'edit';
-        });
-        Route::delete('/{employee}', function () {
-            return 'delete';
-        });
-        Route::get('/{employee}/assign_user', function () {
-            return 'assign_user';
-        });
-        Route::prefix('/{employee}/actions')->group(function () {
-            Route::get('/create', function () {
-                return 'create';
-            });
-            Route::get('/{action}/edit', function () {
-                return 'edit';
-            });
-            // Route::get('/{action}', function () {
-            //     return 'show';
-            // });
-            Route::get('/', function () {
-                return 'index';
-            });
-        });
-        Route::get('/{employee}/tasks', function () {
-            return 'index tasks';
-        });
-        Route::get('/{employee}', function () {
-            return 'show';
-        });
-    });
+    Route::resource('honey_types', HoneyTypeController::class)->only([
+        'index', 'create', 'store'
+    ]);
 
-
-    Route::prefix('/employee_tasks')->group(function () {
-        Route::get('/', function () {
-            return 'index';
-        });
-        Route::get('/create', function () {
-            return 'create';
-        });
-        Route::post('/', function () {
-            return 'store';
-        });
-        Route::delete('/{employee_task}', function () {
-            return 'delete';
-        });
-        // Route::get('/{employee_task}', function () {
-        //     return 'show';
-        // });
-    });
-
-    Route::prefix('/family_states')->group(function () {
-        Route::get('/', function () {
-            return 'index';
-        });
-        Route::get('/create', function () {
-            return 'create';
-        });
-        Route::post('/', function () {
-            return 'store';
-        });
-        Route::get('/{family_state}/edit', function () {
-            return 'edit';
-        });
-        Route::put('/{family_state}', function () {
-            return 'update';
-        });
-        Route::delete('/{family_state}', function () {
-            return 'delete';
-        });
-        // Route::get('/{family_state}', function () {
-        //     return 'show';
-        // });
-    });
-
-    Route::prefix('/hives')->group(function () {
-        Route::get('/', function () {
-            return 'index';
-        });
-        Route::get('/create', function () {
-            return 'create';
-        });
-        Route::post('/', function () {
-            return 'store';
-        });
-        Route::get('/{hive}/edit', function () {
-            return 'edit';
-        });
-        Route::put('/{hive}', function () {
-            return 'update';
-        });
-        Route::delete('/{hive}', function () {
-            return 'delete';
-        });
-        // Route::get('/{hive}', function () {
-        //     return 'show';
-        // });
-    });
-
-
-
-    Route::prefix('/honey_types')->group(function () {
-        Route::get('/', function () {
-            return 'index';
-        });
-        Route::get('/create', function () {
-            return 'create';
-        });
-        Route::post('/', function () {
-            return 'store';
-        });
-        // Route::get('/{honey_type}/edit', function () {
-        //     return 'edit';
-        // });
-        // Route::put('/{honey_type}', function () {
-        //     return 'update';
-        // });
-        // Route::delete('/{honey_type}', function () {
-        //     return 'delete';
-        // });
-        // Route::get('/{honey_type}', function () {
-        //     return 'show';
-        // });
-    });
-
-    Route::prefix('/species')->group(function () {
-        Route::get('/', function () {
-            return 'index';
-        });
-        Route::get('/create', function () {
-            return 'create';
-        });
-        Route::post('/', function () {
-            return 'store';
-        });
-        // Route::get('/{specie}/edit', function () {
-        //     return 'edit';
-        // });
-        // Route::put('/{specie}', function () {
-        //     return 'update';
-        // });
-        // Route::delete('/{specie}', function () {
-        //     return 'delete';
-        // });
-        // Route::get('/{specie}', function () {
-        //     return 'show';
-        // });
-    });
-
-    Route::prefix('/state_types')->group(function () {
-        Route::get('/', function () {
-            return 'index';
-        });
-        Route::get('/create', function () {
-            return 'create';
-        });
-        Route::post('/', function () {
-            return 'store';
-        });
-        // Route::get('/{state_type}/edit', function () {
-        //     return 'edit';
-        // });
-        // Route::put('/{state_type}', function () {
-        //     return 'update';
-        // });
-        // Route::delete('/{state_type}', function () {
-        //     return 'delete';
-        // });
-        // Route::get('/{state_type}', function () {
-        //     return 'show';
-        // });
-    });
-
-    Route::prefix('/tasks')->group(function () {
-        Route::get('/', function () {
-            return 'index';
-        });
-        Route::get('/create', function () {
-            return 'create';
-        });
-        Route::post('/', function () {
-            return 'store';
-        });
-        Route::get('/{task}/edit', function () {
-            return 'edit';
-        });
-        Route::put('/{task}', function () {
-            return 'update';
-        });
-        Route::delete('/{task}', function () {
-            return 'delete';
-        });
-        Route::get('/{task}', function () {
-            return 'show';
-        });
-    });
-
-    Route::prefix('/honey_productions')->group(function () {
-        Route::get('/', function () {
-            return 'index';
-        });
-        Route::get('/create', function () {
-            return 'create';
-        });
-        Route::post('/', function () {
-            return 'store';
-        });
-        Route::get('/{honey_production}/edit', function () {
-            return 'edit';
-        });
-        Route::put('/{honey_production}', function () {
-            return 'update';
-        });
-        Route::delete('/{honey_production}', function () {
-            return 'delete';
-        });
-        // Route::get('/{honey_production}', function () {
-        //     return 'show';
-        // });
-    });
-
-    Route::prefix('/wax_productions')->group(function () {
-        Route::get('/', function () {
-            return 'index';
-        });
-        Route::get('/create', function () {
-            return 'create';
-        });
-        Route::post('/', function () {
-            return 'store';
-        });
-        Route::get('/{wax_production}/edit', function () {
-            return 'edit';
-        });
-        Route::put('/{wax_production}/edit', function () {
-            return 'update';
-        });
-        Route::delete('/{wax_production}', function () {
-            return 'delete';
-        });
-        // Route::get('/{wax_production}', function () {
-        //     return 'show';
-        // });
-    });
+    Route::resource('species', SpecieController::class)->only([
+        'index', 'create', 'store'
+    ]);
+    
+    Route::resource('state_types', StateTypeController::class)->only([
+        'index', 'create', 'store'
+    ]);
 });
 
 
