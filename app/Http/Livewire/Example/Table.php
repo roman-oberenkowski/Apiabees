@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Example;
 
 use Livewire\Component;
 
-class ExampleTable extends Component
+class Table extends Component
 {
     public $isDeleteModalOpen = false;
 
@@ -12,6 +12,6 @@ class ExampleTable extends Component
 
     public function render()
     {
-        return view('livewire.example-table');
+        return view('livewire.example.table');
     }
 }
