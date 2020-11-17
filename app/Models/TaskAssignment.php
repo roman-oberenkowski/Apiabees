@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property int $task_id
@@ -10,22 +11,16 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $employee_PESEL
  * @property Apiary $apiary
  * @property Employee $employee
- * @property Task $task
+ * @property TaskType $task
  */
-class EmployeeTask extends Model
+class TaskAssignment extends Model
 {
-    protected $primaryKey = ['apiary_code_name', 'employee_PESEL', 'task_id'];
-
-    public $incrementing = false;
-
-    protected  $keyType = ['string', 'string', 'int'];
-
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'employees_tasks';
+    protected $table = 'task_assignments';
 
     /**
      * @var array
@@ -40,7 +35,7 @@ class EmployeeTask extends Model
     public $timestamps = false;
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function apiary()
     {
@@ -48,7 +43,7 @@ class EmployeeTask extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function employee()
     {
@@ -56,10 +51,10 @@ class EmployeeTask extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
-    public function task()
+    public function taskType()
     {
-        return $this->belongsTo('App\Models\Task');
+        return $this->belongsTo('App\Models\TaskType', 'task_type_name');
     }
 }

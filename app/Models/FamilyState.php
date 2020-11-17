@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property string $checked_at
@@ -14,12 +15,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class FamilyState extends Model
 {
-    protected $primaryKey = ['checked_at', 'bee_family_id'];
-
-    public $incrementing = false;
-
-    protected  $keyType = ['string', 'int'];
-
     /**
      * @var array
      */
@@ -36,7 +31,7 @@ class FamilyState extends Model
     public $timestamps = false;
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function beeFamily()
     {
@@ -44,7 +39,7 @@ class FamilyState extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function stateType()
     {

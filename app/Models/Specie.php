@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property string $name
@@ -36,7 +37,7 @@ class Specie extends Model
     /**
      * @var array
      */
-    protected $fillable = ['latin_name', 'is_aggressive'];
+    protected $fillable = ['name', 'latin_name', 'is_aggressive'];
 
     /**
      * Indicates if the model should be timestamped.
@@ -46,7 +47,7 @@ class Specie extends Model
     public $timestamps = false;
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function beeFamilies()
     {

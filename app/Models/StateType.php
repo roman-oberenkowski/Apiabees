@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property string $name
@@ -34,7 +35,7 @@ class StateType extends Model
     /**
      * @var array
      */
-    protected $fillable = [];
+    protected $fillable = [ 'name' ];
 
     /**
      * Indicates if the model should be timestamped.
@@ -44,7 +45,7 @@ class StateType extends Model
     public $timestamps = false;
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function familyStates()
     {

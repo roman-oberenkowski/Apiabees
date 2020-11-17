@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property string $started_at
@@ -12,17 +13,14 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Attendance extends Model
 {
-    protected $primaryKey = ['started_at', 'employee_PESEL'];
-
-    public $incrementing = false;
-
-    protected  $keyType = ['string', 'string'];
 
     /**
      * @var array
      */
     protected $fillable = [
+        'started_at',
         'finished_at',
+        'employee_PESEL'
     ];
 
     /**
@@ -33,7 +31,7 @@ class Attendance extends Model
     public $timestamps = false;
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function employee()
     {

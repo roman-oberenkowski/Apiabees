@@ -14,10 +14,11 @@ class CreateWaxProductionsTable extends Migration
     public function up()
     {
         Schema::create('wax_productions', function (Blueprint $table) {
+            $table->id();
             $table->date('produced_at');
             $table->decimal('produced_weight', 10);
             $table->string('apiary_code_name', 32);
-            $table->primary(['apiary_code_name', 'produced_at']);
+            $table->unique(['apiary_code_name', 'produced_at'], 'wax_productions__idx');
         });
     }
 

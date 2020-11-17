@@ -14,11 +14,12 @@ class CreateFamilyStatesTable extends Migration
     public function up()
     {
         Schema::create('family_states', function (Blueprint $table) {
+            $table->id();
             $table->timestamp('checked_at')->useCurrent();
             $table->text('inspection_description')->nullable();
             $table->integer('bee_family_id');
             $table->string('state_type_name', 32)->index('family_states_state_types_fk');
-            $table->primary(['bee_family_id', 'checked_at']);
+            $table->unique(['bee_family_id', 'checked_at'], 'family_states__idx');
         });
     }
 

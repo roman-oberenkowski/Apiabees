@@ -14,7 +14,7 @@ class CreateHivesTable extends Migration
     public function up()
     {
         Schema::create('hives', function (Blueprint $table) {
-            $table->integer('id', true);
+            $table->id();
             $table->string('material', 32);
             $table->string('nfc_tag', 128)->nullable();
             $table->string('qr_code', 32)->nullable();

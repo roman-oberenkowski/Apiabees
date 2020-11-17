@@ -14,12 +14,13 @@ class CreateActionsTable extends Migration
     public function up()
     {
         Schema::create('actions', function (Blueprint $table) {
+            $table->id();
             $table->char('employee_PESEL', 11);
             $table->timestamp('performed_at')->useCurrent();
             $table->text('action_description')->nullable();
             $table->integer('hive_id')->nullable()->index('actions_hives_fk');
             $table->string('action_type_name', 32)->index('actions_action_types_fk');
-            $table->primary(['employee_PESEL', 'performed_at']);
+            $table->unique(['employee_PESEL', 'performed_at'], 'UC_actions__idx');
         });
     }
 

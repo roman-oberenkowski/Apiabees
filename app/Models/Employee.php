@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property string $PESEL
@@ -67,7 +68,7 @@ class Employee extends Model
     public $timestamps = false;
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function actions()
     {
@@ -75,7 +76,7 @@ class Employee extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function attendances()
     {
@@ -83,10 +84,10 @@ class Employee extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
-    public function employeesTasks()
+    public function assignedTasks()
     {
-        return $this->hasMany('App\Models\EmployeeTask', 'employee_PESEL', 'PESEL');
+        return $this->hasMany('App\Models\TaskAssignment', 'task_assignments', 'PESEL');
     }
 }

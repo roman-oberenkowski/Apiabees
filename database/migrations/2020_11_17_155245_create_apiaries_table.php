@@ -20,7 +20,8 @@ class CreateApiariesTable extends Migration
             $table->string('parcel', 8);
             $table->string('street', 32);
             $table->string('city', 32);
-            $table->integer('max_hives_count');
+            $table->integer('col_num');
+            $table->integer('row_num');
             $table->decimal('latitude', 10, 7);
             $table->decimal('longitude', 10, 7);
         });

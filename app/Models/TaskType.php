@@ -3,13 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property int $id
  * @property string $name
- * @property EmployeesTask[] $employeesTasks
+ * @property TaskAssignment[] $employeesTasks
  */
-class Task extends Model
+class TaskType extends Model
 {
     /**
      * @var array
@@ -24,10 +25,10 @@ class Task extends Model
     public $timestamps = false;
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function employeesTasks()
     {
-        return $this->hasMany('App\Models\EmployeeTask');
+        return $this->hasMany('App\Models\TaskAssignment');
     }
 }
