@@ -6,12 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * @property int $task_id
- * @property string $apiary_code_name
+ * @property int $id
+ * @property string apiary_code_name
+ * @property string $assignment_date
  * @property string $employee_PESEL
+ * @property string $task_type_name
  * @property Apiary $apiary
  * @property Employee $employee
- * @property TaskType $task
+ * @property TaskType $task_type
  */
 class TaskAssignment extends Model
 {

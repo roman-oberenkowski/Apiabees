@@ -13,7 +13,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string $parcel
  * @property string $street
  * @property string $city
- * @property int $max_hives_count
+ * @property int $row_num
+ * @property int $col_num
  * @property float $latitude
  * @property float $longitude
  * @property TaskAssignment[] $employeesTasks
