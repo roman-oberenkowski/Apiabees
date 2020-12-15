@@ -26,13 +26,14 @@ class ApiarySeeder extends Seeder
             $rec->area=rand(10,200);
             $rec->parcel=$f->numberBetween(1,100);
             $rec->street=$f->streetName;
-            $rec->city=$f->city;  
-            $rec->max_hives_count=$f->numberBetween(10,98)*4;
+            $rec->city=$f->city;
+            $rec->row_num=$f->numberBetween(2,12);
+            $rec->col_num=$f->numberBetween(1,5);
             $rec->latitude=$f->numberBetween(4900,5400)/100;
-            $rec->longitude=$f->numberBetween(1400,2400)/100;                                             
+            $rec->longitude=$f->numberBetween(1400,2400)/100;
             $rec->save();
         }
-        
+
     }
 }
 

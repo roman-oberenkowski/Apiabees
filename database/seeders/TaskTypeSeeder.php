@@ -6,7 +6,7 @@ use Illuminate\Database\Seeder;
 use \App\Models\TaskType;
 
 
-class TaskSeeder extends Seeder
+class TaskTypeSeeder extends Seeder
 {
 
     /**
