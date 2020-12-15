@@ -14,7 +14,7 @@ class AddForeignKeysToBeeFamiliesTable extends Migration
     public function up()
     {
         Schema::table('bee_families', function (Blueprint $table) {
-            $table->foreign('hive_id', 'bee_families_hives_fk')->references('id')->on('hives')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+            //$table->foreign('hive_id', 'bee_families_hives_fk')->references('id')->on('hives')->onUpdate('RESTRICT')->onDelete('RESTRICT');
             $table->foreign('species_name', 'bee_families_species_fk')->references('name')->on('species')->onUpdate('CASCADE')->onDelete('RESTRICT');
         });
     }
