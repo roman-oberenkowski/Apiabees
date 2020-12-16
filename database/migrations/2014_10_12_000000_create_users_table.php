@@ -21,10 +21,9 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
             $table->text('profile_photo_path')->nullable();
-            $table->string('employee_PESEL')->nullable();
             $table->timestamps();
+            $table->char('employee_PESEL', 11)->nullable();
             $table->softDeletes();
-            $table->foreign('employee_PESEL')->references('PESEL')->on('employees');
         });
     }
 
