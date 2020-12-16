@@ -16,7 +16,6 @@ class EmployeeSeeder extends Seeder
      */
     public function run()
     {
-
         $f=\Faker\Factory::create('pl_PL');
         $employees=array();
         for ($i=0;$i<10;$i++){
@@ -29,9 +28,9 @@ class EmployeeSeeder extends Seeder
             $emp->last_name=$f->lastName;
             $emp->salary=$f->numberBetween(10,50)*200;
             $emp->house_number=$f->numberBetween(1,200);
-            $emp->street=$f->streetName;
+            $emp->street=substr($f->streetName,0,32);
             $emp->city=$f->city;
-            $emp->email=$f->unique()->email;
+            $emp->email=substr($f->unique()->email,0,32);
             if($f->randomDigit%2==0){
                 $emp->appartement=$f->numberBetween(1,50);
             }

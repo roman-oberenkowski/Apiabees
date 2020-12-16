@@ -21,7 +21,6 @@ class DatabaseSeeder extends Seeder
             TaskTypeSeeder::class,
             StateTypeSeeder::class,
             //other seeders
-
             ApiarySeeder::class,
             EmployeeSeeder::class,
             AttendanceSeeder::class,

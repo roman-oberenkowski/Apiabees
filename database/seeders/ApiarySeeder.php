@@ -25,7 +25,7 @@ class ApiarySeeder extends Seeder
             $rec->name=$names[$i];
             $rec->area=rand(10,200);
             $rec->parcel=$f->numberBetween(1,100);
-            $rec->street=$f->streetName;
+            $rec->street=substr($f->streetName,0,32);
             $rec->city=$f->city;
             $rec->row_num=$f->numberBetween(2,12);
             $rec->col_num=$f->numberBetween(1,5);

@@ -15,13 +15,13 @@ class HoneyTypeSeeder extends Seeder
      */
     public function run()
     {
-        $arr=['Wrzosowy', 'Rzepakowy', 'Akacjowy', 'Gryczany', 'Wielokwiatowy','Spadziowy']; 
+        $arr=['Wrzosowy', 'Rzepakowy', 'Akacjowy', 'Gryczany', 'Wielokwiatowy','Spadziowy'];
         foreach ($arr as $ht){
             $rec=new HoneyType;
             $rec->name= $ht;
             $rec->save();
         }
-        
+
     }
 }
 
