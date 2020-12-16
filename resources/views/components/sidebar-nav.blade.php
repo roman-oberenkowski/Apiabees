@@ -9,7 +9,7 @@
         </div>
         <div class="font-semibold text-xl text-gray-100 leading-tight py-4">
             <x-sidebar-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')"> <i class="fab fa-accusoft pr-1"></i>  {{ __('Dashboard') }} </x-sidebar-nav-link>
-            <x-sidebar-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')"> <i class="fab fa-accusoft pr-1"></i>  {{ __('Dashboard') }} </x-sidebar-nav-link>
+            <x-sidebar-nav-link href="{{ route('employees.index') }}" :active="request()->is('employees/*')"> <i class="fab fa-accusoft pr-1"></i>  {{ __('Employees') }} </x-sidebar-nav-link>
         </div>
     </div>
 </aside>

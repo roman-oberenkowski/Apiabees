@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Krlove\EloquentModelGenerator\Model\HasOne;
 
 /**
  * @property string $PESEL
@@ -79,6 +80,14 @@ class Employee extends Model
      * @var bool
      */
     public $timestamps = false;
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function user()
+    {
+        return $this->hasOne('App\Models\User', 'employee_PESEL', 'PESEL');
+    }
 
     /**
      * @return HasMany
