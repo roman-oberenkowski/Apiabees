@@ -14,7 +14,7 @@ class CreateFamilyStatesTable extends Migration
     public function up()
     {
         Schema::create('family_states', function (Blueprint $table) {
-            $table->id();
+            $table->integer('id', true);
             $table->timestamp('checked_at')->useCurrent();
             $table->text('inspection_description')->nullable();
             $table->integer('bee_family_id');

@@ -14,7 +14,7 @@ class CreateActionsTable extends Migration
     public function up()
     {
         Schema::create('actions', function (Blueprint $table) {
-            $table->id();
+            $table->integer('id', true);
             $table->char('employee_PESEL', 11);
             $table->timestamp('performed_at')->useCurrent();
             $table->text('action_description')->nullable();

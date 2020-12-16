@@ -18,8 +18,8 @@ class CreateEmployeesTable extends Migration
             $table->string('first_name', 32);
             $table->string('last_name', 32);
             $table->decimal('salary', 10);
-            $table->string('email', 64)->unique('employees__idx');
-            $table->date('date_of_employment')->useCurrent();
+            $table->string('email', 32)->unique('employees__idx');
+            $table->date('date_of_employment')->default('CURRENT_TIMESTAMP');
             $table->date('date_of_release')->nullable();
             $table->string('appartement', 4)->nullable();
             $table->string('house_number', 8);

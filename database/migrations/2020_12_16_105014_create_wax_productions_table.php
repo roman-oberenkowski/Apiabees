@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateHoneyProductionsTable extends Migration
+class CreateWaxProductionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class CreateHoneyProductionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('honey_productions', function (Blueprint $table) {
-            $table->id();
+        Schema::create('wax_productions', function (Blueprint $table) {
+            $table->integer('id', true);
             $table->date('produced_at');
             $table->decimal('produced_weight', 10);
-            $table->string('honey_type_name', 32)->index('honey_productions_types_fk');
             $table->string('apiary_code_name', 32);
-            $table->unique(['apiary_code_name', 'produced_at'], 'honey_productions__idx');
+            $table->unique(['apiary_code_name', 'produced_at'], 'wax_productions__idx');
         });
     }
 
@@ -30,6 +29,6 @@ class CreateHoneyProductionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('honey_productions');
+        Schema::dropIfExists('wax_productions');
     }
 }

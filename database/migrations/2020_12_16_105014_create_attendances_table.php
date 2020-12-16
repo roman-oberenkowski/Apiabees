@@ -14,7 +14,7 @@ class CreateAttendancesTable extends Migration
     public function up()
     {
         Schema::create('attendances', function (Blueprint $table) {
-            $table->id();
+            $table->integer('id', true);
             $table->timestamp('started_at')->useCurrent();
             $table->timestamp('finished_at')->nullable();
             $table->char('employee_PESEL', 11);

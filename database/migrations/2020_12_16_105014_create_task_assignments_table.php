@@ -14,8 +14,8 @@ class CreateTaskAssignmentsTable extends Migration
     public function up()
     {
         Schema::create('task_assignments', function (Blueprint $table) {
-            $table->id();
-            $table->date('assignment_date')->useCurrent();
+            $table->integer('id', true);
+            $table->date('assignment_date')->default('CURRENT_TIMESTAMP');
             $table->char('employee_PESEL', 11);
             $table->string('task_type_name', 64)->index('assigned_tasks_tasks_fk');
             $table->string('apiary_code_name', 32)->index('assigned_tasks_apiaries_fk');

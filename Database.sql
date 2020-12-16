@@ -177,7 +177,6 @@ ALTER TABLE wax_productions ADD CONSTRAINT wax_productions_apiaries_fk FOREIGN K
 CREATE OR REPLACE PROCEDURE NewAttendance(
   IN pEmployeePESEL VARCHAR(11)
 )
-
 BEGIN
   UPDATE attendances
   SET finished_at = CURRENT_TIMESTAMP

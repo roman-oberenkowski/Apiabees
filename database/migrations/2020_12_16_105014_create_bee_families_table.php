@@ -14,8 +14,8 @@ class CreateBeeFamiliesTable extends Migration
     public function up()
     {
         Schema::create('bee_families', function (Blueprint $table) {
-            $table->id();
-            $table->date('acquired_at')->useCurrent();
+            $table->integer('id', true);
+            $table->date('acquired_at')->default('CURRENT_TIMESTAMP');
             $table->integer('population');
             $table->date('die_off_date')->nullable();
             $table->string('species_name', 32)->index('bee_families_species_fk');
