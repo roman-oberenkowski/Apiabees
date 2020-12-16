@@ -27,6 +27,7 @@ use App\Http\Controllers\WaxProductionController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::get('/example', function () {
@@ -36,8 +37,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/', function () {
         return view('dashboard');
     })->name('dashboard');
-    
-    
+
+
     //APIARIES
     Route::resource('apiaries', ApiaryController::class)->only([
         'index', 'create', 'store', 'show'
@@ -51,9 +52,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::resource('apiaries.honeyproducions', HoneyProducionController::class)->only([
         'index', 'create', 'store', 'show'
     ]);
-    
 
-    //BEE_FAMILIIES  
+
+    //BEE_FAMILIIES
     Route::resource('bee_families', BeeFamilyController::class)->only([
         'index', 'create', 'store', 'show', 'edit', 'update'
     ]);
@@ -61,20 +62,21 @@ Route::middleware(['auth:sanctum'])->group(function () {
         'index', 'create', 'store', 'show'
     ]);
 
-    
+
     //EMPLOYEES
     Route::resource('employees', EmployeeController::class)->only([
         'index', 'create', 'store', 'show', 'edit', 'update'
     ]);
+
     //jeśli do action będzie slug to: Route::resource('employees.actions', ActionController::class)->shallow()->only([
     Route::resource('employees.actions', ActionController::class)->only([
         'index', 'create', 'store', 'show'
     ]);
 
     Route::resource('employees.attendances', AttendanceController::class)->only([
-        'index', 'create', 'store', 'show' 
+        'index', 'create', 'store', 'show'
     ]);
- 
+
     Route::resource('employees.employee_tasks', EmployeeTaskController::class)->only([
         'index', 'create', 'store', 'show'
     ]);
@@ -91,11 +93,11 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::resource('employee_tasks', EmployeeTaskController::class)->only([
         'index', 'create', 'store', 'show', 'destroy'
     ]);
-    
+
     Route::resource('tasks', TaskController::class)->only([
         'index', 'create', 'store', 'show', 'edit', 'update', 'destroy'
     ]);
-    
+
     Route::resource('honey_productions', HoneyProductionController::class)->only([
         'index', 'create', 'store', 'show', 'edit', 'update', 'destroy'
     ]);
@@ -104,7 +106,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
         'index', 'create', 'store', 'show', 'edit', 'update', 'destroy'
     ]);
 
-    //DICTIONARY TABLES //opcjonalnie dodac destroy lub 
+    //DICTIONARY TABLES //opcjonalnie dodac destroy lub
     Route::resource('action_types', ActionTypeController::class)->only([
         'index', 'create', 'store'
     ]);
@@ -116,7 +118,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::resource('species', SpecieController::class)->only([
         'index', 'create', 'store'
     ]);
-    
+
     Route::resource('state_types', StateTypeController::class)->only([
         'index', 'create', 'store'
     ]);

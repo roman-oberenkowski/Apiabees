@@ -66,7 +66,7 @@ CREATE TABLE employees (
 	first_name VARCHAR(32) NOT NULL,
 	last_name VARCHAR(32) NOT NULL,
 	salary DECIMAL(10, 2) NOT NULL,
-	email VARCHAR(32) NOT NULL,
+	email VARCHAR(64) NOT NULL,
 	date_of_employment DATE DEFAULT CURRENT_TIMESTAMP NOT NULL,
 	date_of_release DATE NULL,
 	appartement VARCHAR(4) NULL,
