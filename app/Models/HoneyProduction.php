@@ -18,7 +18,21 @@ class HoneyProduction extends Model
     /**
      * @var array
      */
-    protected $fillable = ['produced_at', 'honey_type_name', 'produced_weight'];
+    protected $fillable = [
+        'produced_at',
+        'honey_type_name',
+        'produced_weight',
+        'apiary_code_name'
+    ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'produced_at' => 'datetime:Y-m-d',
+    ];
 
     /**
      * Indicates if the model should be timestamped.

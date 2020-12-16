@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @property string $PESEL
@@ -23,6 +24,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class Employee extends Model
 {
+    use SoftDeletes;
     /**
      * The primary key for the model.
      *
@@ -48,6 +50,7 @@ class Employee extends Model
      * @var array
      */
     protected $fillable = [
+        'PESEL',
         'first_name',
         'last_name',
         'salary',
@@ -58,6 +61,16 @@ class Employee extends Model
         'house_number',
         'street',
         'city'
+    ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'date_of_employment' => 'datetime:Y-m-d',
+        'date_of_release' => 'datetime:Y-m-d',
     ];
 
     /**

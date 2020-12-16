@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @property int $id
@@ -20,6 +21,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  */
 class BeeFamily extends Model
 {
+    use SoftDeletes;
     /**
      * @var array
      */
@@ -29,6 +31,16 @@ class BeeFamily extends Model
         'acquired_at',
         'population',
         'die_off_date'
+    ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'acquired_at' => 'datetime:Y-m-d',
+        'die_off_date' => 'datetime:Y-m-d',
     ];
 
     /**

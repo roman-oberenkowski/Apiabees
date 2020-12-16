@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @property string $started_at
@@ -13,7 +14,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class Attendance extends Model
 {
-
+    use SoftDeletes;
     /**
      * @var array
      */
@@ -21,6 +22,16 @@ class Attendance extends Model
         'started_at',
         'finished_at',
         'employee_PESEL'
+    ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'started_at' => 'datetime:Y-m-d h:i:s',
+        'finished_at' => 'datetime:Y-m-d h:i:s',
     ];
 
     /**

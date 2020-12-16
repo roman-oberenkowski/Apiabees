@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @property int $id
@@ -17,6 +18,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class TaskAssignment extends Model
 {
+    use SoftDeletes;
     /**
      * The table associated with the model.
      *
@@ -27,7 +29,21 @@ class TaskAssignment extends Model
     /**
      * @var array
      */
-    protected $fillable = [];
+    protected $fillable = [
+        'assignment_date',
+        'employee_PESEL',
+        'task_type_name',
+        'apiary_code_name'
+    ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'assignment_date' => 'datetime:Y-m-d',
+    ];
 
     /**
      * Indicates if the model should be timestamped.

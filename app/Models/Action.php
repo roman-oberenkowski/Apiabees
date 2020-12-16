@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @property int $id
@@ -19,6 +20,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class Action extends Model
 {
+    use SoftDeletes;
+
     /**
      * @var array
      */
@@ -36,6 +39,15 @@ class Action extends Model
      * @var bool
      */
     public $timestamps = false;
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'performed_at' => 'datetime:Y-m-d h:i:s',
+    ];
 
     /**
      * @return BelongsTo

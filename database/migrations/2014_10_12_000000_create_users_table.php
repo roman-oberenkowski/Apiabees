@@ -23,6 +23,8 @@ class CreateUsersTable extends Migration
             $table->text('profile_photo_path')->nullable();
             $table->string('employee_PESEL')->nullable();
             $table->timestamps();
+            $table->softDeletes();
+            $table->foreign('employee_PESEL')->references('PESEL')->on('employees');
         });
     }
 

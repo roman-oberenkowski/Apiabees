@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @property string $name
@@ -13,6 +14,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class Specie extends Model
 {
+    use SoftDeletes;
     /**
      * The primary key for the model.
      *
@@ -37,7 +39,11 @@ class Specie extends Model
     /**
      * @var array
      */
-    protected $fillable = ['name', 'latin_name', 'is_aggressive'];
+    protected $fillable = [
+        'name',
+        'latin_name',
+        'is_aggressive'
+    ];
 
     /**
      * Indicates if the model should be timestamped.

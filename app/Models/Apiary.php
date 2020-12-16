@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @property string $code_name
@@ -24,6 +25,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class Apiary extends Model
 {
+    use SoftDeletes;
     /**
      * The primary key for the model.
      *
@@ -49,6 +51,7 @@ class Apiary extends Model
      * @var array
      */
     protected $fillable = [
+        'code_name',
         'name',
         'area',
         'parcel',
