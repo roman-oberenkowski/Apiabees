@@ -17,7 +17,7 @@ CREATE TABLE actions (
 	action_description TEXT,
 	hive_id INTEGER,
 	action_type_name VARCHAR(32) NOT NULL,
-	deleted_at TIMESTAMP
+	deleted_at TIMESTAMP NULL
 );
 
 CREATE UNIQUE INDEX UC_actions__idx ON actions  (employee_PESEL, performed_at);
@@ -41,7 +41,7 @@ CREATE TABLE attendances (
 	started_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
 	finished_at TIMESTAMP NULL,
 	employee_PESEL CHAR(11) NOT NULL,
-	deleted_at TIMESTAMP,
+	deleted_at TIMESTAMP NULL,
 	CHECK (finished_at >= started_at OR finished_at IS NULL)
 );
 
@@ -55,7 +55,7 @@ CREATE TABLE bee_families (
 	die_off_date DATE NULL,
 	species_name VARCHAR(32) NOT NULL,
 	hive_id INTEGER NOT NULL,
-	deleted_at TIMESTAMP,
+	deleted_at TIMESTAMP NULL,
 	CHECK ( die_off_date >= acquired_at OR die_off_date IS NULL )
 );
 
@@ -73,7 +73,7 @@ CREATE TABLE employees (
 	house_number VARCHAR(8) NOT NULL,
 	street VARCHAR(32) NOT NULL,
 	city VARCHAR(32) NOT NULL,
-	deleted_at TIMESTAMP,
+	deleted_at TIMESTAMP NULL,
 	CHECK (date_of_release >= date_of_employment OR date_of_release IS NULL)
 );
 
@@ -84,7 +84,7 @@ CREATE TABLE family_states (
 	checked_at TIMESTAMP NOT NULL,
 	inspection_description TEXT NULL,
 	bee_family_id INTEGER NOT NULL,
-	deleted_at TIMESTAMP,
+	deleted_at TIMESTAMP NULL,
 	state_type_name VARCHAR(32) NOT NULL
 );
 
@@ -99,7 +99,7 @@ CREATE TABLE hives (
 	location_row INTEGER NULL,
 	location_column INTEGER NULL,
 	bee_family_id INTEGER NULL,
-	deleted_at TIMESTAMP
+	deleted_at TIMESTAMP NULL
 );
 
 CREATE UNIQUE INDEX hives__idx ON hives ( bee_family_id );
@@ -116,7 +116,7 @@ CREATE UNIQUE INDEX honey_productions__idx ON honey_productions ( apiary_code_na
 
 CREATE TABLE honey_types (
 	name VARCHAR(32) NOT NULL PRIMARY KEY,
-	deleted_at TIMESTAMP
+	deleted_at TIMESTAMP NULL
 );
 
 CREATE TABLE task_assignments (
@@ -125,7 +125,7 @@ CREATE TABLE task_assignments (
 	employee_PESEL CHAR(11) NOT NULL,
 	task_type_name VARCHAR(64) NOT NULL,
 	apiary_code_name VARCHAR(32) NOT NULL,
-	deleted_at TIMESTAMP
+	deleted_at TIMESTAMP NULL
 );
 
 CREATE UNIQUE INDEX task_assignments__idx ON task_assignments ( employee_PESEL, task_type_name, apiary_code_name, assignment_date );
@@ -134,17 +134,17 @@ CREATE TABLE species (
 	name VARCHAR(32) NOT NULL PRIMARY KEY,
 	latin_name VARCHAR(32) NOT NULL,
 	is_aggressive BOOL NOT NULL,
-	deleted_at TIMESTAMP
+	deleted_at TIMESTAMP NULL
 );
 
 CREATE TABLE state_types (
 	name VARCHAR(32) NOT NULL PRIMARY KEY,
-	deleted_at TIMESTAMP
+	deleted_at TIMESTAMP NULL
 );
 
 CREATE TABLE task_types (
 	name VARCHAR(64) NOT NULL PRIMARY KEY,
-	deleted_at TIMESTAMP
+	deleted_at TIMESTAMP NULL
 );
 
 CREATE TABLE wax_productions (
@@ -188,6 +188,8 @@ ALTER TABLE task_assignments ADD CONSTRAINT assigned_tasks_apiaries_fk FOREIGN K
 
 ALTER TABLE wax_productions ADD CONSTRAINT wax_productions_apiaries_fk FOREIGN KEY (apiary_code_name) REFERENCES apiaries (code_name);
 
+COMMIT;
+
 CREATE OR REPLACE PROCEDURE NewAttendance(
   IN pEmployeePESEL VARCHAR(11)
 )
@@ -199,6 +201,8 @@ BEGIN
   INSERT INTO attendances (employee_PESEL)
   VALUES (pEmployeePESEL);
 END;
+
+COMMIT;
 
 CREATE OR REPLACE FUNCTION getProduced(
     pType VARCHAR(64),
