@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property string $produced_at
@@ -12,16 +13,23 @@ use Illuminate\Database\Eloquent\Model;
  */
 class WaxProduction extends Model
 {
-    protected $primaryKey = ['produced_at', 'apiary_code_name'];
-
-    public $incrementing = false;
-
-    protected  $keyType = ['string', 'string'];
-
     /**
      * @var array
      */
-    protected $fillable = ['produced_weight'];
+    protected $fillable = [
+        'produced_at',
+        'produced_weight',
+        'apiary_code_name'
+    ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'produced_at' => 'datetime:Y-m-d',
+    ];
 
     /**
      * Indicates if the model should be timestamped.
@@ -31,7 +39,7 @@ class WaxProduction extends Model
     public $timestamps = false;
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function apiary()
     {

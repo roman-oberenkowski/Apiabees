@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @property string $name
@@ -10,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class StateType extends Model
 {
+    use SoftDeletes;
     /**
      * The primary key for the model.
      *
@@ -34,7 +37,7 @@ class StateType extends Model
     /**
      * @var array
      */
-    protected $fillable = [];
+    protected $fillable = [ 'name' ];
 
     /**
      * Indicates if the model should be timestamped.
@@ -44,7 +47,7 @@ class StateType extends Model
     public $timestamps = false;
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function familyStates()
     {

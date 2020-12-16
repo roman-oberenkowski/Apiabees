@@ -4,18 +4,23 @@ CREATE DATABASE apiabees;
 
 USE apiabees;
 
-CREATE TABLE action_types ( 
-	name VARCHAR(32) NOT NULL PRIMARY KEY 
+CREATE TABLE action_types (
+	name VARCHAR(32) NOT NULL PRIMARY KEY,
+	deleted_at TIMESTAMP
+
 );
 
-CREATE TABLE actions ( 
-	employee_PESEL CHAR(11) NOT NULL, 
+CREATE TABLE actions (
+	id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	employee_PESEL CHAR(11) NOT NULL,
 	performed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
 	action_description TEXT,
 	hive_id INTEGER,
-	action_type_name VARCHAR(32) NOT NULL, 
-	PRIMARY KEY ( employee_PESEL, performed_at)
+	action_type_name VARCHAR(32) NOT NULL,
+	deleted_at TIMESTAMP NULL
 );
+
+CREATE UNIQUE INDEX UC_actions__idx ON actions  (employee_PESEL, performed_at);
 
 CREATE TABLE apiaries (
 	code_name VARCHAR(32) NOT NULL PRIMARY KEY,
@@ -24,18 +29,23 @@ CREATE TABLE apiaries (
 	parcel VARCHAR(8) NOT NULL,
 	street VARCHAR(32) NOT NULL,
 	city VARCHAR(32) NOT NULL,
-	max_hives_count INTEGER NOT NULL CHECK (max_hives_count >= 0),
+	col_num INTEGER NOT NULL CHECK (col_num >= 0),
+	row_num INTEGER NOT NULL CHECK (row_num >= 0),
 	latitude DECIMAL(10, 7) NOT NULL CHECK (latitude > 0),
-	longitude DECIMAL(10, 7) NOT NULL CHECK (longitude > 0)
+	longitude DECIMAL(10, 7) NOT NULL CHECK (longitude > 0),
+	deleted_at TIMESTAMP
 );
 
 CREATE TABLE attendances (
+	id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	started_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
-	finished_at TIMESTAMP NULL, 
+	finished_at TIMESTAMP NULL,
 	employee_PESEL CHAR(11) NOT NULL,
-	CHECK (finished_at >= started_at OR finished_at IS NULL),
-	PRIMARY KEY (employee_PESEL, started_at)
+	deleted_at TIMESTAMP NULL,
+	CHECK (finished_at >= started_at OR finished_at IS NULL)
 );
+
+CREATE UNIQUE INDEX UC_attendances__idx ON attendances (employee_PESEL, started_at);
 
 
 CREATE TABLE bee_families (
@@ -45,6 +55,7 @@ CREATE TABLE bee_families (
 	die_off_date DATE NULL,
 	species_name VARCHAR(32) NOT NULL,
 	hive_id INTEGER NOT NULL,
+	deleted_at TIMESTAMP NULL,
 	CHECK ( die_off_date >= acquired_at OR die_off_date IS NULL )
 );
 
@@ -62,20 +73,24 @@ CREATE TABLE employees (
 	house_number VARCHAR(8) NOT NULL,
 	street VARCHAR(32) NOT NULL,
 	city VARCHAR(32) NOT NULL,
-	CHECK (date_of_release >= date_of_employment OR date_of_release IS NULL) 
+	deleted_at TIMESTAMP NULL,
+	CHECK (date_of_release >= date_of_employment OR date_of_release IS NULL)
 );
 
-ALTER TABLE employees ADD CONSTRAINT employees_email_un UNIQUE (email);
+CREATE UNIQUE INDEX employees__idx ON employees (email);
 
 CREATE TABLE family_states (
+    id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	checked_at TIMESTAMP NOT NULL,
 	inspection_description TEXT NULL,
 	bee_family_id INTEGER NOT NULL,
-	state_type_name VARCHAR(32) NOT NULL,
-	PRIMARY KEY ( bee_family_id, checked_at )
+	deleted_at TIMESTAMP NULL,
+	state_type_name VARCHAR(32) NOT NULL
 );
 
-CREATE TABLE hives ( 
+CREATE UNIQUE INDEX family_states__idx ON family_states (bee_family_id, checked_at);
+
+CREATE TABLE hives (
 	id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	material VARCHAR(32) NOT NULL,
 	nfc_tag VARCHAR(128) NULL,
@@ -83,53 +98,65 @@ CREATE TABLE hives (
 	apiary_code_name VARCHAR(32) NULL,
 	location_row INTEGER NULL,
 	location_column INTEGER NULL,
-	bee_family_id INTEGER NULL
+	bee_family_id INTEGER NULL,
+	deleted_at TIMESTAMP NULL
 );
 
-CREATE UNIQUE INDEX hives__idx ON hives ( bee_family_id ASC );
+CREATE UNIQUE INDEX hives__idx ON hives ( bee_family_id );
 
 CREATE TABLE honey_productions (
+    id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	produced_at DATE NOT NULL,
 	produced_weight DECIMAL(10, 2) NOT NULL,
 	honey_type_name VARCHAR(32) NOT NULL,
-	apiary_code_name VARCHAR(32) NOT NULL,
-	PRIMARY KEY ( apiary_code_name, produced_at )
+	apiary_code_name VARCHAR(32) NOT NULL
 );
+
+CREATE UNIQUE INDEX honey_productions__idx ON honey_productions ( apiary_code_name, produced_at );
 
 CREATE TABLE honey_types (
-	name VARCHAR(32) NOT NULL PRIMARY KEY
+	name VARCHAR(32) NOT NULL PRIMARY KEY,
+	deleted_at TIMESTAMP NULL
 );
 
-CREATE TABLE employees_tasks (
+CREATE TABLE task_assignments (
+    id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	assignment_date DATE DEFAULT CURRENT_TIMESTAMP NOT NULL,
 	employee_PESEL CHAR(11) NOT NULL,
-	task_id INTEGER NOT NULL, 
+	task_type_name VARCHAR(64) NOT NULL,
 	apiary_code_name VARCHAR(32) NOT NULL,
-	PRIMARY KEY (employee_PESEL, task_id, apiary_code_name)
+	deleted_at TIMESTAMP NULL
 );
 
-CREATE TABLE species ( 
+CREATE UNIQUE INDEX task_assignments__idx ON task_assignments ( employee_PESEL, task_type_name, apiary_code_name, assignment_date );
+
+CREATE TABLE species (
 	name VARCHAR(32) NOT NULL PRIMARY KEY,
 	latin_name VARCHAR(32) NOT NULL,
-	is_aggressive BOOL NOT NULL 
+	is_aggressive BOOL NOT NULL,
+	deleted_at TIMESTAMP NULL
 );
 
 CREATE TABLE state_types (
-	name VARCHAR(32) NOT NULL PRIMARY KEY
+	name VARCHAR(32) NOT NULL PRIMARY KEY,
+	deleted_at TIMESTAMP NULL
 );
 
-CREATE TABLE tasks ( 
-	id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY, 
-	name VARCHAR(64) NOT NULL 
+CREATE TABLE task_types (
+	name VARCHAR(64) NOT NULL PRIMARY KEY,
+	deleted_at TIMESTAMP NULL
 );
 
-CREATE TABLE wax_productions ( 
-	produced_at DATE NOT NULL, 
-	produced_weight DECIMAL(10, 2) NOT NULL, 
-	apiary_code_name VARCHAR(32) NOT NULL,
-	PRIMARY KEY(apiary_code_name, produced_at)
+CREATE TABLE wax_productions (
+    id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	produced_at DATE NOT NULL,
+	produced_weight DECIMAL(10, 2) NOT NULL,
+	apiary_code_name VARCHAR(32) NOT NULL
 );
 
-ALTER TABLE actions ADD CONSTRAINT actions_action_types_fk FOREIGN KEY (action_type_name) REFERENCES action_types (name);
+CREATE UNIQUE INDEX wax_productions__idx ON wax_productions ( apiary_code_name, produced_at );
+
+ALTER TABLE actions ADD CONSTRAINT actions_action_types_fk FOREIGN KEY (action_type_name) REFERENCES action_types (name) ON UPDATE CASCADE;
 
 ALTER TABLE actions ADD CONSTRAINT actions_employees_fk FOREIGN KEY (employee_PESEL) REFERENCES employees (PESEL);
 
@@ -137,26 +164,60 @@ ALTER TABLE actions ADD CONSTRAINT actions_hives_fk FOREIGN KEY (hive_id) REFERE
 
 ALTER TABLE attendances ADD CONSTRAINT attendances_employees_fk FOREIGN KEY (employee_PESEL) REFERENCES employees (PESEL);
 
-ALTER TABLE bee_families ADD CONSTRAINT bee_families_species_fk FOREIGN KEY (species_name) REFERENCES species (name);
+ALTER TABLE bee_families ADD CONSTRAINT bee_families_species_fk FOREIGN KEY (species_name) REFERENCES species (name) ON UPDATE CASCADE;
 
 ALTER TABLE bee_families ADD CONSTRAINT bee_families_hives_fk FOREIGN KEY (hive_id) REFERENCES hives (id);
 
 ALTER TABLE family_states ADD CONSTRAINT family_states_bee_families_fk FOREIGN KEY (bee_family_id) REFERENCES bee_families (id);
 
-ALTER TABLE family_states ADD CONSTRAINT family_states_state_types_fk FOREIGN KEY (state_type_name) REFERENCES state_types (name);
+ALTER TABLE family_states ADD CONSTRAINT family_states_state_types_fk FOREIGN KEY (state_type_name) REFERENCES state_types (name) ON UPDATE CASCADE;
 
 ALTER TABLE hives ADD CONSTRAINT hives_bee_families_fk FOREIGN KEY (bee_family_id) REFERENCES bee_families (id);
 
 ALTER TABLE hives ADD CONSTRAINT hives_apiaries_fk FOREIGN KEY (apiary_code_name) REFERENCES apiaries (code_name);
 
-ALTER TABLE honey_productions ADD CONSTRAINT honey_productions_types_fk FOREIGN KEY (honey_type_name) REFERENCES honey_types (name);
+ALTER TABLE honey_productions ADD CONSTRAINT honey_productions_types_fk FOREIGN KEY (honey_type_name) REFERENCES honey_types (name) ON UPDATE CASCADE;
 
 ALTER TABLE honey_productions ADD CONSTRAINT honey_productions_apiaries_fk FOREIGN KEY (apiary_code_name) REFERENCES apiaries (code_name);
 
-ALTER TABLE employees_tasks ADD CONSTRAINT employees_tasks_employees_fk FOREIGN KEY (employee_PESEL) REFERENCES employees (pesel);
+ALTER TABLE task_assignments ADD CONSTRAINT assigned_tasks_employees_fk FOREIGN KEY (employee_PESEL) REFERENCES employees (pesel);
 
-ALTER TABLE employees_tasks ADD CONSTRAINT employees_tasks_tasks_fk FOREIGN KEY (task_id) REFERENCES tasks (id);
+ALTER TABLE task_assignments ADD CONSTRAINT assigned_tasks_tasks_fk FOREIGN KEY (task_type_name) REFERENCES task_types (name) ON UPDATE CASCADE;
 
-ALTER TABLE employees_tasks ADD CONSTRAINT employees_tasks_apiaries_fk FOREIGN KEY (apiary_code_name) REFERENCES apiaries (code_name);
+ALTER TABLE task_assignments ADD CONSTRAINT assigned_tasks_apiaries_fk FOREIGN KEY (apiary_code_name) REFERENCES apiaries (code_name);
 
 ALTER TABLE wax_productions ADD CONSTRAINT wax_productions_apiaries_fk FOREIGN KEY (apiary_code_name) REFERENCES apiaries (code_name);
+
+COMMIT;
+
+CREATE OR REPLACE PROCEDURE NewAttendance(
+  IN pEmployeePESEL VARCHAR(11)
+)
+BEGIN
+  UPDATE attendances
+  SET finished_at = CURRENT_TIMESTAMP
+  WHERE employee_PESEL LIKE pEmployeePESEL;
+
+  INSERT INTO attendances (employee_PESEL)
+  VALUES (pEmployeePESEL);
+END;
+
+COMMIT;
+
+CREATE OR REPLACE FUNCTION getProduced(
+    pType VARCHAR(64),
+    pFrom DATE,
+    pTo DATE
+)
+RETURNS NUMERIC(10,2)
+BEGIN
+  DECLARE vProduced NUMERIC(10,2);
+   CASE pType
+    WHEN 'HONEY' THEN SELECT SUM(produced_weight) INTO vProduced FROM honey_productions WHERE produced_at BETWEEN pFrom AND pTo;
+    WHEN 'WAX' THEN SELECT SUM(produced_weight)  INTO vProduced FROM wax_productions WHERE produced_at BETWEEN pFrom AND pTo;
+    ELSE
+      SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Name parameter has incorrect value. Use HONEY or WAX';
+  END CASE;
+   RETURN vProduced;
+END;

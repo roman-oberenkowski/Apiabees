@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @property string $name
@@ -10,8 +12,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property boolean $is_aggressive
  * @property BeeFamily[] $beeFamilies
  */
-class Species extends Model
+class Specie extends Model
 {
+    use SoftDeletes;
     /**
      * The primary key for the model.
      *
@@ -36,7 +39,11 @@ class Species extends Model
     /**
      * @var array
      */
-    protected $fillable = ['latin_name', 'is_aggressive'];
+    protected $fillable = [
+        'name',
+        'latin_name',
+        'is_aggressive'
+    ];
 
     /**
      * Indicates if the model should be timestamped.
@@ -46,7 +53,7 @@ class Species extends Model
     public $timestamps = false;
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function beeFamilies()
     {

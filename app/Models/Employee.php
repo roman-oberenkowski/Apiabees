@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @property string $PESEL
@@ -22,6 +24,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Employee extends Model
 {
+    use SoftDeletes;
     /**
      * The primary key for the model.
      *
@@ -47,6 +50,7 @@ class Employee extends Model
      * @var array
      */
     protected $fillable = [
+        'PESEL',
         'first_name',
         'last_name',
         'salary',
@@ -60,6 +64,16 @@ class Employee extends Model
     ];
 
     /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'date_of_employment' => 'datetime:Y-m-d',
+        'date_of_release' => 'datetime:Y-m-d',
+    ];
+
+    /**
      * Indicates if the model should be timestamped.
      *
      * @var bool
@@ -67,7 +81,7 @@ class Employee extends Model
     public $timestamps = false;
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function actions()
     {
@@ -75,7 +89,7 @@ class Employee extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function attendances()
     {
@@ -83,10 +97,10 @@ class Employee extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
-    public function employeesTasks()
+    public function assignedTasks()
     {
-        return $this->hasMany('App\Models\EmployeeTask', 'employee_PESEL', 'PESEL');
+        return $this->hasMany('App\Models\TaskAssignment', 'task_assignments', 'PESEL');
     }
 }

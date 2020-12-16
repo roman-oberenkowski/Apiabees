@@ -3,6 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @property string $code_name
@@ -11,16 +14,18 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $parcel
  * @property string $street
  * @property string $city
- * @property int $max_hives_count
+ * @property int $row_num
+ * @property int $col_num
  * @property float $latitude
  * @property float $longitude
- * @property EmployeesTask[] $employeesTasks
+ * @property TaskAssignment[] $employeesTasks
  * @property Hive[] $hives
  * @property HoneyProduction[] $honeyProductions
  * @property WaxProduction[] $waxProductions
  */
 class Apiary extends Model
 {
+    use SoftDeletes;
     /**
      * The primary key for the model.
      *
@@ -46,12 +51,14 @@ class Apiary extends Model
      * @var array
      */
     protected $fillable = [
+        'code_name',
         'name',
         'area',
         'parcel',
         'street',
         'city',
-        'max_hives_count',
+        'col_num',
+        'row_num',
         'latitude',
         'longitude'
     ];
@@ -64,15 +71,15 @@ class Apiary extends Model
     public $timestamps = false;
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return BelongsToMany
      */
-    public function employeeTasks()
+    public function employeeAssignedTasks()
     {
-        return $this->belongsToMany('App\Models\EmployeeTask', 'employees_tasks', 'apiary_code_name');
+        return $this->belongsToMany('App\Models\TaskAssignment', 'task_assignments', 'apiary_code_name');
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function hives()
     {
@@ -80,7 +87,7 @@ class Apiary extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function honeyProductions()
     {
@@ -88,7 +95,7 @@ class Apiary extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function waxProductions()
     {

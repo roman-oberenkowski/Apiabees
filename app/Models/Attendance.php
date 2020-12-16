@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @property string $started_at
@@ -12,17 +14,24 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Attendance extends Model
 {
-    protected $primaryKey = ['started_at', 'employee_PESEL'];
-
-    public $incrementing = false;
-
-    protected  $keyType = ['string', 'string'];
-
+    use SoftDeletes;
     /**
      * @var array
      */
     protected $fillable = [
+        'started_at',
         'finished_at',
+        'employee_PESEL'
+    ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'started_at' => 'datetime:Y-m-d h:i:s',
+        'finished_at' => 'datetime:Y-m-d h:i:s',
     ];
 
     /**
@@ -33,7 +42,7 @@ class Attendance extends Model
     public $timestamps = false;
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function employee()
     {

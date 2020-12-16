@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property string $produced_at
@@ -14,16 +15,24 @@ use Illuminate\Database\Eloquent\Model;
  */
 class HoneyProduction extends Model
 {
-    protected $primaryKey = ['produced_at', 'apiary_code_name'];
-
-    public $incrementing = false;
-
-    protected  $keyType = ['string', 'string'];
-
     /**
      * @var array
      */
-    protected $fillable = ['honey_type_name', 'produced_weight'];
+    protected $fillable = [
+        'produced_at',
+        'honey_type_name',
+        'produced_weight',
+        'apiary_code_name'
+    ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'produced_at' => 'datetime:Y-m-d',
+    ];
 
     /**
      * Indicates if the model should be timestamped.
@@ -33,7 +42,7 @@ class HoneyProduction extends Model
     public $timestamps = false;
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function apiary()
     {
@@ -41,7 +50,7 @@ class HoneyProduction extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function honeyType()
     {

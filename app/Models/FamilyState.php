@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @property string $checked_at
@@ -14,18 +16,24 @@ use Illuminate\Database\Eloquent\Model;
  */
 class FamilyState extends Model
 {
-    protected $primaryKey = ['checked_at', 'bee_family_id'];
-
-    public $incrementing = false;
-
-    protected  $keyType = ['string', 'int'];
-
+    use SoftDeletes;
     /**
      * @var array
      */
     protected $fillable = [
+        'checked_at',
+        'bee_family_id',
         'state_type_name',
         'inspection_description'
+    ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'checked_at' => 'datetime:Y-m-d h:i:s',
     ];
 
     /**
@@ -36,7 +44,7 @@ class FamilyState extends Model
     public $timestamps = false;
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function beeFamily()
     {
@@ -44,7 +52,7 @@ class FamilyState extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function stateType()
     {

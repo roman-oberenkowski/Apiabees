@@ -3,6 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @property int $id
@@ -17,6 +21,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class BeeFamily extends Model
 {
+    use SoftDeletes;
     /**
      * @var array
      */
@@ -29,6 +34,16 @@ class BeeFamily extends Model
     ];
 
     /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'acquired_at' => 'datetime:Y-m-d',
+        'die_off_date' => 'datetime:Y-m-d',
+    ];
+
+    /**
      * Indicates if the model should be timestamped.
      *
      * @var bool
@@ -37,7 +52,7 @@ class BeeFamily extends Model
 
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function species()
     {
@@ -45,7 +60,7 @@ class BeeFamily extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function familyStates()
     {
@@ -53,7 +68,7 @@ class BeeFamily extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return HasOne
      */
     public function hive()
     {

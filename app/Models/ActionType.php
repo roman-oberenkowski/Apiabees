@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @property string $name
@@ -10,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class ActionType extends Model
 {
+    use SoftDeletes;
     /**
      * The primary key for the model.
      *
@@ -46,7 +49,7 @@ class ActionType extends Model
     public $timestamps = false;
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function actions()
     {

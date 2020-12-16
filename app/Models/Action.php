@@ -4,8 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
+ * @property int $id
  * @property string $performed_at
  * @property int $hive_id
  * @property string $action_type_name
@@ -17,15 +20,14 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Action extends Model
 {
-    protected $primaryKey = ['performed_at', 'employee_PESEL'];
+    use SoftDeletes;
 
-    public $incrementing = false;
-
-    protected  $keyType = ['string', 'string'];
     /**
      * @var array
      */
     protected $fillable = [
+        'employee_PESEL',
+        'performed_at',
         'hive_id',
         'action_type_name',
         'action_description'
@@ -39,7 +41,16 @@ class Action extends Model
     public $timestamps = false;
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'performed_at' => 'datetime:Y-m-d h:i:s',
+    ];
+
+    /**
+     * @return BelongsTo
      */
     public function actionType()
     {
@@ -47,7 +58,7 @@ class Action extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function employee()
     {
@@ -55,50 +66,11 @@ class Action extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function hive()
     {
         return $this->belongsTo('App\Models\Hive');
     }
-
-//    /**
-//     * Set the keys for a save update query.
-//     *
-//     * @param  \Illuminate\Database\Eloquent\Builder  $query
-//     * @return \Illuminate\Database\Eloquent\Builder
-//     */
-//    protected function setKeysForSaveQuery(Builder $query)
-//    {
-//        $keys = $this->getKeyName();
-//        if(!is_array($keys)){
-//            return parent::setKeysForSaveQuery($query);
-//        }
-//
-//        foreach($keys as $keyName){
-//            $query->where($keyName, '=', $this->getKeyForSaveQuery($keyName));
-//        }
-//
-//        return $query;
-//    }
-//
-//    /**
-//     * Get the primary key value for a save query.
-//     *
-//     * @param mixed $keyName
-//     * @return mixed
-//     */
-//    protected function getKeyForSaveQuery($keyName = null)
-//    {
-//        if(is_null($keyName)){
-//            $keyName = $this->getKeyName();
-//        }
-//
-//        if (isset($this->original[$keyName])) {
-//            return $this->original[$keyName];
-//        }
-//
-//        return $this->getAttribute($keyName);
-//    }
 
 }
