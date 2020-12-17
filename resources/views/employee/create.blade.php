@@ -6,7 +6,9 @@
 
     <x-slot name="slot">
         <x-section>
-            @livewire('employee.create-form')
+            <div class="overflow-hidden sm:rounded-md">
+                @livewire('employee.create-form')
+            </div>
         </x-section>
     </x-slot>
 </x-app-layout>

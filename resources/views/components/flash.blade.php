@@ -52,14 +52,3 @@
         </div>
     </div>
 @endif
-
-@if ($errors->any())
-    <div class="flash max-w-7xl mx-auto sm:px-6 lg:px-8 top-0 right-0 m-6">
-        <div  class="bg-grey-200 text-grey-900 rounded-lg shadow-md p-6 pr-10 flex justify-between">
-            <div class="flex items-center">
-                {{ $message }}
-            </div>
-            <button  class="opacity-75 cursor-pointer top-0 right-0 py-2 px-3 hover:opacity-100 close-flash" > <i class="fas fa-times"></i> </button>
-        </div>
-    </div>
-@endif

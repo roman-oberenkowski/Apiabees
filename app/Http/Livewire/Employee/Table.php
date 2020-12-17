@@ -10,62 +10,67 @@ class Table extends Component
 {
     use WithPagination;
 
-    private $employees;
-
-    private $selectedEmployee;
-
-    public bool $isDeleteModalOpen = false;
-
-    public bool $isEditModalOpen = false;
-
-    public bool $isDetailModalOpen = false;
-
     public string $search__first_name = '';
 
     public string $search__last_name = '';
 
+    protected $listeners = [
+        'closedDeleteModalForm' => '$refresh',
+        'closedEditModalForm' => '$refresh'
+    ];
+
+    /**
+     * The livewire mount function
+     *
+     * @return void
+     */
+    public function mount()
+    {
+        $this->resetPage();
+    }
+
+    /**
+     * The read function
+     *
+     * @return void
+     */
+    public function read()
+    {
+        return Employee::where('first_name', 'like', "%{$this->search__first_name}%")
+            ->where('last_name', 'like', "%{$this->search__last_name}%")
+            ->paginate(10);
+    }
+
+    /**
+     * Opens selected modal
+     *
+     * @param string $modal_type
+     * @param $id
+     *
+     * @return void
+     */
+    public function openModal(string $modal_type, $id) {
+        $this->resetValidation();
+        $this->reset();
+        switch ($modal_type)
+        {
+            case 'edit':
+                $this->emit('openEmployeeEditModalForm', $id);
+                break;
+            case 'details':
+                $this->emit('openEmployeeDetailsModal', $id);
+                break;
+            case 'delete':
+                $this->emit('openEmployeeDeleteModalForm', $id);
+                break;
+
+        }
+    }
+
     public function render()
     {
-        $this->employees = Employee::where('first_name', 'like', "%{$this->search__first_name}%")
-            ->where('last_name', 'like', "%{$this->search__last_name}%")
-            ->paginate(20);
-
         return view('livewire.employee.table', [
-            'employees' => $this->employees,
-            'selectedEmployee' => $this->selectedEmployee
+            'employees' => $this->read()
         ]);
     }
-
-    public function destroy($id)
-    {
-        try {
-            $employee = Employee::findOrFail($id);
-            $employee->delete();
-        } catch (\Exception $e) {
-            session()->flash('error', "Cannot find user with given PESEL.");
-
-            return \App::make('redirect')
-            ->back();
-        }
-        session()->flash('success', "User {$employee->first_name} {$employee->last_name} has been deleted.");
-
-        return \App::make('redirect')
-            ->back();
-    }
-
-    public function openDetailsModal($id) {
-        $this->selectedEmployee = Employee::findOrFail($id);
-        $this->isDetailModalOpen = true;
-    }
-
-    public function openEditModal($id) {
-        $this->selectedEmployee = Employee::findOrFail($id);
-        $this->isEditModalOpen = true;
-    }
-
-    public function openDeleteModal($id) {
-        $this->selectedEmployee = Employee::findOrFail($id);
-        $this->isDeleteModalOpen = true;
-    }
-
 }
