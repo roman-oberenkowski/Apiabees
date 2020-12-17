@@ -53,9 +53,9 @@
                         </div>
                     </td>
                     <td class="pr-4 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
-                        <a href="#" class="text-gray-400 hover:text-gray-900 pr-3" wire:click="openModal('details', {{$employee->PESEL}})" wire:loading.attr="disabled"><i class="fas fa-address-card pr-2"></i>Details</a>
-                        <a href="#" class="text-green-400 hover:text-green-900 pr-3" wire:click="openModal('edit', {{$employee->PESEL}})" wire:loading.attr="disabled"><i class="fas fa-trash pr-2"></i>Edit</a>
-                        <a href="#" class="text-red-600 hover:text-red-900" wire:click="openModal('delete', {{$employee->PESEL}})" wire:loading.attr="disabled"><i class="fas fa-times pr-2"></i>Delete</a>
+                        <a href="#" class="text-gray-400 hover:text-gray-900 pr-3" wire:click="openModal('details', '{{$employee->PESEL}}')" wire:loading.attr="disabled"><i class="fas fa-address-card pr-2"></i>Details</a>
+                        <a href="#" class="text-green-400 hover:text-green-900 pr-3" wire:click="openModal('edit', '{{$employee->PESEL}}')" wire:loading.attr="disabled"><i class="fas fa-trash pr-2"></i>Edit</a>
+                        <a href="#" class="text-red-600 hover:text-red-900" wire:click="openModal('delete', '{{$employee->PESEL}}')" wire:loading.attr="disabled"><i class="fas fa-times pr-2"></i>Delete</a>
                     </td>
                 </tr>
             </div>

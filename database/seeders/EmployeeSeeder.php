@@ -22,8 +22,8 @@ class EmployeeSeeder extends Seeder
             array_push($employees,$f->unique()->PESEL);
         }
         foreach($employees as $pesel){
-            $emp=new Employee;
-            $emp->PESEL='p'.$pesel;
+            $emp= Employee::create();
+            $emp->PESEL=$pesel;
             $emp->first_name=$f->firstName;
             $emp->last_name=$f->lastName;
             $emp->salary=$f->numberBetween(10,50)*200;
