@@ -8,7 +8,6 @@ use \App\Models\Hive;
 
 class HiveSeeder extends Seeder
 {
-
     /**
      * Run the database seeds.
      *
@@ -22,7 +21,7 @@ class HiveSeeder extends Seeder
             $rec->material= $mat[rand(0,2)];
             $rec->save();
         }
-        
+
     }
 }
 

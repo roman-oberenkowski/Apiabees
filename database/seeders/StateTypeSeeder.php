@@ -15,12 +15,12 @@ class StateTypeSeeder extends Seeder
      */
     public function run()
     {
-        $arr=['Wszystko OK','Mała ruchliwość','Choroba','Znaczne zmniejszenie populacji','Śmierć rodziny']; 
+        $arr=['Wszystko OK','Mała ruchliwość','Choroba','Znaczne zmniejszenie populacji','Śmierć rodziny'];
         foreach ($arr as $ht){
             $rec=new StateType;
             $rec->name= $ht;
             $rec->save();
-        } 
+        }
     }
 }
 

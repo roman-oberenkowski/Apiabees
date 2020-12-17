@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use \App\Models\Employee;
 
@@ -21,12 +22,13 @@ class DatabaseSeeder extends Seeder
             TaskTypeSeeder::class,
             StateTypeSeeder::class,
             //other seeders
-
             ApiarySeeder::class,
             EmployeeSeeder::class,
             AttendanceSeeder::class,
             HiveSeeder::class,
-            SpecieSeeder::class
+            SpecieSeeder::class,
+            //testing seeders
+            UserSeeder::class,
         ]);
     }
 

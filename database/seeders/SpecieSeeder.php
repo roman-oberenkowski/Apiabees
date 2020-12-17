@@ -20,7 +20,7 @@ class SpecieSeeder extends Seeder
             ['Pszczoła karłowata','Apis florea Fabr.',false],
             ['Kaukaska pszczoła miodna','Apis mellifera caucasia',true],
             ['Włoska pszczoła miodna','Apis mellifera ligustica',false]
-        ]; 
+        ];
         foreach ($arr as $bee){
             $rec=new Specie;
             $rec->name= $bee[0];
@@ -28,7 +28,7 @@ class SpecieSeeder extends Seeder
             $rec->is_aggressive=$bee[2];
             $rec->save();
         }
-        
+
     }
 }
 

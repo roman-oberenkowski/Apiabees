@@ -6,7 +6,7 @@ USE apiabees;
 
 CREATE TABLE action_types (
 	name VARCHAR(32) NOT NULL PRIMARY KEY,
-	deleted_at TIMESTAMP
+	deleted_at TIMESTAMP NULL
 
 );
 
@@ -33,7 +33,7 @@ CREATE TABLE apiaries (
 	row_num INTEGER NOT NULL CHECK (row_num >= 0),
 	latitude DECIMAL(10, 7) NOT NULL CHECK (latitude > 0),
 	longitude DECIMAL(10, 7) NOT NULL CHECK (longitude > 0),
-	deleted_at TIMESTAMP
+	deleted_at TIMESTAMP NULL
 );
 
 CREATE TABLE attendances (
