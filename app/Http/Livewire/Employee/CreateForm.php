@@ -72,7 +72,7 @@ class CreateForm extends Component
     public function store()
     {
         $validated = $this->validate();
-
+        $validated['PESEL'] = 'p'.$validated['PESEL'];
         $employee = Employee::create($validated);
         $user = User::create($validated);
         $user->employee_PESEL = $employee->PESEL;

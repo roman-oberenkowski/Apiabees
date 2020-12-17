@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->foreignId('current_team_id')->nullable();
             $table->text('profile_photo_path')->nullable();
             $table->timestamps();
-            $table->char('employee_PESEL', 11)->nullable();
+            $table->char('employee_PESEL', 12)->nullable();
             $table->softDeletes();
         });
     }
