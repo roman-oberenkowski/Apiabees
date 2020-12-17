@@ -14,7 +14,7 @@ class ActionTypeController extends Controller
      */
     public function index()
     {
-        return ActionType::all();
+         return view('action-type.index');
     }
 
     /**
@@ -69,7 +69,7 @@ class ActionTypeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+
     }
 
     /**

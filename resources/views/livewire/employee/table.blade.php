@@ -65,6 +65,5 @@
     <div class="p-3">
         {{ $employees->links() }}
     </div>
-    @livewire('employee.edit-modal-form')
-    @livewire('employee.delete-modal-form')
+
 </div>
