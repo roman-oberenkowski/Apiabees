@@ -10,6 +10,7 @@ use Livewire\Component;
 class EditModalForm extends Component
 {
     public bool $isModalOpen = false;
+
     public string $name = '';
     public string $email = '';
     public string $password = '';
@@ -22,16 +23,8 @@ class EditModalForm extends Component
     public string $house_number = '';
     public string $street = '';
     public string $city = '';
-    public string $date_of_employment;
+    public string $date_of_employment = '';
 
-    /**
-     * Form constructor.
-     */
-    function __construct()
-    {
-        parent::__construct();
-        $this->date_of_employment = Carbon::now()->toDateString();
-    }
     /**
      * Components listeners
      *
@@ -47,9 +40,7 @@ class EditModalForm extends Component
      */
     protected $rules = [
         'name' => ['required', 'string', 'max:255', 'min:8'],
-        'email' => ['required', 'string', 'email', 'max:255', 'unique:users', 'unique:employees', 'min:5'],
         'password' => ['required', 'string', 'confirmed', 'min:8'],
-        'PESEL' => ['required', 'string', 'size:11', 'unique:employees', 'regex:/^\d{11}?$/'],
         'first_name' => ['required', 'string', 'max:32', 'min:3'],
         'last_name' => ['required', 'string', 'max:32', 'min:3'],
         'salary' => ['required', 'numeric', 'gt:0', 'regex:/^\d+(\.\d{1,2})?$/'],
@@ -80,8 +71,14 @@ class EditModalForm extends Component
     {
         $this->validate();
         $data = $this->modelData();
-        $employee = Employee::find($this->PESEL)->update($data);
-        $employee->user()->createOrUpdate($data);
+        $employee = Employee::find($this->PESEL);
+        $employee->update($data);
+        $userData = [];
+        $userData['name'] = $data['name'];
+        $userData['email'] = $data['email'];
+        $userData['password'] = $data['password'];
+        $userData['employee_Pesel'] = $this->PESEL;
+        $employee->user()->updateOrCreate($userData);
         session()->flash('success', "Employee successsfully updated.");
         $this->closeModal();
     }
@@ -96,9 +93,8 @@ class EditModalForm extends Component
     {
         $this->resetValidation();
         $this->reset();
-        $this->isModalOpen = true;
         $this->loadData($employee);
-
+        $this->isModalOpen = true;
     }
 
     /**

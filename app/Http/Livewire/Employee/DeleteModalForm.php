@@ -8,6 +8,7 @@ use Livewire\Component;
 class DeleteModalForm extends Component
 {
     public bool $isModalOpen = false;
+
     public string $PESEL = '';
 
     /**
@@ -60,7 +61,6 @@ class DeleteModalForm extends Component
     public function closeModal()
     {
         $this->resetValidation();
-        $this->reset();
         $this->isModalOpen = false;
         $this->emit('closedDeleteModalForm');
     }

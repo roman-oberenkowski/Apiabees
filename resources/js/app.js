@@ -1,5 +1,4 @@
 require('./bootstrap');
-import 'alpinejs';
 
 const removeFlash = ({ target }) => target.closest('.flash').remove();
 

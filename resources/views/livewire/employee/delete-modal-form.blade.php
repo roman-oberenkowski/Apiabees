@@ -1,11 +1,4 @@
-<div
-    x-init="
-        requestAnimationFrame(() => {
-            name = $wire.name
-            $watch('name', (v) => @this.set('name', v));
-        });
-    "
->
+<div>
     <x-jet-dialog-modal wire:model="isModalOpen">
         <x-slot name="title">
             {{ __('Delete Account') }}

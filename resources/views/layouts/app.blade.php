@@ -12,10 +12,13 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-
         @livewireStyles
 
         <!-- Scripts -->
+        @livewireScripts
+        <script src="{{asset('js/app.js')}}" defer></script>
+        <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100 flex flex-wrap overflow-hidden">
@@ -40,7 +43,5 @@
 
         @stack('modals')
 
-        @livewireScripts
-        <script src="{{asset('js/app.js')}}" defer></script>
     </body>
 </html>

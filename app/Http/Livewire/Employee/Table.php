@@ -14,6 +14,10 @@ class Table extends Component
 
     public string $search__last_name = '';
 
+    protected $listeners = [
+        'closedDeleteModalForm' => '$refresh',
+        'closedEditModalForm' => '$refresh'
+    ];
 
     /**
      * The livewire mount function
@@ -65,7 +69,6 @@ class Table extends Component
 
     public function render()
     {
-
         return view('livewire.employee.table', [
             'employees' => $this->read()
         ]);

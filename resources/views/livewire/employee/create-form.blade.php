@@ -1,4 +1,4 @@
-<div xmlns:wire="http://www.w3.org/1999/xhtml" x-data="{stored: @entangle('saved')}">
+<div xmlns:wire="http://www.w3.org/1999/xhtml">
         <x-flash />
         <form wire:submit.prevent="store" method="POST">
             @csrf
@@ -113,10 +113,6 @@
                 </div>
             </div>
             <div class="col-span-12 flex items-center justify-end px-4 py-3 bg-gray-50 text-right sm:px-6 mt-4 rounded ">
-                <x-jet-action-message class="mr-3" on="saved">
-                    {{ __('Saved.') }}
-                </x-jet-action-message>
-
                 <x-jet-button>
                     {{ __('Save') }}
                 </x-jet-button>
