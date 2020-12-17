@@ -14,7 +14,7 @@ CREATE TABLE action_types (
 
 CREATE TABLE actions (
 	id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	employee_PESEL CHAR(11) NOT NULL,
+	employee_PESEL CHAR(12) NOT NULL,
 	performed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
 	action_description TEXT,
 	hive_id INTEGER,
@@ -42,7 +42,7 @@ CREATE TABLE attendances (
 	id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	started_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
 	finished_at TIMESTAMP NULL,
-	employee_PESEL CHAR(11) NOT NULL,
+	employee_PESEL CHAR(12) NOT NULL,
 	deleted_at TIMESTAMP NULL,
 	CHECK (finished_at >= started_at OR finished_at IS NULL)
 );
@@ -64,7 +64,7 @@ CREATE TABLE bee_families (
 CREATE UNIQUE INDEX bee_families__idx ON bee_families ( hive_id ASC );
 
 CREATE TABLE employees (
-	PESEL CHAR(11) NOT NULL PRIMARY KEY,
+	PESEL CHAR(12) NOT NULL PRIMARY KEY,
 	first_name VARCHAR(32) NOT NULL,
 	last_name VARCHAR(32) NOT NULL,
 	salary DECIMAL(10, 2) NOT NULL,
@@ -124,7 +124,7 @@ CREATE TABLE honey_types (
 CREATE TABLE task_assignments (
     id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	assignment_date DATE DEFAULT CURRENT_TIMESTAMP NOT NULL,
-	employee_PESEL CHAR(11) NOT NULL,
+	employee_PESEL CHAR(12) NOT NULL,
 	task_type_name VARCHAR(64) NOT NULL,
 	apiary_code_name VARCHAR(32) NOT NULL,
 	deleted_at TIMESTAMP NULL
@@ -191,4 +191,3 @@ ALTER TABLE task_assignments ADD CONSTRAINT assigned_tasks_apiaries_fk FOREIGN K
 ALTER TABLE wax_productions ADD CONSTRAINT wax_productions_apiaries_fk FOREIGN KEY (apiary_code_name) REFERENCES apiaries (code_name);
 
 COMMIT;
-

@@ -23,7 +23,7 @@ class EmployeeSeeder extends Seeder
         }
         foreach($employees as $pesel){
             $emp=new Employee;
-            $emp->PESEL=$pesel;
+            $emp->PESEL='p'.$pesel;
             $emp->first_name=$f->firstName;
             $emp->last_name=$f->lastName;
             $emp->salary=$f->numberBetween(10,50)*200;
