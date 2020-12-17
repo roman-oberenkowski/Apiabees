@@ -82,7 +82,7 @@ class CreateForm extends Component
         $this->resetValidation();
         $this->emit('newEmployeeCreated');
         $this->saved = true;
-        return redirect()->route('employee.index');
+        return redirect()->route('employees.index');
     }
 
     /**

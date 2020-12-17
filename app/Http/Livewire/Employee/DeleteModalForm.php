@@ -60,6 +60,7 @@ class DeleteModalForm extends Component
      */
     public function closeModal()
     {
+        $this->reset();
         $this->resetValidation();
         $this->isModalOpen = false;
         $this->emit('closedDeleteModalForm');

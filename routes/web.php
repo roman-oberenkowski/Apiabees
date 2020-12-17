@@ -108,7 +108,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     //DICTIONARY TABLES //opcjonalnie dodac destroy lub
     Route::resource('action-types', ActionTypeController::class)->only([
-        'index', 'create', 'store'
+        'index', 'create'
     ]);
 
     Route::resource('honey_types', HoneyTypeController::class)->only([

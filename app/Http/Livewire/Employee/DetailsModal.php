@@ -30,14 +30,12 @@ class DetailsModal extends Component
 
     public function openModal(Employee $employee)
     {
-        $this->reset();
         $this->loadData($employee);
         $this->isModalOpen = true;
     }
 
     public function closeModal()
     {
-        $this->reset();
         $this->isModalOpen = false;
         $this->emit('closedEmployeeDetailsModalForm');
     }

@@ -5,8 +5,8 @@
 
     <x-slot name="slot">
         <x-section>
-            @livewire('action-type.table')
-            @livewire('action-type.delete-modal')
+            @livewire('action-type.create')
+
         </x-section>
     </x-slot>
 </x-app-layout>
