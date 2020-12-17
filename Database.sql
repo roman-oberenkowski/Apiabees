@@ -1,6 +1,8 @@
-DROP DATABASE IF EXISTS apiabees;
+-- laravel will take care of dropping and creating the database
 
-CREATE DATABASE apiabees;
+-- DROP DATABASE IF EXISTS apiabees;
+
+-- CREATE DATABASE apiabees;
 
 USE apiabees;
 
@@ -189,35 +191,3 @@ ALTER TABLE task_assignments ADD CONSTRAINT assigned_tasks_apiaries_fk FOREIGN K
 ALTER TABLE wax_productions ADD CONSTRAINT wax_productions_apiaries_fk FOREIGN KEY (apiary_code_name) REFERENCES apiaries (code_name);
 
 COMMIT;
-
-CREATE OR REPLACE PROCEDURE NewAttendance(
-  IN pEmployeePESEL VARCHAR(12)
-)
-BEGIN
-  UPDATE attendances
-  SET finished_at = CURRENT_TIMESTAMP
-  WHERE employee_PESEL LIKE pEmployeePESEL;
-
-  INSERT INTO attendances (employee_PESEL)
-  VALUES (pEmployeePESEL);
-END;
-
-COMMIT;
-
-CREATE OR REPLACE FUNCTION getProduced(
-    pType VARCHAR(64),
-    pFrom DATE,
-    pTo DATE
-)
-RETURNS NUMERIC(10,2)
-BEGIN
-  DECLARE vProduced NUMERIC(10,2);
-   CASE pType
-    WHEN 'HONEY' THEN SELECT SUM(produced_weight) INTO vProduced FROM honey_productions WHERE produced_at BETWEEN pFrom AND pTo;
-    WHEN 'WAX' THEN SELECT SUM(produced_weight)  INTO vProduced FROM wax_productions WHERE produced_at BETWEEN pFrom AND pTo;
-    ELSE
-      SIGNAL SQLSTATE '45000'
-        SET MESSAGE_TEXT = 'Name parameter has incorrect value. Use HONEY or WAX';
-  END CASE;
-   RETURN vProduced;
-END;

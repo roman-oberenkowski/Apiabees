@@ -17,6 +17,6 @@ To install the app follow these steps:
 7. `sudo chmod -R 777 bootstrap/cache`,
 8. copy .env.example to .env and fill it with data you'll need (database, mail),
 9. `php artisan key:generate`,
-10. Import database from `Database.sql` (stored procedures import separately) and `php artisan migrate --seed` (in order)
+10. `php artisan migrate:fresh --seed`
 11. `php artisan serve`
 12. Voila
