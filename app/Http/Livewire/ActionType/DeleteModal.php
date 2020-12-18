@@ -3,7 +3,6 @@
 namespace App\Http\Livewire\ActionType;
 
 use App\Models\ActionType;
-use App\Models\Employee;
 use Livewire\Component;
 
 class DeleteModal extends Component
@@ -13,11 +12,11 @@ class DeleteModal extends Component
     public string $name='';
 
     protected $listeners = [
-        'openActionTypeDeleteModal' => 'openModal',
+        'openDeleteModal' => 'openModal',
     ];
 
     protected $rules = [
-        'name' => ['required', 'string'],
+        'name' => ['required', 'string','exists:action_types'],
     ];
 
 
@@ -43,24 +42,26 @@ class DeleteModal extends Component
     {
         $this->resetValidation();
         $this->isModalOpen = false;
-        $this->emit('closedActionTypeDeleteModalForm');
+        $this->emit('closedDeleteModalForm');
     }
 
 
     public function destroy()
     {
-
+        if($this->name=='Inna') {
+            flash("Cannot delete specia action type {$this->name}.")->info()->livewire($this);
+            $this->closeModal();
+            return;
+        }
         $action_type_to_delete = ActionType::find($this->name);
         if (!isset($action_type_to_delete))
         {
-            session()->flash('message', "Cannot delete action type with given name.");
-            $this->emit('closedActionTypeDeleteModalForm_Cancelled');
+            flash("Cannot delete action type {$this->name} - probably already deleted.")->error()->livewire($this);
         }
         else
         {
             $action_type_to_delete->delete();
-            session()->flash('message', "Action type {$action_type_to_delete->name} has been deleted.");
-            $this->emit('closedActionTypeDeleteModalForm_Success');
+            flash("Action type {$action_type_to_delete->name} has been deleted.")->success()->livewire($this);
         }
         $this->closeModal();
     }

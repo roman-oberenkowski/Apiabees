@@ -12,8 +12,7 @@ class Table extends Component
     public string $search__name = '';
 
     protected $listeners = [
-        'closedActionTypeDeleteModalForm_Success' => 'reload',
-        'closedActionTypeCreateModalForm_Success' => 'reload',
+        'closedDeleteModalForm' => '$refresh',
     ];
 
     public function mount()
@@ -34,17 +33,6 @@ class Table extends Component
     }
 
     public function openDeleteModal($id){
-        $this->emit('openActionTypeDeleteModal', $id);
+        $this->emit('openDeleteModal', $id);
     }
-
-    public function reload2(){
-        $temp_filter=$this->search__name;
-        $this->reset();
-        $this->search__name=$temp_filter;
-        session()->flash('message', 'Reloaded with search save');
-    }
-    public function reload(){
-        $this->render();
-    }
-
 }

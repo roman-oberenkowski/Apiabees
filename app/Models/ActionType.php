@@ -12,6 +12,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class ActionType extends Model
 {
+
+
     use SoftDeletes;
     /**
      * The primary key for the model.
@@ -47,6 +49,12 @@ class ActionType extends Model
      * @var bool
      */
     public $timestamps = false;
+
+    public static function validationRulesCreate()
+    {
+        return ['name' => ['required', 'string', 'max:32', 'min:2']];
+    }
+
 
     /**
      * @return HasMany
