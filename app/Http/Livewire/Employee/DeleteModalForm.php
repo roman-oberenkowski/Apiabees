@@ -71,13 +71,13 @@ class DeleteModalForm extends Component
         $employee = Employee::find($this->PESEL);
         if (!isset($employee))
         {
-            session()->flash('error', "Cannot find user with given PESEL.");
+            flash("Cannot find user with given PESEL.")->error()->livewire($this);
             $this->closeModal();
         }
         else
         {
             $employee->delete();
-            session()->flash('success', "User {$employee->first_name} {$employee->last_name} has been deleted.");
+            flash("User {$employee->first_name} {$employee->last_name} has been deleted.")->success()->livewire($this);
             $this->closeModal();
         }
     }

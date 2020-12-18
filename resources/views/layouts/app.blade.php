@@ -31,8 +31,8 @@
                 <x-header>
                     {{ $header }}
                 </x-header>
+                <livewire:flash-container />
                 <main class="px-2 max-h-full overflow-y-auto">
-                <x-flash />
                     <!-- Page Content -->
                     <section class="px-2 w-full overflow-hidden pb-16">
                         {{ $slot }}

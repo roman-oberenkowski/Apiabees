@@ -77,7 +77,7 @@ class CreateForm extends Component
         $user->employee_PESEL = $employee->PESEL;
         $user->save();
 
-        session()->flash('success', "Employee {$employee->first_name} {$employee->last_name} has been created.");
+        flash("Employee {$employee->first_name} {$employee->last_name} has been created.")->session();
         $this->reset();
         $this->resetValidation();
         $this->emit('newEmployeeCreated');

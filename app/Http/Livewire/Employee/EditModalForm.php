@@ -79,7 +79,7 @@ class EditModalForm extends Component
         $userData['password'] = $data['password'];
         $userData['employee_Pesel'] = $this->PESEL;
         $employee->user()->updateOrCreate($userData);
-        session()->flash('success', "Employee successsfully updated.");
+        flash("Employee successsfully updated.")->session()->livewire($this);
         $this->closeModal();
     }
 
