@@ -2,17 +2,24 @@
     <x-flash />
 
     <div class="grid grid-cols-6 gap-6 p-3">
-        <div class="col-span-6 sm:col-span-3">
-            <x-jet-label for="search__first_name" value="{{ __('First name') }}" />
+        <div class="col-span-6 sm:col-span-2">
+            <x-jet-label for="search__first_name" value="{{ __('Filter by First name') }}" />
             <x-jet-input id="search__first_name" type="text" class="mt-1 block w-full" wire:model="search__first_name" autocomplete="search__first_name"/>
             <x-jet-input-error for="search__first_name" class="mt-2" />
         </div>
 
-        <div class="col-span-6 sm:col-span-3">
-            <x-jet-label for="search__last_name" value="{{ __('Last name') }}" />
+        <div class="col-span-6 sm:col-span-2">
+            <x-jet-label for="search__last_name" value="{{ __('Filter by Last name') }}" />
             <x-jet-input id="search__last_name" type="text" class="mt-1 block w-full" wire:model="search__last_name" autocomplete="search__last_name" />
             <x-jet-input-error for="search__last_name" class="mt-2" />
         </div>
+
+        <div class="col-span-6 sm:col-span-2">
+            <x-jet-label  value="{{ __('Filter') }}" />
+            <x-jet-secondary-button wire:click="resetSearch()" wire:loading.attr="disabled">
+                {{ __('Reset') }}
+            </x-jet-secondary-button></div>
+
     </div>
     <table class="min-w-full divide-y divide-gray-200">
         <thead>

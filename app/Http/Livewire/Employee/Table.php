@@ -29,6 +29,11 @@ class Table extends Component
         $this->resetPage();
     }
 
+    public function resetSearch(){
+        $this->search__first_name='';
+        $this->search__last_name='';
+    }
+
     /**
      * The read function
      *
@@ -51,7 +56,6 @@ class Table extends Component
      */
     public function openModal(string $modal_type, $id) {
         $this->resetValidation();
-        $this->reset();
         switch ($modal_type)
         {
             case 'edit':

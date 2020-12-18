@@ -44,7 +44,6 @@ class DetailsModal extends Component
     {
         $id = $this->PESEL;
         $this->closeModal();
-
         $this->emit('openEmployeeEditModalForm', $id);
     }
 

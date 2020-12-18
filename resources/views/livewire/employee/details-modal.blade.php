@@ -18,20 +18,7 @@
                                 <div class="grid grid-cols-6 gap-6">
                                     <div class="col-span-6">
                                         <x-jet-label for="name" value="{{ __('Username') }}" />
-                                        <x-jet-input id="name" type="text" class="mt-1 block w-full" wire:model="name" autocomplete="name" maxlength="255" minlength="8" required/>
-                                        <x-jet-input-error for="name" class="mt-2" />
-                                    </div>
-
-                                    <div class="col-span-6">
-                                        <x-jet-label for="password" value="{{ __('Password') }}" />
-                                        <x-jet-input id="password" type="password" class="mt-1 block w-full" wire:model="password" autocomplete="password" minlength="8" required/>
-                                        <x-jet-input-error for="password" class="mt-2" />
-                                    </div>
-
-                                    <div class="col-span-6 ">
-                                        <x-jet-label for="password_confirmation" value="{{ __('Confirm password') }}" />
-                                        <x-jet-input id="password_confirmation" type="password" class="mt-1 block w-full" wire:model="password_confirmation" autocomplete="password_confirmation" minlength="8" required/>
-                                        <x-jet-input-error for="password_confirmation" class="mt-2" />
+                                        {{$name}}
                                     </div>
                                 </div>
                             </div>
@@ -50,6 +37,10 @@
                         <div class="shadow overflow-hidden sm:rounded-md">
                             <div class="px-4 py-5 bg-white sm:p-6">
                                 <div class="grid grid-cols-6 gap-6">
+                                    <div class="col-span-6 ">
+                                        <x-jet-label for="salary" value="{{ __('PESEL') }}" />
+                                        {{$PESEL}}
+                                    </div>
 
                                     <div class="col-span-6 ">
                                         <x-jet-label for="salary" value="{{ __('Salary') }}" />

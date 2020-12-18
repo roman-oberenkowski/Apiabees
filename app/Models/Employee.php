@@ -63,6 +63,38 @@ class Employee extends Model
         'street',
         'city'
     ];
+    public static function validationRulesUpdate()
+    {
+        return [
+            'PESEL' => ['required','exists:employees'],
+            'name' => ['required', 'string', 'max:255', 'min:8'],
+            'password' => ['required', 'string', 'confirmed', 'min:8'],
+            'first_name' => ['required', 'string', 'max:32', 'min:3'],
+            'last_name' => ['required', 'string', 'max:32', 'min:3'],
+            'salary' => ['required', 'numeric', 'gt:0', 'regex:/^\d+(\.\d{1,2})?$/'],
+            'date_of_employment' => ['required', 'date', 'before_or_equal:today'],
+            'appartement' => ['nullable', 'string', 'min:1','max:4'],
+            'house_number' => ['string', 'required', 'min:1'],
+            'street' => ['string', 'required', 'min:1'],
+            'city' => ['string', 'required', 'min:1'],
+        ];
+    }
+    public static function validationRulesCreate(){
+        return [
+            'name' => ['required', 'string', 'max:255', 'min:8'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users', 'unique:employees', 'min:5'],
+            'password' => ['required', 'string', 'confirmed', 'min:8'],
+            'PESEL' => ['required', 'string', 'size:11', 'unique:employees', 'regex:/^\d{11}?$/'],
+            'first_name' => ['required', 'string', 'max:32', 'min:3'],
+            'last_name' => ['required', 'string', 'max:32', 'min:3'],
+            'salary' => ['required', 'numeric', 'gt:0', 'regex:/^\d+(\.\d{1,2})?$/'],
+            'date_of_employment' => ['required', 'date', 'before_or_equal:today'],
+            'appartement' => ['nullable', 'string', 'min:1', 'max:4'],
+            'house_number' => ['string', 'required', 'min:1'],
+            'street' => ['string', 'required', 'min:1'],
+            'city' => ['string', 'required', 'min:1'],
+        ];
+    }
 
     /**
      * The attributes that should be cast.

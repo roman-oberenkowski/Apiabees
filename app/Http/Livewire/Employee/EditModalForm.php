@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Employee;
 use App\Models\Employee;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Livewire\Component;
 
 class EditModalForm extends Component
@@ -38,18 +39,9 @@ class EditModalForm extends Component
      *
      * @return void
      */
-    protected $rules = [
-        'name' => ['required', 'string', 'max:255', 'min:8'],
-        'password' => ['required', 'string', 'confirmed', 'min:8'],
-        'first_name' => ['required', 'string', 'max:32', 'min:3'],
-        'last_name' => ['required', 'string', 'max:32', 'min:3'],
-        'salary' => ['required', 'numeric', 'gt:0', 'regex:/^\d+(\.\d{1,2})?$/'],
-        'date_of_employment' => ['required', 'date', 'before_or_equal:today'],
-        'appartement' => ['nullable', 'string', 'min:1'],
-        'house_number' => ['string', 'required', 'min:1'],
-        'street' => ['string', 'required', 'min:1'],
-        'city' => ['string', 'required', 'min:1'],
-    ];
+    protected function rules(){
+        return Employee::validationRulesUpdate();
+    }
 
     /**
      * Validates data online
@@ -71,16 +63,24 @@ class EditModalForm extends Component
     {
         $this->validate();
         $data = $this->modelData();
-        $employee = Employee::find($this->PESEL);
-        $employee->update($data);
-        $userData = [];
-        $userData['name'] = $data['name'];
-        $userData['email'] = $data['email'];
-        $userData['password'] = $data['password'];
-        $userData['employee_Pesel'] = $this->PESEL;
-        $employee->user()->updateOrCreate($userData);
-        flash("Employee successsfully updated.")->session()->livewire($this);
-        $this->closeModal();
+        try {
+            $employee = Employee::findOrFail($this->PESEL);
+            $employee->update($data);
+            $userData = [];
+            $userData['name'] = $data['name'];
+            $userData['email'] = $data['email'];
+            $userData['password'] = $data['password'];
+            $userData['employee_Pesel'] = $this->PESEL;
+            $employee->user()->updateOrCreate($userData);
+            flash("Employee successsfully updated.")->success()->livewire($this);
+            $this->closeModal();
+        }
+        //catching for example concurrent start edit, other user deletes and first try to save
+        catch(ModelNotFoundException $e){
+            flash("Cannot edit chosen user. Please check if user is still in the database and try again")->error()->livewire($this);
+            $this->closeModal();
+        }
+
     }
 
     /**

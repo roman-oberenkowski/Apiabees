@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Employee;
 
 use App\Models\Employee;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Livewire\Component;
 
 class DeleteModalForm extends Component
@@ -19,25 +20,6 @@ class DeleteModalForm extends Component
         'openEmployeeDeleteModalForm' => 'openModal',
     ];
 
-    /**
-     * The validation rules
-     *
-     * @return void
-     */
-    protected $rules = [
-        'PESEL' => ['required', 'string', 'size:11', 'unique:employees', 'regex:/^\d{11}?$/'],
-    ];
-
-    /**
-     * Validates data online
-     *
-     * @param $propertyName
-     * @throws \Illuminate\Validation\ValidationException
-     */
-    public function updated($propertyName)
-    {
-        $this->validateOnly($propertyName);
-    }
 
     /**
      * Opens modal
@@ -68,16 +50,15 @@ class DeleteModalForm extends Component
 
     public function destroy()
     {
-        $employee = Employee::find($this->PESEL);
-        if (!isset($employee))
-        {
-            flash("Cannot find user with given PESEL.")->error()->livewire($this);
-            $this->closeModal();
-        }
-        else
-        {
+        try{
+            $employee = Employee::findOrFail($this->PESEL);
             $employee->delete();
             flash("User {$employee->first_name} {$employee->last_name} has been deleted.")->success()->livewire($this);
+
+            $this->closeModal();
+        }
+        catch(ModelNotFoundException $e){
+            flash("Cannot delete chosen user. Please check if user is really in the database and try again")->error()->livewire($this);
             $this->closeModal();
         }
     }
