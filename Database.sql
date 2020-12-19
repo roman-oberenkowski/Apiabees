@@ -68,18 +68,14 @@ CREATE TABLE employees (
 	first_name VARCHAR(32) NOT NULL,
 	last_name VARCHAR(32) NOT NULL,
 	salary DECIMAL(10, 2) NOT NULL,
-	email VARCHAR(64) NOT NULL,
 	date_of_employment DATE DEFAULT CURRENT_TIMESTAMP NOT NULL,
 	date_of_release DATE NULL,
 	appartement VARCHAR(4) NULL,
 	house_number VARCHAR(8) NOT NULL,
 	street VARCHAR(32) NOT NULL,
 	city VARCHAR(32) NOT NULL,
-	deleted_at TIMESTAMP NULL,
 	CHECK (date_of_release >= date_of_employment OR date_of_release IS NULL)
 );
-
-CREATE UNIQUE INDEX employees__idx ON employees (email);
 
 CREATE TABLE family_states (
     id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,

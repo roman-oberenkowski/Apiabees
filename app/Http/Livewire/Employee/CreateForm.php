@@ -54,20 +54,15 @@ class CreateForm extends Component
         $this->validateOnly($propertyName);
     }
 
-    /**
-     * Create Employee and User function.
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
     public function store()
     {
-
         $validated = $this->validate();
-
         $employee = Employee::create($validated);
-        $user = User::create($validated);
+        $user = new User;
+        $user->email= $this->email;
         $user->password= Hash::make($this->password);
         $user->employee_PESEL = $employee->PESEL;
+        $user->name=$this->first_name.' '.$this->last_name;
         $user->save();
 
         flash("Employee {$employee->first_name} {$employee->last_name} has been created.")->session();

@@ -13,16 +13,14 @@
                         <div class="shadow overflow-hidden sm:rounded-md">
                             <div class="px-4 py-5 bg-white sm:p-6">
                                 <div class="grid grid-cols-6 gap-6">
-                                    <div class="col-span-6 sm:col-span-3">
-                                        <x-jet-label for="name" value="{{ __('Username') }}" />
-                                        <x-jet-input id="name" type="text" class="mt-1 block w-full" wire:model="name" autocomplete="name" maxlength="255" minlength="8" required/>
-                                        <x-jet-input-error for="name" class="mt-2" />
-                                    </div>
 
                                     <div class="col-span-6 sm:col-span-3">
                                         <x-jet-label for="email" value="{{ __('Email') }}" />
                                         <x-jet-input id="email" type="email" class="mt-1 block w-full" wire:model="email" autocomplete="email" maxlength="255" minlength="5" required/>
                                         <x-jet-input-error for="email" class="mt-2" />
+                                    </div>
+                                    <div class="col-span-6 sm:col-span-3">
+
                                     </div>
 
                                     <div class="col-span-6 sm:col-span-3">

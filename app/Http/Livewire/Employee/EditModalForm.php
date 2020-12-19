@@ -6,6 +6,7 @@ use App\Models\Employee;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 
 class EditModalForm extends Component
@@ -66,12 +67,28 @@ class EditModalForm extends Component
         try {
             $employee = Employee::findOrFail($this->PESEL);
             $employee->update($data);
-            $userData = [];
-            $userData['name'] = $data['name'];
-            $userData['email'] = $data['email'];
-            $userData['password'] = $data['password'];
-            $userData['employee_Pesel'] = $this->PESEL;
-            $employee->user()->updateOrCreate($userData);
+            $user = User::where('employee_PESEL', $employee->PESEL)->first();
+            if($user== NULL){
+                //create user
+                dd($this);
+                $userData = [];
+                $userData['name'] = $employee->first_name.' '.$employee->last_name;
+                $userData['email'] = $data['email'];
+                $userData['password'] = Hash::make($data['password']);
+                $userData['employee_Pesel'] = $this->PESEL;
+                $employee->user()->Create($userData);
+            }
+            else{
+                $user->name=$employee->first_name.' '.$employee->last_name;
+                $user->email=$data['email'];
+                if(strlen($data['password'])>0 ){
+
+                    $user->password= Hash::make($data['password']);
+                    flash("Employee password changed.")->info()->livewire($this);
+                }
+                $user->save();
+            }
+
             flash("Employee successsfully updated.")->success()->livewire($this);
             $this->closeModal();
         }
@@ -109,8 +126,9 @@ class EditModalForm extends Component
         if(isset($employee->user))
         {
             $this->name = $employee->user->name;
-            $this->password = $employee->user->password;
-            $this->password_confirmation = $employee->user->password;
+            //$this->password = $employee->user->password;
+            //$this->password_confirmation = $employee->user->password;
+            $this->email = $employee->user->email;
         }
         else
         {
@@ -118,8 +136,7 @@ class EditModalForm extends Component
             $this->password = '';
             $this->password_confirmation = '';
         }
-        $this->PESEL = $employee->PESEL;
-        $this->email = $employee->email;
+        $this->PESEL=$employee->PESEL;
         $this->first_name = $employee->first_name;
         $this->last_name = $employee->last_name;
         $this->salary = $employee->salary;

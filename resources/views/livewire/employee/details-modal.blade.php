@@ -38,7 +38,17 @@
                             <div class="px-4 py-5 bg-white sm:p-6">
                                 <div class="grid grid-cols-6 gap-6">
                                     <div class="col-span-6 ">
-                                        <x-jet-label for="salary" value="{{ __('PESEL') }}" />
+                                        <x-jet-label for="first_name" value="{{ __('First name') }}" />
+                                        {{$first_name}}
+                                    </div>
+
+                                    <div class="col-span-6 ">
+                                        <x-jet-label for="last_name" value="{{ __('Last name') }}" />
+                                        {{$last_name}}
+                                    </div>
+
+                                    <div class="col-span-6 ">
+                                        <x-jet-label for="PESEL" value="{{ __('PESEL') }}" />
                                         {{$PESEL}}
                                     </div>
 

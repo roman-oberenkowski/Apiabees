@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use \Faker\Factory;
 use \App\Models\Employee;
+use Illuminate\Support\Facades\Hash;
 
 class EmployeeSeeder extends Seeder
 {
@@ -30,12 +31,19 @@ class EmployeeSeeder extends Seeder
             $emp->house_number=$f->numberBetween(1,200);
             $emp->street=substr($f->streetName,0,32);
             $emp->city=$f->city;
-            $emp->email=substr($f->unique()->email,0,32);
             if($f->randomDigit%2==0){
                 $emp->appartement=$f->numberBetween(1,50);
             }
             $emp->date_of_employment=$f->dateTimeBetween();
+
             $emp->save();
+
+            $userData = [];
+            $userData['name'] = $emp->first_name.' '.$emp->last_name;
+            $userData['email'] =substr($f->unique()->email,0,64);
+            $userData['password'] = Hash::make('password');
+            //$userData['employee_Pesel'] = $emp->PESEL;
+            $emp->user()->Create($userData);
         }
     }
 }

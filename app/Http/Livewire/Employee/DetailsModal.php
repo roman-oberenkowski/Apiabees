@@ -54,6 +54,7 @@ class DetailsModal extends Component
             $this->name = $employee->user->name;
             $this->password = $employee->user->password;
             $this->password_confirmation = $employee->user->password;
+            $this->email = $employee->user->email;
         }
         else
         {
@@ -62,7 +63,7 @@ class DetailsModal extends Component
             $this->password_confirmation = '';
         }
         $this->PESEL = $employee->PESEL;
-        $this->email = $employee->email;
+
         $this->first_name = $employee->first_name;
         $this->last_name = $employee->last_name;
         $this->salary = $employee->salary;

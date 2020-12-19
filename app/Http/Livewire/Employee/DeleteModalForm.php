@@ -52,6 +52,9 @@ class DeleteModalForm extends Component
     {
         try{
             $employee = Employee::findOrFail($this->PESEL);
+            if(isset($employee->user)){
+                $employee->user->delete();
+            }
             $employee->delete();
             flash("User {$employee->first_name} {$employee->last_name} has been deleted.")->success()->livewire($this);
 
