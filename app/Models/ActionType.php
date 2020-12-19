@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Validation\Rule;
 
 /**
  * @property string $name
@@ -52,7 +53,7 @@ class ActionType extends Model
 
     public static function validationRulesCreate()
     {
-        return ['name' => ['required', 'string', 'max:32', 'min:2']];
+        return ['name' => ['required', 'string', 'max:32', 'min:2', Rule::unique('action_types')->whereNull('deleted_at')]];
     }
 
 
