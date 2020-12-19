@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Validation\Rule;
 use Krlove\EloquentModelGenerator\Model\HasOne;
 
 /**
@@ -59,6 +60,7 @@ class Employee extends Model
     ];
     public static function validationRulesCreate(){
         return [
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users', 'min:5'],
             'password' => ['required', 'string', 'confirmed', 'min:6'],
 
             'PESEL' => ['required', 'string', 'size:11', 'unique:employees', 'regex:/^\d{11}?$/'],
@@ -75,7 +77,7 @@ class Employee extends Model
     public static function validationRulesUpdate()
     {
         return [
-            'password' => ['nullable', 'string', 'confirmed', 'min:8'],
+             'password' => ['nullable', 'string', 'confirmed', 'min:8'],
 
 
 

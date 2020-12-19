@@ -32,6 +32,7 @@ class CreateForm extends Component
     {
         parent::__construct();
         $this->date_of_employment = Carbon::now()->toDateString();
+        //dd($this->date_of_employment);
     }
 
     /**

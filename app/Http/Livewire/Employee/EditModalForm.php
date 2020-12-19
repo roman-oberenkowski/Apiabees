@@ -7,12 +7,14 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 use Livewire\Component;
 
 class EditModalForm extends Component
 {
     public bool $isModalOpen = false;
 
+    public $user_id=NULL;
     public string $name = '';
     public string $email = '';
     public string $password = '';
@@ -25,7 +27,7 @@ class EditModalForm extends Component
     public string $house_number = '';
     public string $street = '';
     public string $city = '';
-    public string $date_of_employment = '';
+    public string $date_of_employment='';
 
     /**
      * Components listeners
@@ -41,7 +43,13 @@ class EditModalForm extends Component
      * @return void
      */
     protected function rules(){
-        return Employee::validationRulesUpdate();
+        $emprules=Employee::validationRulesUpdate();
+        if (isset($this->user_id)) {
+            $emprules['email']= ['required', 'string', 'email', 'min:5', 'max:255',Rule::unique('users')->ignore($this->user_id)];
+        }
+        else
+            $emprules['email']= ['required', 'string', 'email', 'min:5', 'max:255','unique:users'];
+        return $emprules;
     }
 
     /**
@@ -69,8 +77,12 @@ class EditModalForm extends Component
             $employee->update($data);
             $user = User::where('employee_PESEL', $employee->PESEL)->first();
             if($user== NULL){
+                if(strlen($data['password'])==0 ){
+                    //no user for that employee, but no password provided
+                    $this->addError('password', 'That employee doesn\'t have an account yet, so you need to provide a password.');
+                    return;
+                }
                 //create user
-                dd($this);
                 $userData = [];
                 $userData['name'] = $employee->first_name.' '.$employee->last_name;
                 $userData['email'] = $data['email'];
@@ -129,9 +141,11 @@ class EditModalForm extends Component
             //$this->password = $employee->user->password;
             //$this->password_confirmation = $employee->user->password;
             $this->email = $employee->user->email;
+            $this->user_id=$employee->user->id;
         }
         else
         {
+
             $this->name = '';
             $this->password = '';
             $this->password_confirmation = '';
@@ -140,7 +154,8 @@ class EditModalForm extends Component
         $this->first_name = $employee->first_name;
         $this->last_name = $employee->last_name;
         $this->salary = $employee->salary;
-        $this->date_of_employment = $employee->date_of_employment;
+        $this->date_of_employment = Carbon::parse($employee->date_of_employment)->format('Y-m-d');
+
         $this->appartement = $employee->appartement;
         $this->house_number = $employee->house_number;
         $this->street = $employee->street;
