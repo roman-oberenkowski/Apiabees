@@ -15,7 +15,6 @@ class User extends Authenticatable
 {
     use HasProfilePhoto;
     use Notifiable;
-    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
