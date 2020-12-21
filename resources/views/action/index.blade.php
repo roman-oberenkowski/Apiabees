@@ -1,12 +1,12 @@
 <x-app-layout>
     <x-slot name="header">
-        @include('headers.action-types')
+        @include('headers.actions')
     </x-slot>
 
     <x-slot name="slot">
         <x-section>
-            @livewire('action-type.table')
-            @livewire('action-type.delete-modal')
+            @livewire('action.table')
+
         </x-section>
     </x-slot>
 </x-app-layout>

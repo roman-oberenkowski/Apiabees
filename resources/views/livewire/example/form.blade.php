@@ -1,6 +1,6 @@
 <div class="overflow-hidden sm:rounded-md">
-
-    <form submit="__TODO__" {{--      wire:submit.prevent="{{ _______ }}"--}} >
+    {{'<form submit="__TODO__" {{--      wire:submit.prevent="{{ _______ }}"--}} >'}}
+    <form wire:submit.prevent="store" method="POST">
         <div class="grid grid-cols-6 gap-6">
             <div class="col-span-6 sm:col-span-3">
                 <x-jet-label for="current_password" value="{{ __('Current Password') }}" />
@@ -22,10 +22,10 @@
 
             <div class="col-span-6 sm:col-start-4 sm:col-span-3">
                 @php
-                    $options = [
-                        ['name' => 'test', 'value' => 'test', 'checked' => true],
-                       ['name' => 'test2', 'value' => 'test2', 'checked' => false]
-                     ];
+                        $options = [
+                            ['name' => 'test', 'value' => 'testx', 'checked' => false],
+                           ['name' => 'test2', 'value' => 'test2', 'checked' => true]
+                         ];
                 @endphp
                 <x-jet-label for="country" value="Country:" />
                 <x-select for="country" :options="$options" />

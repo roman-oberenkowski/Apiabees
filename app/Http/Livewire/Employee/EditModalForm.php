@@ -14,7 +14,7 @@ class EditModalForm extends Component
 {
     public bool $isModalOpen = false;
 
-    public $user_id=NULL;
+    public $user_id = NULL;
     public string $name = '';
     public string $email = '';
     public string $password = '';
@@ -27,47 +27,28 @@ class EditModalForm extends Component
     public string $house_number = '';
     public string $street = '';
     public string $city = '';
-    public string $date_of_employment='';
+    public string $date_of_employment = '';
 
-    /**
-     * Components listeners
-     *
-     **/
+
     protected $listeners = [
         'openEmployeeEditModalForm' => 'openModal',
     ];
 
-    /**
-     * The validation rules
-     *
-     * @return void
-     */
-    protected function rules(){
-        $emprules=Employee::validationRulesUpdate();
+    protected function rules()
+    {
+        $emprules = Employee::validationRulesUpdate();
         if (isset($this->user_id)) {
-            $emprules['email']= ['required', 'string', 'email', 'min:5', 'max:255',Rule::unique('users')->ignore($this->user_id)];
-        }
-        else
-            $emprules['email']= ['required', 'string', 'email', 'min:5', 'max:255','unique:users'];
+            $emprules['email'] = ['required', 'string', 'email', 'min:5', 'max:255', Rule::unique('users')->ignore($this->user_id)];
+        } else
+            $emprules['email'] = ['required', 'string', 'email', 'min:5', 'max:255', 'unique:users'];
         return $emprules;
     }
 
-    /**
-     * Validates data online
-     *
-     * @param $propertyName
-     * @throws \Illuminate\Validation\ValidationException
-     */
     public function updated($propertyName)
     {
         $this->validateOnly($propertyName);
     }
 
-    /**
-     * Update Employee and User function.
-     *
-     * @return void
-     */
     public function update()
     {
         $this->validate();
@@ -76,26 +57,25 @@ class EditModalForm extends Component
             $employee = Employee::findOrFail($this->PESEL);
             $employee->update($data);
             $user = User::where('employee_PESEL', $employee->PESEL)->first();
-            if($user== NULL){
-                if(strlen($data['password'])==0 ){
+            if ($user == NULL) {
+                if (strlen($data['password']) == 0) {
                     //no user for that employee, but no password provided
                     $this->addError('password', 'That employee doesn\'t have an account yet, so you need to provide a password.');
                     return;
                 }
                 //create user
                 $userData = [];
-                $userData['name'] = $employee->first_name.' '.$employee->last_name;
+                $userData['name'] = $employee->first_name . ' ' . $employee->last_name;
                 $userData['email'] = $data['email'];
                 $userData['password'] = Hash::make($data['password']);
                 $userData['employee_Pesel'] = $this->PESEL;
                 $employee->user()->Create($userData);
-            }
-            else{
-                $user->name=$employee->first_name.' '.$employee->last_name;
-                $user->email=$data['email'];
-                if(strlen($data['password'])>0 ){
+            } else {
+                $user->name = $employee->first_name . ' ' . $employee->last_name;
+                $user->email = $data['email'];
+                if (strlen($data['password']) > 0) {
 
-                    $user->password= Hash::make($data['password']);
+                    $user->password = Hash::make($data['password']);
                     flash("Employee password changed.")->info()->livewire($this);
                 }
                 $user->save();
@@ -103,21 +83,14 @@ class EditModalForm extends Component
 
             flash("Employee successsfully updated.")->success()->livewire($this);
             $this->closeModal();
-        }
-        //catching for example concurrent start edit, other user deletes and first try to save
-        catch(ModelNotFoundException $e){
+        } //catching for example concurrent start edit, other user deletes and first try to save
+        catch (ModelNotFoundException $e) {
             flash("Cannot edit chosen user. Please check if user is still in the database and try again")->error()->livewire($this);
             $this->closeModal();
         }
 
     }
 
-    /**
-     * Opens modal
-     * @param Employee $employee
-     *
-     * @return void
-     */
     public function openModal(Employee $employee)
     {
         $this->resetValidation();
@@ -126,31 +99,21 @@ class EditModalForm extends Component
         $this->isModalOpen = true;
     }
 
-    /**
-     * Loads the model data
-     * of this component.
-     *
-     * @param Employee $employee
-     * @return void
-     */
     public function loadData(Employee $employee)
     {
-        if(isset($employee->user))
-        {
+        if (isset($employee->user)) {
             $this->name = $employee->user->name;
             //$this->password = $employee->user->password;
             //$this->password_confirmation = $employee->user->password;
             $this->email = $employee->user->email;
-            $this->user_id=$employee->user->id;
-        }
-        else
-        {
+            $this->user_id = $employee->user->id;
+        } else {
 
             $this->name = '';
             $this->password = '';
             $this->password_confirmation = '';
         }
-        $this->PESEL=$employee->PESEL;
+        $this->PESEL = $employee->PESEL;
         $this->first_name = $employee->first_name;
         $this->last_name = $employee->last_name;
         $this->salary = $employee->salary;
@@ -162,11 +125,6 @@ class EditModalForm extends Component
         $this->city = $employee->city;
     }
 
-    /**
-     * The data for the model mapped to component
-     *
-     * @return array
-     */
     public function modelData()
     {
         return [
@@ -184,11 +142,6 @@ class EditModalForm extends Component
         ];
     }
 
-    /**
-     * Closes modal
-     *
-     * @return void
-     */
     public function closeModal()
     {
         $this->resetValidation();
@@ -197,11 +150,6 @@ class EditModalForm extends Component
         $this->emit('closedEditModalForm');
     }
 
-    /**
-     * Renders component
-     *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
-     */
     public function render()
     {
         return view('livewire.employee.edit-modal-form');

@@ -12,21 +12,11 @@ class DeleteModalForm extends Component
 
     public string $PESEL = '';
 
-    /**
-     * Components listeners
-     *
-     **/
     protected $listeners = [
         'openEmployeeDeleteModalForm' => 'openModal',
     ];
 
 
-    /**
-     * Opens modal
-     * @param string $pesel
-     *
-     * @return void
-     */
     public function openModal(string $PESEL)
     {
         $this->resetValidation();
@@ -35,11 +25,7 @@ class DeleteModalForm extends Component
         $this->isModalOpen = true;
     }
 
-    /**
-     * Closes modal
-     *
-     * @return void
-     */
+
     public function closeModal()
     {
         $this->reset();
@@ -66,11 +52,7 @@ class DeleteModalForm extends Component
         }
     }
 
-    /**
-     * Renderd modal
-     *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
-     */
+
     public function render()
     {
         return view('livewire.employee.delete-modal-form');

@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        @include('headers.action-type')
+        @include('headers.action-types')
     </x-slot>
 
     <x-slot name="slot">

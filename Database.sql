@@ -16,9 +16,9 @@ CREATE TABLE actions (
 	id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	employee_PESEL CHAR(11) NOT NULL,
 	performed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
-	action_description TEXT,
+	description TEXT,
 	hive_id INTEGER,
-	action_type_name VARCHAR(32) NOT NULL,
+	type_name VARCHAR(32) NOT NULL,
 	deleted_at TIMESTAMP NULL
 );
 
@@ -154,7 +154,7 @@ CREATE TABLE wax_productions (
 
 CREATE UNIQUE INDEX wax_productions__idx ON wax_productions ( apiary_code_name, produced_at );
 
-ALTER TABLE actions ADD CONSTRAINT actions_action_types_fk FOREIGN KEY (action_type_name) REFERENCES action_types (name) ON UPDATE CASCADE;
+ALTER TABLE actions ADD CONSTRAINT actions_action_types_fk FOREIGN KEY (type_name) REFERENCES action_types (name) ON UPDATE CASCADE;
 
 ALTER TABLE actions ADD CONSTRAINT actions_employees_fk FOREIGN KEY (employee_PESEL) REFERENCES employees (PESEL);
 

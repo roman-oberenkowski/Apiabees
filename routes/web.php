@@ -68,6 +68,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
         'index', 'create', 'store', 'show', 'edit', 'update'
     ]);
 
+    Route::resource('actions', ActionController::class)->only([
+        'index', 'create', 'store', 'show'
+    ]);
+
     //jeśli do action będzie slug to: Route::resource('employees.actions', ActionController::class)->shallow()->only([
     Route::resource('employees.actions', ActionController::class)->only([
         'index', 'create', 'store', 'show'

@@ -12,9 +12,9 @@ class ActionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($PESEL)
+    public function index()
     {
-        return Action::where('employee_PESEL',$PESEL)->get();
+        return view('action.index');
     }
 
     /**
@@ -24,7 +24,7 @@ class ActionController extends Controller
      */
     public function create()
     {
-        //
+        return view('action.create');
     }
 
     /**
@@ -49,7 +49,7 @@ class ActionController extends Controller
     {
         //return 'show action of ' . $PESEL . ', performed at: '.$performed_at;
         //return Action::where('employee_PESEL',$PESEL)->where('performed_at',$performed_at)->first();
-        
+
         return  Action::where('employee_PESEL',$PESEL)->where('performed_at',$performed_at)->get();
     }
 

@@ -13,7 +13,13 @@ use Illuminate\Validation\Rule;
  */
 class ActionType extends Model
 {
-
+    public const special_action_inspection="Inspekcja";
+    public const special_action_other="Inna";
+    public static function isSpecial($action){
+        if($action==self::special_action_inspection)return true;
+        if($action==self::special_action_other)return true;
+        return false;
+    }
 
     use SoftDeletes;
     /**

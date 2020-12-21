@@ -20,14 +20,19 @@ class Table extends Component
         $this->resetPage();
     }
 
+    public function updated($propertyName)
+    {
+        if($propertyName=='search__name')
+            $this->resetPage();
+    }
+
     public function render()
     {
-
         return view(
             'livewire.action-type.table',
-                [
+            [
                 'action_types' => ActionType::where('name', 'like', "%{$this->search__name}%")->orderBy('name', 'asc')->paginate(5)
-                ]
+            ]
         );
 
     }
