@@ -25,12 +25,7 @@ class UserSeeder extends Seeder
             'name' => env('ADMIN_NAME'),
             'password' => Hash::make(env('ADMIN_PASSWORD'))
         ]);
-      
-        DB::table('users')->insert([
-            'name' => "Osobnik testowy",
-            'email' => "test@test.pl",
-            'password' => Hash::make('password'),
-        ]);
+
     }
 }
 
