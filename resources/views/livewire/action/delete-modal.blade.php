@@ -1,11 +1,11 @@
 <div>
     <x-jet-dialog-modal wire:model="isModalOpen">
         <x-slot name="title">
-            {{ __('Delete Action Type') }}
+            {{ __('Delete action?') }}
         </x-slot>
 
         <x-slot name="content">
-            {{ __("Are you sure you want to delete action type $name?") }}
+            {{ __("Are you sure you want to delete action?") }}
         </x-slot>
 
         <x-slot name="footer">

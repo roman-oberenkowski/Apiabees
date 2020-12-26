@@ -49,7 +49,7 @@ class DeleteModal extends Component
     public function destroy()
     {
         if($this->name=='Inna') {
-            flash("Cannot delete specia action type {$this->name}.")->info()->livewire($this);
+            flash("Cannot delete special action type {$this->name}.")->info()->livewire($this);
             $this->closeModal();
             return;
         }

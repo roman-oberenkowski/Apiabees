@@ -2,17 +2,27 @@
     <x-flash />
 
     <div class="grid grid-cols-6 gap-6 p-3">
-        <div class="col-span-6 sm:col-span-2">
-            <x-jet-label for="search__name" value="{{ __('Filter') }}" />
-            <x-jet-input id="search__name" type="text" class="mt-1 block w-full" wire:model="search__name" autocomplete="search__name"/>
-            <x-jet-input-error for="search__name" class="mt-2" />
-        </div>
         <div class="col-span-6 sm:col-span-4">
             @if (session()->has('message'))
                 <div class="alert alert-success">
                     {{ session('message') }}
                 </div>
             @endif
+        </div>
+        <div class="col-span-6 sm:col-span-2">
+            <x-jet-label for="filter_employee_PESEL" value="by employee:" />
+            <x-select for="filter_employee_PESEL" wire:model="filter_employee_PESEL" :options="$filter_employees_dropdown"  />
+            <x-jet-input-error for="filter_employee_PESEL" class="mt-2" />
+        </div>
+        <div class="col-span-6 sm:col-span-2">
+            <x-jet-label for="filter_type_name"  value="by action type" />
+            <x-select for="filter_type_name" wire:model="filter_type_name" :options="$filter_type_names_dropdown"  />
+            <x-jet-input-error for="filter_type_name" class="mt-2" />
+        </div>
+        <div class="col-span-6 sm:col-span-2">
+            <x-jet-label for="filter_description" value="{{ __('by description') }}" />
+            <x-jet-input id="filter_description" type="text" class="mt-1 block w-full" wire:model="filter_description" autocomplete="filter_description"/>
+            <x-jet-input-error for="filter_description" class="mt-2" />
         </div>
 
 

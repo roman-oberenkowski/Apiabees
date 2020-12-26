@@ -13,7 +13,7 @@ class HiveController extends Controller
      */
     public function index()
     {
-        //
+        return view('hive.index');
     }
 
     /**
@@ -23,7 +23,7 @@ class HiveController extends Controller
      */
     public function create()
     {
-        //
+        return view('hive.create');
     }
 
     /**

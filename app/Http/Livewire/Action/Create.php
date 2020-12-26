@@ -14,7 +14,7 @@ class Create extends Component
 {
     public string $action_id = '';
     public string $employee_PESEL = '';
-    public $description=null;
+    public string $description='';
     public $hive_id = null;
     public string $type_name = '';
     public string $choosen_hive_info='Brak';

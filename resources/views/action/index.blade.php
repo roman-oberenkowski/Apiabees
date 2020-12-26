@@ -6,6 +6,7 @@
     <x-slot name="slot">
         <x-section>
             @livewire('action.table')
+            @livewire('action.delete-modal')
 
         </x-section>
     </x-slot>

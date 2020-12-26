@@ -12,6 +12,7 @@
             <x-sidebar-nav-link href="{{ route('employees.index') }}" :active="request()->is('employees/')"> <i class="fab fa-accusoft pr-1"></i>  {{ __('Employees') }} </x-sidebar-nav-link>
             <x-sidebar-nav-link href="{{ route('action-types.index') }}" :active="request()->is('action_types/*')"> <i class="fab fa-accusoft pr-1"></i>  {{ __('Action Types') }} </x-sidebar-nav-link>
             <x-sidebar-nav-link href="{{ route('actions.index') }}" :active="request()->is('actions')"> <i class="fab fa-accusoft pr-1"></i>  {{ __('Actions') }} </x-sidebar-nav-link>
+            <x-sidebar-nav-link href="{{ route('hives.index') }}" :active="request()->is('hives')"> <i class="fab fa-accusoft pr-1"></i>  {{ __('Hives') }} </x-sidebar-nav-link>
         </div>
     </div>
 </aside>

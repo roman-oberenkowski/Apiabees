@@ -1,11 +1,11 @@
 <x-app-layout>
     <x-slot name="header">
-        @include('headers.actions')
+        @include('headers.hives')
     </x-slot>
 
     <x-slot name="slot">
         <x-section>
-            @livewire('action.table')
+            @livewire('hive.table',['isModal'=>true])
 
         </x-section>
     </x-slot>

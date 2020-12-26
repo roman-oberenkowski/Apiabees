@@ -1,44 +1,47 @@
 <?php
 
-namespace App\Http\Livewire\Action;
+namespace App\Http\Livewire\Hive;
 
+use App\Models\ActionType;
+use App\Models\Employee;
 use Livewire\Component;
-use App\Models\Action;
+use App\Models\Hive;
 use Livewire\WithPagination;
+use phpDocumentor\Reflection\Types\Boolean;
 
 class Table extends Component
 {
     use WithPagination;
+    public bool $isModal;
+    public bool $isModalOpen=true;
     public string $search__name = '';
+    public string $message='';
 
     protected $listeners = [
-        'closedActionDeleteModalForm' => '$refresh',
+        'closedHiveDeleteModal' => '$refresh',
     ];
 
     public function mount()
     {
         $this->resetPage();
+        if($this->isModal)$this->message='got modal';
+        else $this->message='got normal';
     }
 
     public function render()
     {
 
         return view(
-            'livewire.action.table',
+            'livewire.hive.table',
                 [
-                'actions' => Action::orderBy('performed_at', 'desc')->paginate(5)
+                    'hives' => Hive::paginate(5),
+
                 ]
         );
 
     }
 
-    public function formatDescription($in){
-        if(strlen($in)>32)
-            return substr($in,0,29).'...';
-        return $in;
-    }
-
     public function openDeleteModal($id){
-        $this->emit('openActionDeleteModal', $id);
+        $this->emit('openHiveDeleteModal', $id);
     }
 }
