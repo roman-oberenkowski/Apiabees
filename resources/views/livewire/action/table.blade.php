@@ -2,7 +2,7 @@
     <x-flash />
 
     <div class="grid grid-cols-6 gap-6 p-3">
-        <div class="col-span-6 sm:col-span-4">
+        <div class="col-span-6 sm:col-span-6">
             @if (session()->has('message'))
                 <div class="alert alert-success">
                     {{ session('message') }}
@@ -24,6 +24,18 @@
             <x-jet-input id="filter_description" type="text" class="mt-1 block w-full" wire:model="filter_description" autocomplete="filter_description"/>
             <x-jet-input-error for="filter_description" class="mt-2" />
         </div>
+        <div class="col-span-6 sm:col-span-2">
+            <x-jet-label for="filter_date" value="{{ __('by date') }}" />
+            <x-jet-input id="filter_date" type="date" class="mt-1 block w-full" wire:model="filter_date" autocomplete="filter_date"/>
+            <x-jet-input-error for="filter_date" class="mt-2" />
+        </div>
+        <div class="col-span-6 sm:col-span-2">
+            <x-jet-label  value="{{ __('Filter') }}" />
+            <x-jet-secondary-button wire:click="resetFilters()" wire:loading.attr="disabled">
+                {{ __('Reset') }}
+            </x-jet-secondary-button>
+        </div>
+
 
 
     </div>

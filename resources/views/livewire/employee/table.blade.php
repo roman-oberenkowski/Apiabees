@@ -18,7 +18,8 @@
             <x-jet-label  value="{{ __('Filter') }}" />
             <x-jet-secondary-button wire:click="resetSearch()" wire:loading.attr="disabled">
                 {{ __('Reset') }}
-            </x-jet-secondary-button></div>
+            </x-jet-secondary-button>
+        </div>
 
     </div>
     <table class="min-w-full divide-y divide-gray-200">
@@ -52,11 +53,6 @@
                     <td class="px-6 py-4 whitespace-no-wrap">
                         <div class="text-sm leading-5 text-gray-900">
                             {{   \Carbon\Carbon::parse($employee->date_of_employment)->format('d/m/Y')   }}
-                        </div>
-                        <div class="text-sm leading-5 text-red-800">
-                            @isset($employee->date_of_release)
-                                {{   \Carbon\Carbon::parse($employee->date_of_release)->format('d/m/Y')   }}
-                            @endisset
                         </div>
                     </td>
                     <td class="pr-4 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">

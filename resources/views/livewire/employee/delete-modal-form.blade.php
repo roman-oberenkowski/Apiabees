@@ -1,7 +1,7 @@
 <div>
     <x-jet-dialog-modal wire:model="isModalOpen">
         <x-slot name="title">
-            {{ __('Delete Account') }}
+            {{ __('Delete employee') }}
         </x-slot>
 
         <x-slot name="content">
@@ -14,7 +14,7 @@
             </x-jet-secondary-button>
 
             <x-jet-danger-button class="ml-2" wire:click="destroy()" wire:loading.attr="disabled">
-                {{ __('Delete Account') }}
+                {{ __('Delete') }}
             </x-jet-danger-button>
         </x-slot>
     </x-jet-dialog-modal>

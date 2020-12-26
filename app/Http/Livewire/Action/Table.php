@@ -14,14 +14,33 @@ class Table extends Component
     public string $filter_description = '';
     public string $filter_employee_PESEL='';
     public string $filter_type_name='';
-
+    public string $filter_date='';
+    public $test;
     protected $listeners = [
         'closedActionDeleteModal' => '$refresh',
     ];
 
     public function mount()
     {
+        if(session()->has('actions_selected_employee')){
+            $this->filter_employee_PESEL=session()->pull('actions_selected_employee');
+        }
         $this->resetPage();
+    }
+
+    public function resetFilters(){
+        $this->filter_description = '';
+        $this->filter_employee_PESEL='';
+        $this->filter_type_name='';
+        $this->filter_date='';
+    }
+
+    public function optionalDateFilter($query)
+    {
+        if ($this->filter_date) {
+            return $query->whereDate('performed_at', $this->filter_date);
+        }
+        return $query;
     }
 
     public function render()
@@ -44,6 +63,9 @@ class Table extends Component
                 'actions' => Action::where('employee_PESEL', 'like', "%{$this->filter_employee_PESEL}%")
                     ->where('type_name', 'like', "%{$this->filter_type_name}%")
                     ->where('description', 'like', "%{$this->filter_description}%")
+                    ->when($this->filter_date, function($query,$date){
+                        return $query->whereDate('performed_at', $date);
+                    })
                     ->orderBy('performed_at', 'desc')->paginate(5),
                 'filter_employees_dropdown' => $employee_dropdown,
                 'filter_type_names_dropdown' => $type_names_dropdown,

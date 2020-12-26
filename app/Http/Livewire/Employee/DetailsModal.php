@@ -2,7 +2,9 @@
 
 namespace App\Http\Livewire\Employee;
 
+use App\Models\Action;
 use App\Models\Employee;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Livewire\Component;
 
 class DetailsModal extends Component
@@ -22,22 +24,48 @@ class DetailsModal extends Component
     public string $street = '';
     public string $city = '';
     public string $date_of_employment = '';
+    public array $actions = [];
 
 
     protected $listeners = [
         'openEmployeeDetailsModal' => 'openModal',
     ];
 
-    public function openModal(Employee $employee)
-    {
-        $this->loadData($employee);
-        $this->isModalOpen = true;
+    public function formatDescription($in){
+        if(strlen($in)>32)
+            return substr($in,0,29).'...';
+        return $in;
     }
+
+    public function openModal($id)
+    {
+        try{
+            $employee=Employee::findOrFail($id);
+            $this->loadData($employee);
+            $this->actions=Action::
+            where('employee_PESEL',$this->PESEL)->
+            orderBy('performed_at', 'desc')->
+            take(5)->
+            get()->
+            toArray();
+            $this->isModalOpen = true;
+        }
+        catch(ModelNotFoundException $e){
+            flash("Couldn't find that employee.")->error()->livewire($this);
+        }
+    }
+
 
     public function closeModal()
     {
         $this->isModalOpen = false;
         $this->emit('closedEmployeeDetailsModalForm');
+    }
+
+    public function redirectEmployeeActionsIndex()
+    {
+        session(['actions_selected_employee'=>$this->PESEL]);
+        return redirect()->route('actions.index');
     }
 
     public function openEditModalForm()
@@ -83,6 +111,7 @@ class DetailsModal extends Component
     }
     public function render()
     {
+
         return view('livewire.employee.details-modal');
     }
 }

@@ -81,21 +81,87 @@
                                         <x-jet-label for="city" value="{{ __('City') }}" />
                                         {{$city}}
                                     </div>
+                                    <div class="col-span-6 ">
+                                        <x-jet-button wire:click="openEditModalForm" wire:loading.attr="disabled">
+                                            {{ __('Edit') }}
+                                        </x-jet-button>
+                                    </div>
                                 </div>
+
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <div>Latest actions (max 5)</div>
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead>
+                <tr>
+                    <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                        Performed at
+                    </th>
+
+                    <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                        Action type
+                    </th>
+                    <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                        description
+                    </th>
+                    <th class="pr-4 py-3 bg-gray-50"></th>
+                </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+
+                @foreach($actions as $action)
+                    <div>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-no-wrap">
+                                <div class="flex items-center">
+                                    <div >
+                                        <div class="text-sm leading-5 font-medium text-gray-900">
+                                            {{$action['performed_at']}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-no-wrap">
+                                <div class="flex items-center">
+                                    <div >
+                                        <div class="text-sm leading-5 font-medium text-gray-900">
+                                            {{$action['type_name']}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-no-wrap">
+                                <div class="flex items-center">
+                                    <div >
+                                        <div class="text-sm leading-5 font-medium text-gray-900">
+                                            {{$this->formatDescription($action['description'])}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td class="pr-4 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
+                                <a href="#" class="text-red-600 hover:text-red-900" wire:click="openActionDetailsModal('{{$action['id']}}')" wire:loading.attr="disabled"><i class="fas fa-times pr-2"></i>Details</a>
+                            </td>
+                        </tr>
+                    </div>
+                @endforeach
+                </tbody>
+            </table>
+
         </x-slot>
 
         <x-slot name="footer">
+            <x-jet-secondary-button wire:click="redirectEmployeeActionsIndex" wire:loading.attr="disabled">
+                {{ __('More actions') }}
+            </x-jet-secondary-button>
             <x-jet-secondary-button wire:click="closeModal" wire:loading.attr="disabled">
                 {{ __('Close') }}
             </x-jet-secondary-button>
-            <x-jet-button wire:click="openEditModalForm" wire:loading.attr="disabled">
-                {{ __('Edit') }}
-            </x-jet-button>
+
 
 
 
