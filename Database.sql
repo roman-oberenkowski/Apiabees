@@ -18,8 +18,7 @@ CREATE TABLE actions (
 	performed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
 	description TEXT,
 	hive_id INTEGER,
-	type_name VARCHAR(32) NOT NULL,
-	deleted_at TIMESTAMP NULL
+	type_name VARCHAR(32) NOT NULL
 );
 
 CREATE UNIQUE INDEX UC_actions__idx ON actions  (employee_PESEL, performed_at);
@@ -43,7 +42,6 @@ CREATE TABLE attendances (
 	started_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
 	finished_at TIMESTAMP NULL,
 	employee_PESEL CHAR(11) NOT NULL,
-	deleted_at TIMESTAMP NULL,
 	CHECK (finished_at >= started_at OR finished_at IS NULL)
 );
 
@@ -69,12 +67,10 @@ CREATE TABLE employees (
 	last_name VARCHAR(32) NOT NULL,
 	salary DECIMAL(10, 2) NOT NULL,
 	date_of_employment DATE DEFAULT CURRENT_TIMESTAMP NOT NULL,
-	date_of_release DATE NULL,
 	appartement VARCHAR(4) NULL,
 	house_number VARCHAR(8) NOT NULL,
 	street VARCHAR(32) NOT NULL,
-	city VARCHAR(32) NOT NULL,
-	CHECK (date_of_release >= date_of_employment OR date_of_release IS NULL)
+	city VARCHAR(32) NOT NULL
 );
 
 CREATE TABLE family_states (
@@ -122,8 +118,7 @@ CREATE TABLE task_assignments (
 	assignment_date DATE DEFAULT CURRENT_TIMESTAMP NOT NULL,
 	employee_PESEL CHAR(11) NOT NULL,
 	task_type_name VARCHAR(64) NOT NULL,
-	apiary_code_name VARCHAR(32) NOT NULL,
-	deleted_at TIMESTAMP NULL
+	apiary_code_name VARCHAR(32) NOT NULL
 );
 
 CREATE UNIQUE INDEX task_assignments__idx ON task_assignments ( employee_PESEL, task_type_name, apiary_code_name, assignment_date );
@@ -156,11 +151,11 @@ CREATE UNIQUE INDEX wax_productions__idx ON wax_productions ( apiary_code_name, 
 
 ALTER TABLE actions ADD CONSTRAINT actions_action_types_fk FOREIGN KEY (type_name) REFERENCES action_types (name) ON UPDATE CASCADE;
 
-ALTER TABLE actions ADD CONSTRAINT actions_employees_fk FOREIGN KEY (employee_PESEL) REFERENCES employees (PESEL);
+ALTER TABLE actions ADD CONSTRAINT actions_employees_fk FOREIGN KEY (employee_PESEL) REFERENCES employees (PESEL)  ON DELETE CASCADE;
 
 ALTER TABLE actions ADD CONSTRAINT actions_hives_fk FOREIGN KEY (hive_id) REFERENCES hives (id);
 
-ALTER TABLE attendances ADD CONSTRAINT attendances_employees_fk FOREIGN KEY (employee_PESEL) REFERENCES employees (PESEL);
+ALTER TABLE attendances ADD CONSTRAINT attendances_employees_fk FOREIGN KEY (employee_PESEL) REFERENCES employees (PESEL) ON DELETE CASCADE;
 
 ALTER TABLE bee_families ADD CONSTRAINT bee_families_species_fk FOREIGN KEY (species_name) REFERENCES species (name) ON UPDATE CASCADE;
 
@@ -178,7 +173,7 @@ ALTER TABLE honey_productions ADD CONSTRAINT honey_productions_types_fk FOREIGN 
 
 ALTER TABLE honey_productions ADD CONSTRAINT honey_productions_apiaries_fk FOREIGN KEY (apiary_code_name) REFERENCES apiaries (code_name);
 
-ALTER TABLE task_assignments ADD CONSTRAINT assigned_tasks_employees_fk FOREIGN KEY (employee_PESEL) REFERENCES employees (pesel);
+ALTER TABLE task_assignments ADD CONSTRAINT assigned_tasks_employees_fk FOREIGN KEY (employee_PESEL) REFERENCES employees (pesel) ON DELETE CASCADE;
 
 ALTER TABLE task_assignments ADD CONSTRAINT assigned_tasks_tasks_fk FOREIGN KEY (task_type_name) REFERENCES task_types (name) ON UPDATE CASCADE;
 

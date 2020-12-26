@@ -14,7 +14,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Attendance extends Model
 {
-    use SoftDeletes;
     /**
      * @var array
      */

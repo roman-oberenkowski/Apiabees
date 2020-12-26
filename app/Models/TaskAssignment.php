@@ -18,7 +18,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class TaskAssignment extends Model
 {
-    use SoftDeletes;
     /**
      * The table associated with the model.
      *

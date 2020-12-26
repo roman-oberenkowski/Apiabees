@@ -22,7 +22,6 @@ use phpDocumentor\Reflection\Types\Boolean;
  */
 class Action extends Model
 {
-    use SoftDeletes;
 
     protected $fillable = [
         'employee_PESEL',

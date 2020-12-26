@@ -14,7 +14,6 @@ use Krlove\EloquentModelGenerator\Model\HasOne;
  * @property string $last_name
  * @property float $salary
  * @property string $date_of_employment
- * @property string $date_of_release
  * @property string $appartement
  * @property string $house_number
  * @property string $street
@@ -25,8 +24,6 @@ use Krlove\EloquentModelGenerator\Model\HasOne;
  */
 class Employee extends Model
 {
-    use SoftDeletes;
-    const DELETED_AT = 'date_of_release';
     protected $primaryKey = 'PESEL';
 
     /**
@@ -52,7 +49,6 @@ class Employee extends Model
         'last_name',
         'salary',
         'date_of_employment',
-        'date_of_release',
         'appartement',
         'house_number',
         'street',
@@ -99,7 +95,6 @@ class Employee extends Model
      */
     protected $casts = [
         'date_of_employment' => 'datetime:Y-m-d',
-        'date_of_release' => 'datetime:Y-m-d',
     ];
 
     /**
