@@ -1,7 +1,10 @@
-<div xmlns:wire="http://www.w3.org/1999/xhtml">
-        <x-flash />
-        <form wire:submit.prevent="store" method="POST">
-            @csrf
+<div>
+    <x-jet-dialog-modal wire:model="isModalOpen">
+        <x-slot name="title">
+            {{ __('Edit apiary') }}
+        </x-slot>
+
+        <x-slot name="content">
             <div class="p-6">
                 <div class="md:grid md:grid-cols-3 md:gap-6">
                     <x-jet-section-title>
@@ -115,10 +118,18 @@
                     </div>
                 </div>
             </div>
+        </x-slot>
+
+        <x-slot name="footer">
             <div class="col-span-12 flex items-center justify-end px-4 py-3 bg-gray-50 text-right sm:px-6 mt-4 rounded ">
-                <x-jet-button>
+                <x-jet-secondary-button wire:click="closeModal" wire:loading.attr="disabled" class="pm-3">
+                    {{ __('Cancel') }}
+                </x-jet-secondary-button>
+
+                <x-jet-button wire:click="update">
                     {{ __('Save') }}
                 </x-jet-button>
             </div>
-        </form>
-    </div>
+        </x-slot>
+    </x-jet-dialog-modal>
+</div>

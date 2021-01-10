@@ -25,6 +25,28 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Apiary extends Model
 {
+    public static function validationRulesCreate(){
+        return [
+            'code_name' => ['required', 'string', 'min:2','max:31','unique:apiaries'],
+            'name' => ['required', 'string', 'min:2','max:63','unique:apiaries'],
+            'area' => ['required', 'numeric', 'gt:0','lte:1000000'],
+            'parcel' => ['required', 'string', 'min:1','max:7'],
+            'street' => ['required', 'string', 'min:3','max:31'],
+            'city' => ['required', 'string', 'min:3','max:31'],
+            'col_num' => ['required', 'integer', 'gt:0','lte:50'],
+            'row_num' => ['required', 'integer', 'gt:0','lte:50'],
+            'latitude' => ['required', 'numeric', 'gte:0','lte:90'],
+            'longitude' => ['required', 'numeric', 'gte:0','lte:180'],
+        ];
+    }
+    public static function validationRulesUpdate()
+    {
+
+        $rules=self::validationRulesCreate();
+        unset($rules['code_name']);
+        unset($rules['name']);
+        return $rules;
+    }
     /**
      * The primary key for the model.
      *

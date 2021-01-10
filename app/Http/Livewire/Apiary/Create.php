@@ -3,13 +3,21 @@
 namespace App\Http\Livewire\Apiary;
 
 use App\Models\Apiary;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class Create extends Component
 {
     protected $listeners=[];
+    public string $code_name='';
+    public string $name='';
+    public string $area='';
+    public string $city='';
+    public string $street='';
+    public string $parcel='';
+    public string $latitude='';
+    public string $longitude='';
+    public string $row_num='';
+    public string $col_num='';
 
     protected function rules()
     {
@@ -18,8 +26,8 @@ class Create extends Component
 
     public function updated($propertyName)
     {
-        if($propertyName=='type_name')
-            $this->resetValidation();
+        //if($propertyName=='type_name')
+        //    $this->resetValidation();
         $this->validateOnly($propertyName);
     }
 
@@ -37,7 +45,8 @@ class Create extends Component
     {
         $this->reset();
         $this->resetValidation();
-        $this->emit('newActionCreated');
+        $this->emit('newApiaryCreated');
+        return redirect()->route('apiaries.index');
     }
 
     public function mount(){

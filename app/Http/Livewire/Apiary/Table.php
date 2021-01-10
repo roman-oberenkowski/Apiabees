@@ -15,10 +15,10 @@ class Table extends Component
     public bool $isModalOpen=true;
     public string $search_name = '';
     public string $search_code_name = '';
-    public string $message='';
 
     protected $listeners = [
         'closedApiaryDeleteModal' => '$refresh',
+        'closedApiaryEditModal' => '$refresh'
     ];
 
     public function mount()
@@ -44,5 +44,8 @@ class Table extends Component
     }
     public function openApiaryDetailsModal($id){
         $this->emit('openApiaryDetailsModal', $id);
+    }
+    public function openApiaryEditModal($id){
+        $this->emit('openApiaryEditModal', $id);
     }
 }
