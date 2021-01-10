@@ -10,7 +10,6 @@ class DeleteModal extends Component
 {
     public bool $isModalOpen = false;
     public ?int $action_id;
-    public string $name='';
     protected $listeners = [
         'openActionDeleteModal' => 'openModal',
     ];
@@ -18,7 +17,7 @@ class DeleteModal extends Component
     public function openModal($id)
     {
         try {
-            $tmp=Action::findOrFail($id);
+            Action::findOrFail($id);
             $this->action_id=$id;
             $this->isModalOpen = true;
         } catch (ModelNotFoundException $e) {

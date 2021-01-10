@@ -15,7 +15,6 @@ class Table extends Component
     public string $filter_employee_PESEL='';
     public string $filter_type_name='';
     public string $filter_date='';
-    public $test;
     protected $listeners = [
         'closedActionDeleteModal' => '$refresh',
     ];

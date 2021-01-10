@@ -13,7 +13,7 @@ class ApiaryController extends Controller
      */
     public function index()
     {
-        //
+        return view("apiary.index");
     }
 
     /**
@@ -23,7 +23,7 @@ class ApiaryController extends Controller
      */
     public function create()
     {
-        //
+        return view("apiary.create");
     }
 
     /**

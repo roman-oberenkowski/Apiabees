@@ -25,7 +25,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Apiary extends Model
 {
-    use SoftDeletes;
     /**
      * The primary key for the model.
      *

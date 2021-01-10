@@ -33,8 +33,7 @@ CREATE TABLE apiaries (
 	col_num INTEGER NOT NULL CHECK (col_num >= 0),
 	row_num INTEGER NOT NULL CHECK (row_num >= 0),
 	latitude DECIMAL(10, 7) NOT NULL CHECK (latitude > 0),
-	longitude DECIMAL(10, 7) NOT NULL CHECK (longitude > 0),
-	deleted_at TIMESTAMP NULL
+	longitude DECIMAL(10, 7) NOT NULL CHECK (longitude > 0)
 );
 
 CREATE TABLE attendances (
@@ -167,7 +166,7 @@ ALTER TABLE family_states ADD CONSTRAINT family_states_state_types_fk FOREIGN KE
 
 ALTER TABLE hives ADD CONSTRAINT hives_bee_families_fk FOREIGN KEY (bee_family_id) REFERENCES bee_families (id);
 
-ALTER TABLE hives ADD CONSTRAINT hives_apiaries_fk FOREIGN KEY (apiary_code_name) REFERENCES apiaries (code_name);
+ALTER TABLE hives ADD CONSTRAINT hives_apiaries_fk FOREIGN KEY (apiary_code_name) REFERENCES apiaries (code_name) ON UPDATE CASCADE;
 
 ALTER TABLE honey_productions ADD CONSTRAINT honey_productions_types_fk FOREIGN KEY (honey_type_name) REFERENCES honey_types (name) ON UPDATE CASCADE;
 
