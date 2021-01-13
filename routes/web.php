@@ -55,10 +55,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
 
     //BEE_FAMILIIES
-    Route::resource('bee_families', BeeFamilyController::class)->only([
+    Route::resource('bee-families', BeeFamilyController::class)->only([
         'index', 'create', 'store', 'show', 'edit', 'update'
     ]);
-    Route::resource('bee_families.family_states', FamilyStateController::class)->only([
+    Route::resource('bee-families.family_states', FamilyStateController::class)->only([
         'index', 'create', 'store', 'show'
     ]);
 

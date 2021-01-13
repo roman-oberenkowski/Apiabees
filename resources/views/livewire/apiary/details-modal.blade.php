@@ -161,7 +161,7 @@
         </x-slot>
 
         <x-slot name="footer">
-            <x-jet-button wire:click="openApiaryEditModalForm" wire:loading.attr="disabled">
+            <x-jet-button wire:click="openApiaryEditModal" wire:loading.attr="disabled">
                 {{ __('Edit') }}
             </x-jet-button>
             <x-jet-secondary-button wire:click="redirectApiariesHivesIndex" wire:loading.attr="disabled">

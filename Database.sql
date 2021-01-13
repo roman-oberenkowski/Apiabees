@@ -53,9 +53,9 @@ CREATE TABLE bee_families (
 	population INTEGER NOT NULL,
 	die_off_date DATE NULL,
 	species_name VARCHAR(32) NOT NULL,
-	hive_id INTEGER NOT NULL,
-	deleted_at TIMESTAMP NULL,
-	CHECK ( die_off_date >= acquired_at OR die_off_date IS NULL )
+	hive_id INTEGER,
+	CHECK ( die_off_date >= acquired_at OR die_off_date IS NULL ),
+	CHECK ( population=0 OR die_off_date is NULL )
 );
 
 CREATE UNIQUE INDEX bee_families__idx ON bee_families ( hive_id ASC );
@@ -160,7 +160,7 @@ ALTER TABLE bee_families ADD CONSTRAINT bee_families_species_fk FOREIGN KEY (spe
 
 ALTER TABLE bee_families ADD CONSTRAINT bee_families_hives_fk FOREIGN KEY (hive_id) REFERENCES hives (id);
 
-ALTER TABLE family_states ADD CONSTRAINT family_states_bee_families_fk FOREIGN KEY (bee_family_id) REFERENCES bee_families (id);
+ALTER TABLE family_states ADD CONSTRAINT family_states_bee_families_fk FOREIGN KEY (bee_family_id) REFERENCES bee_families (id) ON DELETE CASCADE;
 
 ALTER TABLE family_states ADD CONSTRAINT family_states_state_types_fk FOREIGN KEY (state_type_name) REFERENCES state_types (name) ON UPDATE CASCADE;
 

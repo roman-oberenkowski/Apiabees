@@ -24,8 +24,6 @@ class Table extends Component
     public function mount()
     {
         $this->resetPage();
-        if($this->isModal)$this->message='got modal';
-        else $this->message='got normal';
     }
 
     public function render()
@@ -41,7 +39,7 @@ class Table extends Component
 
     }
 
-    public function openDeleteModal($id){
+    public function openHiveDeleteModal($id){
         $this->emit('openHiveDeleteModal', $id);
     }
 }

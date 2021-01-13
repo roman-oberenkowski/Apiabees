@@ -27,7 +27,7 @@ class ChooseModal extends Component
     }
 
     public function choose(){
-        $this->emit('HiveChooseModalChoosen',1);
+        $this->emit('HiveChooseModalChoosen',16);
         $this->closeModal();
     }
 

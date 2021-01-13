@@ -1,11 +1,11 @@
 <div>
     <x-jet-dialog-modal wire:model="isModalOpen">
         <x-slot name="title">
-            {{ __('Delete apiary?') }}
+            {{ __('Delete bee family?') }}
         </x-slot>
 
         <x-slot name="content">
-            {{ __("Are you sure you want to delete selected apiary? Confirming will delete all data assosiated with this apiary (tasks, honey/wax produtions). All hives currently on the apiary won't be deleted, but their placement will be reset - sent to storage.") }}
+            {{ __("Are you sure you want to delete selected bee family?") }}
         </x-slot>
 
         <x-slot name="footer">

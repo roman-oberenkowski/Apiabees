@@ -13,7 +13,7 @@ class BeeFamilyController extends Controller
      */
     public function index()
     {
-        //
+        return view("bee-family.index");
     }
 
     /**
@@ -23,7 +23,7 @@ class BeeFamilyController extends Controller
      */
     public function create()
     {
-        //
+        return view("bee-family.create");
     }
 
     /**

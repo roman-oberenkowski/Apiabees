@@ -22,9 +22,23 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class BeeFamily extends Model
 {
     use SoftDeletes;
-    /**
-     * @var array
-     */
+    const DELETED_AT = 'die_off_date';
+    public static function validationRulesCreate(){
+        return [
+            'acquired_at' => ['required', 'date', 'before_or_equal:today'],
+            'population' => ['required', 'integer', 'min:1','lte:1000000'],
+            'die_off_date' => ['nullable', 'date', 'before_or_equal:acquired_at'],
+            'species_name' => ['required', 'exists:species,name'],
+            'hive_id' => ['nullable', 'integer', 'exists:hives,id'],
+        ];
+    }
+    public static function validationRulesUpdate()
+    {
+        $rules=self::validationRulesCreate();
+        return $rules;
+    }
+
+
     protected $fillable = [
         'species_name',
         'hive_id',

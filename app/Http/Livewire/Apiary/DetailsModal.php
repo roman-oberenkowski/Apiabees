@@ -42,20 +42,13 @@ class DetailsModal extends Component
     public function closeModal()
     {
         $this->isModalOpen = false;
-        $this->emit('closedApiaryDetailsModalForm');
+        $this->emit('closedApiaryDetailsModal');
     }
 
-    public function redirectApiaryActionsIndex()
+    public function openApiaryEditModal()
     {
-        session(['actions_selected_apiary'=>$this->PESEL]);
-        return redirect()->route('actions.index');
-    }
-
-    public function openEditModalForm()
-    {
-        $id = $this->PESEL;
         $this->closeModal();
-        $this->emit('openApiaryEditModalForm', $id);
+        $this->emit('openApiaryEditModal', $this->apiary_code_name);
     }
 
     public function render()
@@ -67,4 +60,5 @@ class DetailsModal extends Component
         session(['hivess_selected_apiary'=>$this->apiary_code_name]);
         return redirect()->route('hives.index');
     }
+
 }
