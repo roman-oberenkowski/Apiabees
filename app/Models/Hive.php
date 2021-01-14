@@ -23,10 +23,21 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Hive extends Model
 {
-    use SoftDeletes;
-    /**
-     * @var array
-     */
+    public static function validationRulesCreate(){
+        return [
+            'material' => ['required','string','min:2','max:31'],
+            'nfc_tag' => ['nullable','string','min:2, max:127','unique:hives,nfc_tag'],
+            'qr_code' => ['nullable','string','min:2, max:31','unique:hives,qr_code'],
+            'apiary_code_name' => ['nullable','string', 'exists:apiaries,code_name','required_with:location_row','required_with:location_column'],
+            'location_row'=> ['nullable','integer','gte:1', 'lte:1000','required_with:apiary_code_name','required_with:location_column'],
+            'location_column'=> ['nullable','integer','gte:1', 'lte:1000', 'required_with:apiary_code_name','required_with:location_row'],
+        ];
+    }
+    public static function validationRulesUpdate()
+    {
+        $rules=self::validationRulesCreate();
+        return $rules;
+    }
     protected $fillable = [
         'apiary_code_name',
         'bee_family_id',

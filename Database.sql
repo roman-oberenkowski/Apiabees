@@ -91,8 +91,7 @@ CREATE TABLE hives (
 	apiary_code_name VARCHAR(32) NULL,
 	location_row INTEGER NULL,
 	location_column INTEGER NULL,
-	bee_family_id INTEGER NULL,
-	deleted_at TIMESTAMP NULL
+	bee_family_id INTEGER NULL
 );
 
 CREATE UNIQUE INDEX hives__idx ON hives ( bee_family_id );

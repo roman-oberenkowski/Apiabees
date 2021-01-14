@@ -14,6 +14,7 @@ class Table extends Component
 
     public string $filter_state='';
     public array $filter_state_dropdown=[];
+    public array $filter_specie_dropdown=[];
 
 
     protected $listeners = [

@@ -5,9 +5,7 @@
 
     <x-slot name="slot">
         <x-section>
-            @livewire('hive.table')
-            @livewire('hive.move-modal')
-
+            @livewire('hive.create')
         </x-section>
     </x-slot>
 </x-app-layout>

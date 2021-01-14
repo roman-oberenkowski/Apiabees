@@ -21,12 +21,15 @@ class DatabaseSeeder extends Seeder
             HoneyTypeSeeder::class,
             TaskTypeSeeder::class,
             StateTypeSeeder::class,
+            SpecieSeeder::class,
             //other seeders
             ApiarySeeder::class,
+            HiveSeeder::class,
+            BeeFamilySeeder::class,
             EmployeeSeeder::class,
             AttendanceSeeder::class,
-            HiveSeeder::class,
-            SpecieSeeder::class,
+
+
             //testing seeders
             UserSeeder::class,
         ]);

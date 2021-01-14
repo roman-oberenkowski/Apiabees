@@ -43,9 +43,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::resource('apiaries', ApiaryController::class)->only([
         'index', 'create', 'store', 'show'
     ]);
-    Route::resource('apiaries.hives', HiveController::class)->shallow()->only([
-        'index', 'create', 'store', 'show'
-    ]);
+//    Route::resource('apiaries.hives', HiveController::class)->shallow()->only([
+//        'index', 'create', 'store', 'show'
+//    ]);
     Route::resource('apiaries.waxproducions', WaxProducionController::class)->only([
         'index', 'create', 'store', 'show'
     ]);

@@ -27,8 +27,8 @@ class ApiarySeeder extends Seeder
             $rec->parcel=$f->numberBetween(1,100);
             $rec->street=substr($f->streetName,0,32);
             $rec->city=$f->city;
-            $rec->row_num=$f->numberBetween(2,12);
-            $rec->col_num=$f->numberBetween(1,5);
+            $rec->row_num=$f->numberBetween(3,6);
+            $rec->col_num=$f->numberBetween(3,6);
             $rec->latitude=$f->numberBetween(4900,5400)/100;
             $rec->longitude=$f->numberBetween(1400,2400)/100;
             $rec->save();

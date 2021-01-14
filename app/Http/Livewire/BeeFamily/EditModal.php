@@ -60,8 +60,7 @@ class EditModal extends Component
 
     }
 
-    public
-    function openModal($bee_family_id)
+    public function openModal($bee_family_id)
     {
         $this->resetValidation();
         $this->reset();
