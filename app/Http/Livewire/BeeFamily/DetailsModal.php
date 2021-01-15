@@ -2,7 +2,9 @@
 
 namespace App\Http\Livewire\BeeFamily;
 
+use App\Models\Attendance;
 use App\Models\BeeFamily;
+use App\Models\FamilyState;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Livewire\Component;
@@ -18,6 +20,7 @@ class DetailsModal extends Component
     public string $hive_id = '';
     public string $choosen_hive_info = '';
     public string $hive_apiary_code_name='';
+    public array $latest_states=[];
 
     public string $alive_text='None - still alive';
 
@@ -62,6 +65,27 @@ class DetailsModal extends Component
                     $this->hive_apiary_code_name='Apiary unassigned - on storage';
             }
         }
+        $this->latest_states=FamilyState::
+        where('bee_family_id',$this->bee_family_id)->
+        orderBy('checked_at', 'desc')->
+        take(5)->
+        get()->
+        toArray();
+        if(sizeof($this->latest_states)==0){
+            $this->latest_states[]=[
+                'id'=>null,
+                'checked_at'=>"No data yet",
+                'inspection_description'=>"No data yet",
+                'state_type_name'=>"No data yet"
+            ];
+        }
+    }
+
+
+    public function formatDescription($in){
+        if(strlen($in)>32)
+            return substr($in,0,29).'...';
+        return $in;
     }
 
     public function closeModal()
@@ -74,6 +98,10 @@ class DetailsModal extends Component
     {
         $this->closeModal();
         $this->emit('openBeeFamilyAssignHiveModal', $this->bee_family_id);
+    }
+
+    public function openFamilyStateDetailsModal($id){
+        $this->emit('openFamilyStateDetailsModal',$id);
     }
 
     public function render()
