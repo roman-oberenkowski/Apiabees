@@ -2,9 +2,8 @@
 
 namespace App\Http\Livewire\Attendance;
 
-use App\Models\ActionType;
-use App\Models\Apiary;
 use App\Models\Attendance;
+use App\Models\Employee;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -15,6 +14,7 @@ class Index extends Component
 {
     protected $listeners=[];
     public string $employee_PESEL='';
+    public string $employee='';
     public string $attendance='';
     public string $status='';
     public function start(){
@@ -24,7 +24,7 @@ class Index extends Component
         if($att==null){
             //if none - create
             DB::select('call NewAttendance(?)', array($this->employee_PESEL));
-            $this->status="In work, started just now";
+            $this->status="At work, started just now";
         }
 
     }
@@ -49,6 +49,9 @@ class Index extends Component
         $current_user=User::find(Auth::id());
         if(isset($current_user) && isset($current_user->employee_PESEL)){
             $this->employee_PESEL=$current_user->employee_PESEL;
+            $emp=Employee::findOrFail($this->employee_PESEL);
+            $this->employee=$emp->first_name.' '.$emp->last_name;
+
             $this->isPresent();
         }
         else{
@@ -59,7 +62,7 @@ class Index extends Component
     public function isPresent(){
         $att=Attendance::where('employee_PESEL',$this->employee_PESEL)->whereNull('finished_at')->first();
         if($att!=null){
-            $this->status="In work, started at: {$att->started_at}";
+            $this->status="At work, started at: {$att->started_at}";
             return true;
         }
         else{

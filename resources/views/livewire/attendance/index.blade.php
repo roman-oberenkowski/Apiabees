@@ -5,7 +5,7 @@
             <div class="p-6">
                 <div class="md:grid md:grid-cols-3 md:gap-6">
                     <x-jet-section-title>
-                        <x-slot name="title">General information</x-slot>
+                        <x-slot name="title">Please mark your attendance</x-slot>
                         <x-slot name="description"></x-slot>
                     </x-jet-section-title>
 
@@ -15,7 +15,7 @@
                                 <div class="grid grid-cols-6 gap-6">
                                     <div class="col-span-6 sm:col-span-3">
                                         <x-jet-label for="qr_code" value="{{ __('Employee') }}" />
-                                        {{$this->employee_PESEL}}
+                                        {{$this->employee}}
                                         <x-jet-label for="qr_code" value="{{ __('Status') }}" />
                                         {{$this->status}}
                                     </div>
