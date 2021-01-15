@@ -43,9 +43,7 @@
                     </td>
 
                     <td class="pr-4 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
-                        @if($action_type->name!="Inspekcja" && $action_type->name!="Inna")
                          <a href="#" class="text-red-600 hover:text-red-900" wire:click="openDeleteModal('{{$action_type->name}}')" wire:loading.attr="disabled"><i class="fas fa-times pr-2"></i>Delete</a>
-                        @endif
                     </td>
                 </tr>
             </div>

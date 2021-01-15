@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder
             BeeFamilySeeder::class,
             EmployeeSeeder::class,
             AttendanceSeeder::class,
-
+            ActionSeeder::class,
 
             //testing seeders
             UserSeeder::class,

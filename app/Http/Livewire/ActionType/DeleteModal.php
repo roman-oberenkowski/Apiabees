@@ -19,13 +19,6 @@ class DeleteModal extends Component
         'name' => ['required', 'string','exists:action_types'],
     ];
 
-
-    public function updated($propertyName)
-    {
-        $this->validateOnly($propertyName);
-    }
-
-
     public function openModal(string $name)
     {
         $this->resetValidation();
@@ -33,11 +26,6 @@ class DeleteModal extends Component
         $this->isModalOpen = true;
     }
 
-    /**
-     * Closes modal
-     *
-     * @return void
-     */
     public function closeModal()
     {
         $this->resetValidation();
@@ -45,24 +33,27 @@ class DeleteModal extends Component
         $this->emit('closedDeleteModalForm');
     }
 
-
     public function destroy()
     {
-        if($this->name=='Inna') {
-            flash("Cannot delete special action type {$this->name}.")->info()->livewire($this);
+        $action_type_to_delete = ActionType::find($this->name);
+        if (!isset($action_type_to_delete)){
+            flash("Cannot delete action type {$this->name} - probably already deleted.")->error()->livewire($this);
             $this->closeModal();
             return;
         }
-        $action_type_to_delete = ActionType::find($this->name);
-        if (!isset($action_type_to_delete))
-        {
-            flash("Cannot delete action type {$this->name} - probably already deleted.")->error()->livewire($this);
+        if(ActionType::isSpecial($this->name)) {
+            flash("Cannot delete special action type {$this->name}.")->error()->livewire($this);
+            $this->closeModal();
+            return;
         }
-        else
-        {
-            $action_type_to_delete->delete();
-            flash("Action type {$action_type_to_delete->name} has been deleted.")->success()->livewire($this);
+        if( ($cnt=$action_type_to_delete->actions->count())>0){
+            flash("Cannot delete action type {$this->name} - this action type is used by {$cnt} action(s).")->error()->livewire($this);
+            $this->closeModal();
+            return;
         }
+
+        $action_type_to_delete->delete();
+        flash("Action type {$action_type_to_delete->name} has been deleted.")->success()->livewire($this);
         $this->closeModal();
     }
 

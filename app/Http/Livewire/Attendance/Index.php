@@ -18,6 +18,7 @@ class Index extends Component
     public string $attendance='';
     public string $status='';
     public function start(){
+        if(!isset($this->employee_PESEL))return;
         //find unfinished attendance
         $att=Attendance::where('employee_PESEL',$this->employee_PESEL)->whereNull('finished_at')->first();
         if($att==null){
@@ -25,12 +26,10 @@ class Index extends Component
             DB::select('call NewAttendance(?)', array($this->employee_PESEL));
             $this->status="In work, started just now";
         }
-        else{
-            return;
-        }
 
     }
     public function finish(){
+        if(!isset($this->employee_PESEL))return;
         //find unfinished attendance
         $att=Attendance::where('employee_PESEL',$this->employee_PESEL)->whereNull('finished_at')->first();
         if($att==null){
@@ -51,6 +50,9 @@ class Index extends Component
         if(isset($current_user) && isset($current_user->employee_PESEL)){
             $this->employee_PESEL=$current_user->employee_PESEL;
             $this->isPresent();
+        }
+        else{
+            $this->status='Cannot determine who you are!';
         }
     }
 

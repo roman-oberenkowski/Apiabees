@@ -7,7 +7,7 @@
         <x-section>
             @livewire('action.table')
             @livewire('action.delete-modal')
-
+            @livewire('action.details-modal')
         </x-section>
     </x-slot>
 </x-app-layout>

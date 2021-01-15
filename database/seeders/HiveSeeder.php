@@ -18,7 +18,7 @@ class HiveSeeder extends Seeder
     {
         $apiaries=Apiary::get(['code_name','col_num','row_num']);
         $f=\Faker\Factory::create('pl_PL');
-        $mat=['Plastikowy','Drewniany','Metalowy'];
+        $mat=['Plastic','Wooden','Metal','Other'];
         for ($i=0;$i<22;$i++){
             $rec=new Hive;
             $rec->material= $mat[rand(0,2)];
@@ -34,7 +34,6 @@ class HiveSeeder extends Seeder
                     $a_cols=$apiaries[$apiary_num]->col_num;
                     $a_rows=$apiaries[$apiary_num]->row_num;
                     //error_log("A $acn_temp B $a_cols C $a_rows D $apiary_num");
-
                 }
                 //do czasu kiedy będzie na niej wystarczająco miejsca
                 while(Hive::where('apiary_code_name',$acn_temp)->count()>=$a_cols*$a_rows-1);
@@ -48,7 +47,6 @@ class HiveSeeder extends Seeder
             }
             $rec->save();
         }
-
     }
 }
 

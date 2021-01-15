@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Employee;
 
 use App\Models\Action;
+use App\Models\Attendance;
 use App\Models\Employee;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Livewire\Component;
@@ -25,6 +26,7 @@ class DetailsModal extends Component
     public string $city = '';
     public string $date_of_employment = '';
     public array $actions = [];
+    public array $attendances =[];
 
 
     protected $listeners = [
@@ -48,6 +50,18 @@ class DetailsModal extends Component
             take(5)->
             get()->
             toArray();
+            if(sizeof($this->actions)==0){
+                $this->actions[]=['id'=>'','hive_id'=>null,'performed_at'=>"No data yet",'type_name'=>"No data yet",'description'=>"No data yet"];
+            }
+            $this->attendances=Attendance::
+            where('employee_PESEL',$this->PESEL)->
+            orderBy('started_at', 'desc')->
+            take(3)->
+            get(['started_at','finished_at'])->
+            toArray();
+            if(sizeof($this->attendances)==0){
+                $this->attendances[]=['started_at'=>"No data yet",'finished_at'=>"No data yet"];
+            }
             $this->isModalOpen = true;
         }
         catch(ModelNotFoundException $e){
@@ -113,5 +127,8 @@ class DetailsModal extends Component
     {
 
         return view('livewire.employee.details-modal');
+    }
+    public function openActionDetailsModal($id){
+        $this->emit('openActionDetailsModal', $id);
     }
 }

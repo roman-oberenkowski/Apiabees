@@ -82,4 +82,7 @@ class Table extends Component
     public function openActionDeleteModal($id){
         $this->emit('openActionDeleteModal', $id);
     }
+    public function openActionDetailsModal($id){
+        $this->emit('openActionDetailsModal', $id);
+    }
 }

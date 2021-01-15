@@ -22,18 +22,9 @@ class Create extends Component
     public function store()
     {
         $validated = $this->validate();
-        //find trashed action with that name
-        $old_record=ActionType::withTrashed()->find($this->name);
-        if($old_record!=null){
-            //trashed action with that name already exists, restore it!
-            $old_record->restore();
-            flash("Action type {$this->name} has been created (restored).")->session();
-        }else{
-            //no trashed action with that name -> create
-            $actiontype= ActionType::create($validated);
-            $actiontype->save();
-            flash("Action type {$this->name} has been created.")->session();
-        }
+        $actiontype= ActionType::create($validated);
+        $actiontype->save();
+        flash("Action type {$this->name} has been created.")->success()->session();
         $this->afterStore();
 
     }

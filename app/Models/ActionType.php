@@ -13,15 +13,14 @@ use Illuminate\Validation\Rule;
  */
 class ActionType extends Model
 {
-    public const special_action_inspection="Inspekcja";
-    public const special_action_other="Inna";
+    public const special_action_inspection="Inspection";
+    public const special_action_other="Other";
     public static function isSpecial($action){
         if($action==self::special_action_inspection)return true;
         if($action==self::special_action_other)return true;
         return false;
     }
 
-    use SoftDeletes;
     /**
      * The primary key for the model.
      *
@@ -59,7 +58,7 @@ class ActionType extends Model
 
     public static function validationRulesCreate()
     {
-        return ['name' => ['required', 'string', 'max:32', 'min:2', Rule::unique('action_types')->whereNull('deleted_at')]];
+        return ['name' => ['required', 'string', 'max:32', 'min:2', Rule::unique('action_types')]];
     }
 
 
@@ -68,6 +67,6 @@ class ActionType extends Model
      */
     public function actions()
     {
-        return $this->hasMany('App\Models\Action', 'action_type_name', 'name');
+        return $this->hasMany('App\Models\Action', 'type_name', 'name');
     }
 }

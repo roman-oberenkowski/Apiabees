@@ -142,16 +142,62 @@
                                     </div>
                                 </div>
                             </td>
-
                             <td class="pr-4 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
+                                @if($action['id']!=null)
                                 <a href="#" class="text-red-600 hover:text-red-900" wire:click="openActionDetailsModal('{{$action['id']}}')" wire:loading.attr="disabled"><i class="fas fa-times pr-2"></i>Details</a>
+                                @endif
                             </td>
                         </tr>
                     </div>
                 @endforeach
                 </tbody>
             </table>
+            <div>Latest attendances (max 3)</div>
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead>
+                <tr>
+                    <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                        Started at
+                    </th>
 
+                    <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                        Finished at
+                    </th>
+
+                </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+
+                @foreach($attendances as $attendance)
+                    <div>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-no-wrap">
+                                <div class="flex items-center">
+                                    <div >
+                                        <div class="text-sm leading-5 font-medium text-gray-900">
+                                            {{$attendance['started_at']}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-no-wrap">
+                                <div class="flex items-center">
+                                    <div >
+                                        <div class="text-sm leading-5 font-medium text-gray-900">
+                                            @if($attendance['finished_at']==null)
+                                                Still at work
+                                            @else
+                                                {{$attendance['finished_at']}}
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </div>
+                @endforeach
+                </tbody>
+            </table>
         </x-slot>
 
         <x-slot name="footer">
