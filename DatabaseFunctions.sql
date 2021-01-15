@@ -2,12 +2,13 @@ CREATE OR REPLACE PROCEDURE NewAttendance(
   IN pEmployeePESEL VARCHAR(11)
 )
 BEGIN
-  UPDATE attendances
-  SET finished_at = CURRENT_TIMESTAMP
-  WHERE employee_PESEL LIKE pEmployeePESEL;
+    UPDATE attendances
+    SET finished_at = CURRENT_TIMESTAMP
+    WHERE employee_PESEL LIKE pEmployeePESEL
+      AND finished_at is NULL;
 
-  INSERT INTO attendances (employee_PESEL)
-  VALUES (pEmployeePESEL);
+    INSERT INTO attendances (employee_PESEL)
+    VALUES (pEmployeePESEL);
 END;
 
 COMMIT;

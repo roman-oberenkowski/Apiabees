@@ -34,6 +34,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
         return view('example');
     });
 
+    Route::resource('attendances', AttendanceController::class)->only([
+        'index'
+    ]);
+
     Route::get('/', function () {
         return view('dashboard');
     })->name('dashboard');
