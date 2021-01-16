@@ -115,6 +115,9 @@
                            wire:click="openHiveMoveModal('{{$hive->id}}')" wire:loading.attr="disabled"><i
                                 class="fas fa-times pr-2"></i>Move</a>
                         <a href="#" class="text-red-600 hover:text-red-900"
+                           wire:click="openHiveDetailsModal('{{$hive->id}}')" wire:loading.attr="disabled"><i
+                                class="fas fa-times pr-2"></i>Details</a>
+                        <a href="#" class="text-red-600 hover:text-red-900"
                            wire:click="openHiveDeleteModal('{{$hive->id}}')" wire:loading.attr="disabled"><i
                                 class="fas fa-times pr-2"></i>Delete</a>
                     </td>

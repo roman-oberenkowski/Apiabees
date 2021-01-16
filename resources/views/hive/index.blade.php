@@ -8,6 +8,7 @@
             @livewire('hive.table')
             @livewire('hive.move-modal')
             @livewire('hive.delete-modal')
+            @livewire('hive.details-modal')
 
         </x-section>
     </x-slot>

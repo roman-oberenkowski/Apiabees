@@ -11,8 +11,6 @@ use Livewire\WithPagination;
 class Table extends Component
 {
     use WithPagination;
-    public bool $isModal;
-    public bool $isModalOpen=true;
     public array $filter_apiary_code_name_dropdown=[];
     public string $filter_apiary_code_name='';
     public string $filter_state='';
@@ -89,5 +87,8 @@ class Table extends Component
     }
     public function openHiveMoveModal($id){
         $this->emit('openHiveMoveModal', $id);
+    }
+    public function openHiveDetailsModal($id){
+        $this->emit('openHiveDetailsModal', $id);
     }
 }

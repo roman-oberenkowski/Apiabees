@@ -27,17 +27,17 @@ class Create extends Component
 
 
     public function chooseHive(){
+        $this->hive_id='';
         $this->emit('openHiveChooseModal');
-        flash("choose modal opened")->success()->livewire($this);
     }
 
     public function hiveChoosen($choosen_hive){
-        flash("recived hive choosen {$choosen_hive}")->success()->livewire($this);
         $hive=Hive::find($choosen_hive);
         if(isset($hive)){
             $this->hive_id=$choosen_hive;
             $this->choosen_hive_info='Hive_nfc: '.$hive->nfc_tag.' Apiary code name: '.$hive->apiary_code_name;
             $this->validateOnly('hive_id');
+            flash("Hive successfully chosen")->success()->livewire($this);
         }
     }
 
