@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Hive;
 use App\Models\Apiary;
 use App\Models\Hive;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Route;
 use Livewire\Component;
 
 class DetailsModal extends Component
@@ -19,14 +20,29 @@ class DetailsModal extends Component
     public string $location_column='';
     public string $bee_family_id='';
 
+    public bool $extended=false;
 
     protected $listeners = [
-        'openHiveDetailsModal' => 'openModal',
+        'openHiveDetailsModal' => 'openModal'
     ];
+
+    public function mount(){
+        if(Route::currentRouteName()=="hives.index"){
+            $this->extended=true;
+        }
+
+    }
 
     public function openModal($input_hive_id)
     {
         try{
+            if($this->extended){
+                $this->reset();
+                $this->extended=true;
+            }else{
+                $this->reset();
+            }
+
             $hive=Hive::findOrFail($input_hive_id);
             $this->hive_id=$input_hive_id;
             $this->material=$hive->material;
@@ -58,5 +74,16 @@ class DetailsModal extends Component
     public function render()
     {
         return view('livewire.hive.details-modal', []);
+    }
+
+    public function openBeeFamilyDetailsModal(){
+        if($this->bee_family_id!=null){
+            $this->emit('openBeeFamilyDetailsModal',$this->bee_family_id);
+            $this->closeModal();
+        }
+    }
+    public function openHiveEditModal(){
+        $this->emit('openHiveEditModal',$this->hive_id);
+        $this->closeModal();
     }
 }

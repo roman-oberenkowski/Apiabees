@@ -127,26 +127,25 @@
                                     </div>
                                 </div>
                             </div>
-
-{{--                            <div class="px-4 py-5 bg-white sm:p-6">--}}
-{{--                                <div class="grid grid-cols-6 gap-6">--}}
-{{--                                    <div class="col-span-6">--}}
-{{--                                        <x-jet-label for="area" value="{{ __('Column') }}"/>--}}
-{{--                                        @if ($this->location_column!=null)--}}
-{{--                                            {{$this->location_column}}--}}
-{{--                                        @else--}}
-{{--                                            Unassigned--}}
-{{--                                        @endif--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-
                         </div>
                     </div>
                 </div>
             </div>
         </x-slot>
         <x-slot name="footer">
+            @if($this->extended)
+{{--                <x-jet-secondary-button wire:click="closeModal" wire:loading.attr="disabled">--}}
+{{--                    {{ __('[hives at this apiary]') }}--}}
+{{--                </x-jet-secondary-button>--}}
+                <x-jet-secondary-button wire:click="openHiveEditModal" wire:loading.attr="disabled">
+                    {{ __('[Edit]') }}
+                </x-jet-secondary-button>
+            @endif
+            @if($this->bee_family_id!=null)
+                <x-jet-secondary-button wire:click="openBeeFamilyDetailsModal" wire:loading.attr="disabled">
+                    {{ __('Bee family details') }}
+                </x-jet-secondary-button>
+            @endif
             <x-jet-secondary-button wire:click="closeModal" wire:loading.attr="disabled">
                 {{ __('Close') }}
             </x-jet-secondary-button>

@@ -29,18 +29,26 @@
                                 </div>
 
                                 <div class="col-span-6 sm:col-span-3">
-                                    <x-jet-label for="hive_id" value="{{ __('Hive_id') }}" />
-                                    <x-jet-input id="hive_id" for class="mt-1 block w-full" wire:model="hive_id"  autocomplete="hive_id" />
+                                    <x-jet-label for="hive_id" value="{{ __('Hive') }}" />
+                                    @if($this->hive_id!=null)
+                                        Hive chosen
+                                    @else
+                                        No hive chosen
+                                    @endif
                                     <x-jet-input-error for="hive_id" class="mt-2" />
                                 </div>
                                 <x-jet-button wire:click.prevent="chooseHive" wire:loading.attr="disabled">
                                     {{ __('Choose Hive') }}
                                 </x-jet-button>
+                                @if($this->hive_id!=null)
+                                <x-jet-button wire:click.prevent="openHiveDetailsModal" wire:loading.attr="disabled">
+                                    {{ __('Hive Details') }}
+                                </x-jet-button>
+                                <x-jet-button wire:click.prevent="resetSelectedHive" wire:loading.attr="disabled">
+                                    {{ __('Reset Hive selection') }}
+                                </x-jet-button>
+                                @endif
 
-                                <div class="col-span-6 sm:col-span-3">
-                                    <x-jet-label value="{{ __('Choosen Hive info') }}" />
-                                    {{$choosen_hive_info}}
-                                </div>
                                 @if($type_name==\App\Models\ActionType::special_action_inspection)
                                     REST OF THE FORM FOR INSP
                                 @endif

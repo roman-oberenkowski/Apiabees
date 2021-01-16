@@ -99,6 +99,7 @@ class Table extends Component
     }
     public function openBeeFamilyDetailsModal($id){
         $this->emit('openBeeFamilyDetailsModal', $id);
+        $this->emit('extendBeeFamilyDetailsModal');
     }
     public function openBeeFamilyEditModal($id){
         $this->emit('openBeeFamilyEditModal', $id);

@@ -26,10 +26,7 @@ class Create extends Component
         ];
 
 
-    public function chooseHive(){
-        $this->hive_id='';
-        $this->emit('openHiveChooseModal');
-    }
+
 
     public function hiveChoosen($choosen_hive){
         $hive=Hive::find($choosen_hive);
@@ -109,5 +106,17 @@ class Create extends Component
             'employees_dropdown' => $employee_dropdown,
             'type_names_dropdown' => $type_names_dropdown
         ]);
+    }
+
+    public function chooseHive(){
+        $this->hive_id='';
+        $this->emit('openHiveChooseModal');
+    }
+    public function openHiveDetailsModal(){
+        if($this->hive_id!=null)
+        $this->emit('openHiveDetailsModal',$this->hive_id);
+    }
+    public function resetSelectedHive(){
+        $this->hive_id='';
     }
 }

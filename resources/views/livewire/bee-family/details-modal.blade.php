@@ -157,20 +157,25 @@
         </x-slot>
 
         <x-slot name="footer">
-            @if($this->die_off_date==$this->alive_text)
-            <x-jet-button wire:click="openBeeFamilyAssignHiveModal" wire:loading.attr="disabled">
-                {{ __('(Re)assign hive') }}
-            </x-jet-button>
+
+            @if($this->extended)
+                @if($this->die_off_date==$this->alive_text)
+                    <x-jet-button wire:click="openBeeFamilyAssignHiveModal" wire:loading.attr="disabled">
+                        {{ __('(Re)assign hive') }}
+                    </x-jet-button>
+                @endif
+                <x-jet-button wire:click="closeModal" wire:loading.attr="disabled">
+                    {{ __('[More states history]') }}
+                </x-jet-button>
             @endif
-            <x-jet-button wire:click="openBeeFamilyAssignHiveModal" wire:loading.attr="disabled">
-                {{ __('More states history') }}
-            </x-jet-button>
+            @if($this->hive_id!=null)
+                <x-jet-secondary-button wire:click="openHiveDetailsModal" wire:loading.attr="disabled">
+                    {{ __('Hive details') }}
+                </x-jet-secondary-button>
+            @endif
             <x-jet-secondary-button wire:click="closeModal" wire:loading.attr="disabled">
                 {{ __('Close') }}
             </x-jet-secondary-button>
-
-
-
 
         </x-slot>
     </x-jet-dialog-modal>

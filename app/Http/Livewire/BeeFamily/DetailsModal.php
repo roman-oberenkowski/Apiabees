@@ -7,6 +7,8 @@ use App\Models\BeeFamily;
 use App\Models\FamilyState;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\Client\Request;
+use Illuminate\Support\Facades\Route;
 use Livewire\Component;
 
 class DetailsModal extends Component
@@ -21,17 +23,29 @@ class DetailsModal extends Component
     public string $choosen_hive_info = '';
     public string $hive_apiary_code_name='';
     public array $latest_states=[];
+    public string $route_name='';
 
+    public bool $extended=false;
     public string $alive_text='None - still alive';
 
     protected $listeners = [
-        'openBeeFamilyDetailsModal' => 'openModal',
+        'openBeeFamilyDetailsModal' => 'openModal'
     ];
+
+    public function mount(){
+        if(Route::currentRouteName()=="bee-families.index")
+            $this->extended=true;
+    }
 
     public function openModal($bee_family_id)
     {
         try{
-            $this->reset();
+            if($this->extended){
+                $this->reset();
+                $this->extended=true;
+            }else{
+                $this->reset();
+            }
             $this->loadData($bee_family_id);
             $this->isModalOpen = true;
         }
@@ -102,6 +116,12 @@ class DetailsModal extends Component
 
     public function openFamilyStateDetailsModal($id){
         $this->emit('openFamilyStateDetailsModal',$id);
+    }
+    public function openHiveDetailsModal(){
+        if($this->hive_id!=null){
+            $this->emit('openHiveDetailsModal',$this->hive_id);
+            $this->closeModal();
+        }
     }
 
     public function render()
