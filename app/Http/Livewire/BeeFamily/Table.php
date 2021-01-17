@@ -30,7 +30,7 @@ class Table extends Component
 
     public function initDropdowns(){
         $this->filter_state_dropdown=[];
-        $this->filter_state_dropdown[] = ['name' => 'All', 'value' => '', 'checked' => false];
+        $this->filter_state_dropdown[] = ['name' => 'All alive', 'value' => '', 'checked' => false];
         $this->filter_state_dropdown[] = ['name' => 'Dead', 'value' => 'Dead', 'checked' => false];
         $this->filter_state_dropdown[] = ['name' => 'Homeless', 'value' => 'Homeless', 'checked' => false];
         $this->filter_state_dropdown[] = ['name' => 'In hive (storage)', 'value' => 'In hive (storage)', 'checked' => false];

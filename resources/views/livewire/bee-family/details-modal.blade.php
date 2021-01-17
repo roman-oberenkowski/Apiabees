@@ -17,7 +17,7 @@
                             <div class="px-4 py-5 bg-white sm:p-6">
                                 <div class="grid grid-cols-6 gap-6">
                                     <div class="col-span-6">
-                                        <x-jet-label for="code_name" value="{{ __('Acquired at') }}" />
+                                        <x-jet-label for="code_name" value="{{ __('Acquired at') }}"/>
                                         {{$this->acquired_at}}
                                     </div>
                                 </div>
@@ -25,7 +25,7 @@
                             <div class="px-4 py-5 bg-white sm:p-6">
                                 <div class="grid grid-cols-6 gap-6">
                                     <div class="col-span-6">
-                                        <x-jet-label for="area" value="{{ __('Specie') }}" />
+                                        <x-jet-label for="area" value="{{ __('Specie') }}"/>
                                         {{$this->species_name}}
                                     </div>
                                 </div>
@@ -33,7 +33,7 @@
                             <div class="px-4 py-5 bg-white sm:p-6">
                                 <div class="grid grid-cols-6 gap-6">
                                     <div class="col-span-6">
-                                        <x-jet-label for="name" value="{{ __('Population') }}" />
+                                        <x-jet-label for="name" value="{{ __('Population') }}"/>
                                         {{$this->population}}
                                     </div>
                                 </div>
@@ -41,7 +41,7 @@
                             <div class="px-4 py-5 bg-white sm:p-6">
                                 <div class="grid grid-cols-6 gap-6">
                                     <div class="col-span-6">
-                                        <x-jet-label for="area" value="{{ __('Die off date') }}" />
+                                        <x-jet-label for="area" value="{{ __('Die off date') }}"/>
                                         {{$this->die_off_date}}
                                     </div>
                                 </div>
@@ -63,17 +63,17 @@
                                 <div class="grid grid-cols-6">
                                     @if($this->hive_id==null)
 
-                                    <div class="col-span-6 ">
-                                        <x-jet-label for="Longitude" value="{{ __('Hive') }}" />
-                                        None
-                                    </div>
+                                        <div class="col-span-6 ">
+                                            <x-jet-label for="Longitude" value="{{ __('Hive') }}"/>
+                                            None
+                                        </div>
                                     @else
                                         <div class="col-span-6 ">
-                                            <x-jet-label for="Longitude" value="{{ __('Hive id') }}" />
+                                            <x-jet-label for="Longitude" value="{{ __('Hive id') }}"/>
                                             {{$this->hive_id}}
                                         </div>
                                         <div class="col-span-6 ">
-                                            <x-jet-label for="Longitude" value="{{ __('Hive on apiary') }}" />
+                                            <x-jet-label for="Longitude" value="{{ __('Hive on apiary') }}"/>
                                             {{$this->hive_apiary_code_name}}
                                         </div>
 
@@ -112,46 +112,48 @@
                 </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
-            @foreach($latest_states as $state)
-                <div>
-                    <tr>
-                        <td class="px-6 py-4 whitespace-no-wrap">
-                            <div class="flex items-center">
-                                <div >
-                                    <div class="text-sm leading-5 font-medium text-gray-900">
-                                        {{$state['checked_at']}}
+                @foreach($latest_states as $state)
+                    <div>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-no-wrap">
+                                <div class="flex items-center">
+                                    <div>
+                                        <div class="text-sm leading-5 font-medium text-gray-900">
+                                            {{$state['checked_at']}}
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </td>
-                        <td class="px-6 py-4 whitespace-no-wrap">
-                            <div class="flex items-center">
-                                <div >
-                                    <div class="text-sm leading-5 font-medium text-gray-900">
-                                        {{$state['state_type_name']}}
+                            </td>
+                            <td class="px-6 py-4 whitespace-no-wrap">
+                                <div class="flex items-center">
+                                    <div>
+                                        <div class="text-sm leading-5 font-medium text-gray-900">
+                                            {{$state['state_type_name']}}
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </td>
-                        <td class="px-6 py-4 whitespace-no-wrap">
-                            <div class="flex items-center">
-                                <div >
-                                    <div class="text-sm leading-5 font-medium text-gray-900">
-                                        {{$this->formatDescription($state['inspection_description'])}}
+                            </td>
+                            <td class="px-6 py-4 whitespace-no-wrap">
+                                <div class="flex items-center">
+                                    <div>
+                                        <div class="text-sm leading-5 font-medium text-gray-900">
+                                            {{$this->formatDescription($state['inspection_description'])}}
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </td>
-                        <td class="pr-4 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
-                            @if($state['id']!=null)
-                                <a href="#" class="text-red-600 hover:text-red-900" wire:click="openFamilyStateDetailsModal('{{$state['id']}}')" wire:loading.attr="disabled"><i class="fas fa-times pr-2"></i>Details</a>
-                            @endif
-                        </td>
-                    </tr>
-                </div>
-            @endforeach
-            </tbody>
-        </table>
+                            </td>
+                            <td class="pr-4 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
+                                @if($state['id']!=null)
+                                    <a href="#" class="text-red-600 hover:text-red-900"
+                                       wire:click="openFamilyStateDetailsModal('{{$state['id']}}')"
+                                       wire:loading.attr="disabled"><i class="fas fa-times pr-2"></i>Details</a>
+                                @endif
+                            </td>
+                        </tr>
+                    </div>
+                @endforeach
+                </tbody>
+            </table>
 
 
         </x-slot>
@@ -160,22 +162,26 @@
 
             @if($this->extended)
                 @if($this->die_off_date==$this->alive_text)
-                    <x-jet-button wire:click="openBeeFamilyAssignHiveModal" wire:loading.attr="disabled">
-                        {{ __('(Re)assign hive') }}
-                    </x-jet-button>
+                    <x-jet-secondary-button wire:click="openBeeFamilyAssignHiveModal" wire:loading.attr="disabled">
+                        {{ __('Assign hive') }}
+                    </x-jet-secondary-button>
                 @endif
-                <x-jet-button wire:click="openFamilyStateIndexModal" wire:loading.attr="disabled">
-                    {{ __('More states history') }}
-                </x-jet-button>
-            @endif
-            @if($this->hive_id!=null)
-                <x-jet-secondary-button wire:click="openHiveDetailsModal" wire:loading.attr="disabled">
-                    {{ __('Hive details') }}
+                <x-jet-secondary-button wire:click="openFamilyStateIndexModal" wire:loading.attr="disabled">
+                    {{ __('All family states') }}
                 </x-jet-secondary-button>
             @endif
-            <x-jet-secondary-button wire:click="closeModal" wire:loading.attr="disabled">
-                {{ __('Close') }}
-            </x-jet-secondary-button>
+            @if($this->hive_id!=null)
+
+                    <x-jet-secondary-button wire:click="openHiveDetailsModal" wire:loading.attr="disabled">
+                        {{ __('Hive details') }}
+                    </x-jet-secondary-button>
+
+            @endif
+
+                <x-jet-secondary-button wire:click="closeModal" wire:loading.attr="disabled">
+                    {{ __('Close') }}
+                </x-jet-secondary-button>
+
 
         </x-slot>
     </x-jet-dialog-modal>

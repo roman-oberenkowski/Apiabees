@@ -29,13 +29,20 @@ class Create extends Component
         $this->validateOnly($propertyName);
     }
 
-    public function setup_apiary_dropdown(){
+    public function setup_dropdowns(){
         $this->apiary_code_name_dropdown=[];
         $apiaries=Apiary::get(['code_name']);
         $this->apiary_code_name_dropdown[] = ['name' => '', 'value' => '', 'checked' => false];
         foreach ($apiaries as $apiary) {
             $this->apiary_code_name_dropdown[] = ['name' => $apiary->code_name, 'value' => $apiary->code_name, 'checked' => false];
         }
+        $available_materials=['Metal','Plastic','Wood','Other'];
+        $this->material_dropdown=[];
+
+        foreach ($available_materials as $type) {
+            $this->material_dropdown[] = ['name' => $type, 'value' => $type, 'checked' => false];
+        }
+        $this->material=$available_materials[0];
 
     }
 
@@ -84,14 +91,8 @@ class Create extends Component
     }
 
     public function mount(){
-        $this->setup_apiary_dropdown();
-        $available_materials=['Metal','Plastic','Wood','Other'];
-        $this->material_dropdown=[];
+        $this->setup_dropdowns();
 
-        foreach ($available_materials as $type) {
-            $this->material_dropdown[] = ['name' => $type, 'value' => $type, 'checked' => false];
-        }
-        $this->material=$available_materials[0];
     }
 
     public function render()

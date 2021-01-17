@@ -14,21 +14,6 @@ class AssignHiveModal extends Component
     public string $bee_family_id = '';
     public string $old_hive_id='';
     public string $new_hive_id='';
-    public string $choosen_hive_info='';
-
-    public string $old_hive_material='';
-    public string $old_hive_nfc_tag='';
-    public string $old_hive_qr_code='';
-    public string $old_hive_apiary_code_name='';
-    public string $old_hive_location_row='';
-    public string $old_hive_location_column='';
-
-    public string $new_hive_material='';
-    public string $new_hive_nfc_tag='';
-    public string $new_hive_qr_code='';
-    public string $new_hive_apiary_code_name='';
-    public string $new_hive_location_row='';
-    public string $new_hive_location_column='';
 
 
 
@@ -36,11 +21,6 @@ class AssignHiveModal extends Component
         'openBeeFamilyAssignHiveModal' => 'openModal',
         'HiveChooseModalChoosen'=>'hiveChoosen'
     ];
-
-    public function updated($propertyName)
-    {
-        //$this->validateOnly($propertyName);
-    }
 
     public function unassign_hive($bee_family){
         if($bee_family->hive != null){
@@ -65,7 +45,7 @@ class AssignHiveModal extends Component
         try {
             $bee_family=BeeFamily::findOrFail($this->bee_family_id);
         }catch (ModelNotFoundException $e) {
-            flash("Cannot edit chosen bee-family. Please check if bee-family is still in the database and try again")->error()->livewire($this);
+            flash("Cannot find chosen bee-family. Please check if bee-family is still in the database and try again")->error()->livewire($this);
             $this->closeModal();
             return;
         }
@@ -113,17 +93,6 @@ class AssignHiveModal extends Component
         $this->bee_family_id=$bee_family_id;
         if($bee_family->hive!=null){
             $this->old_hive_id=$bee_family->hive->id;
-
-            $hive=Hive::find($this->old_hive_id);
-            if($hive!=null){
-                $this->old_hive_material= $hive->material;
-                $this->old_hive_nfc_tag=$this->loadOpt($hive->nfc_tag);
-                $this->old_hive_qr_code=$this->loadOpt($hive->qr_code);
-                $this->old_hive_apiary_code_name=$this->loadOpt($hive->apiary_code_name);
-                $this->old_hive_location_row=$this->loadOpt($hive->location_row);
-                $this->old_hive_location_column=$this->loadOpt($hive->location_column);
-            }
-
         }
     }
 
@@ -140,6 +109,14 @@ class AssignHiveModal extends Component
         return view('livewire.bee-family.assign-hive-modal');
     }
 
+    public function openOldHiveDetailsModal(){
+        $this->emit('openHiveDetailsModal',$this->old_hive_id);
+    }
+
+    public function openNewHiveDetailsModal(){
+        $this->emit('openHiveDetailsModal',$this->new_hive_id);
+    }
+
     public function chooseHive(){
         $this->emit('openHiveChooseModal');
     }
@@ -148,15 +125,6 @@ class AssignHiveModal extends Component
         $hive=Hive::find($chosen_hive);
         if(isset($hive)){
             $this->new_hive_id=$chosen_hive;
-            //load choosen hive data
-            $this->new_hive_material= $hive->material;
-            $this->new_hive_nfc_tag=$this->loadOpt($hive->nfc_tag);
-            $this->new_hive_qr_code=$this->loadOpt($hive->qr_code);
-            $this->new_hive_apiary_code_name=$this->loadOpt($hive->apiary_code_name);
-            $this->new_hive_location_row=$this->loadOpt($hive->location_row);
-            $this->new_hive_location_column=$this->loadOpt($hive->location_column);
-
-
             //$this->validateOnly('hive_id');
             if($hive->bee_family_id!=null){
                 $this->addError('choosen_hive',"That hive is not empty!");

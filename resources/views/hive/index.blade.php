@@ -6,7 +6,7 @@
     <x-slot name="slot">
         <x-section>
             @livewire('hive.table')
-            @livewire('hive.move-modal')
+            @livewire('hive.edit-modal')
             @livewire('hive.delete-modal')
             @livewire('hive.details-modal')
 

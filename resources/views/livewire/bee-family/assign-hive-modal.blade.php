@@ -18,35 +18,9 @@
                                 <div class="grid grid-cols-6 gap-6">
                                     <div class="col-span-6 sm:col-span-3">
                                         @if($this->old_hive_id!=null)
-                                            <div class="col-span-6 sm:col-span-3">
-                                                <x-jet-label for="old_hive_id" value="Hive ID" />
-                                                {{$this->old_hive_id}}
-                                            </div>
-                                            <div class="col-span-6 sm:col-span-3">
-                                                <x-jet-label for="material" value="material" />
-                                                {{$this->old_hive_material}}
-                                            </div>
-                                            <div class="col-span-6 sm:col-span-3">
-                                                <x-jet-label for="nfc_tag" value="nfc_tag" />
-                                                {{$this->old_hive_nfc_tag}}
-                                            </div>
-                                            <div class="col-span-6 sm:col-span-3">
-                                                <x-jet-label for="nfc_tag" value="nfc_tag />
-                                                {{$this->old_hive_nfc_tag}}
-                                            </div>
-                                            <div class="col-span-6 sm:col-span-3">
-                                                <x-jet-label for="apiary_code_name" value="apiary_code_name" />
-                                                {{$this->old_hive_apiary_code_name}}
-                                            </div>
-                                            <div class="col-span-6 sm:col-span-3">
-                                                <x-jet-label for="location_row" value="location_row" />
-                                                {{$this->old_hive_location_row}}
-                                            </div>
-                                            <div class="col-span-6 sm:col-span-3">
-                                                <x-jet-label for="location_column" value="location_column" />
-                                                {{$this->old_hive_location_column}}
-                                            </div>
-
+                                            <x-jet-button wire:click="openOldHiveDetailsModal" wire:loading.attr="disabled" class="pm-3">
+                                                {{ __('Details') }}
+                                            </x-jet-button>
                                         @else
                                             <div class="col-span-6 sm:col-span-3">
                                                 None
@@ -63,7 +37,7 @@
             <div class="p-6">
                 <div class="md:grid md:grid-cols-3 md:gap-6">
                     <x-jet-section-title>
-                        <x-slot name="title">Targe hive</x-slot>
+                        <x-slot name="title">Target hive</x-slot>
                         <x-slot name="description"></x-slot>
                     </x-jet-section-title>
 
@@ -74,35 +48,12 @@
                                     <div class="col-span-6 sm:col-span-6">
                                         <div class="col-span-6 sm:col-span-6">
                                             @if($this->new_hive_id!=null)
-                                                <div class="col-span-6 sm:col-span-3">
-                                                    <x-jet-label for="old_hive_id" value="Hive ID" />
-                                                    {{$this->new_hive_id}}
+                                                <div>
+                                                    Selected <br />
+                                                <x-jet-button wire:click="openNewHiveDetailsModal" wire:loading.attr="disabled" class="pm-3">
+                                                    {{ __('Details') }}
+                                                </x-jet-button>
                                                 </div>
-                                                <div class="col-span-6 sm:col-span-3">
-                                                    <x-jet-label for="material" value="material" />
-                                                    {{$this->new_hive_material}}
-                                                </div>
-                                                <div class="col-span-6 sm:col-span-3">
-                                                    <x-jet-label for="nfc_tag" value="nfc_tag" />
-                                                    {{$this->new_hive_nfc_tag}}
-                                                </div>
-                                                <div class="col-span-6 sm:col-span-3">
-                                                    <x-jet-label for="nfc_tag" value="nfc_tag />
-                                                {{$this->new_hive_nfc_tag}}
-                                                        </div>
-                                                        <div class="col-span-6 sm:col-span-3">
-                                                    <x-jet-label for="apiary_code_name" value="apiary_code_name" />
-                                                    {{$this->new_hive_apiary_code_name}}
-                                                </div>
-                                                <div class="col-span-6 sm:col-span-3">
-                                                    <x-jet-label for="location_row" value="location_row" />
-                                                    {{$this->new_hive_location_row}}
-                                                </div>
-                                                <div class="col-span-6 sm:col-span-3">
-                                                    <x-jet-label for="location_column" value="location_column" />
-                                                    {{$this->new_hive_location_column}}
-                                                </div>
-
                                             @else
                                                 <div class="col-span-6 sm:col-span-3">
                                                     None selected

@@ -18,7 +18,7 @@ class Table extends Component
 
     protected $listeners = [
         'closedHiveDeleteModal' => '$refresh',
-        'HiveMoveModalMoved' => '$refresh'
+        'HiveEditModalEdited' => '$refresh'
     ];
 
     public function updated($propertyName){
@@ -85,8 +85,8 @@ class Table extends Component
     public function openHiveDeleteModal($id){
         $this->emit('openHiveDeleteModal', $id);
     }
-    public function openHiveMoveModal($id){
-        $this->emit('openHiveMoveModal', $id);
+    public function openHiveEditModal($id){
+        $this->emit('openHiveEditModal', $id);
     }
     public function openHiveDetailsModal($id){
         $this->emit('openHiveDetailsModal', $id);

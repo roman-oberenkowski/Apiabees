@@ -33,11 +33,7 @@ class Hive extends Model
             'location_column'=> ['nullable','integer','gte:1', 'lte:1000', 'required_with:apiary_code_name','required_with:location_row'],
         ];
     }
-    public static function validationRulesUpdate()
-    {
-        $rules=self::validationRulesCreate();
-        return $rules;
-    }
+
     protected $fillable = [
         'apiary_code_name',
         'bee_family_id',
