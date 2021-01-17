@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TaskTypeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ActionController;
 use App\Http\Controllers\ActionTypeController;
@@ -127,12 +128,16 @@ Route::middleware(['auth:sanctum'])->group(function () {
         'index', 'create'
     ]);
 
-    Route::resource('honey_types', HoneyTypeController::class)->only([
+    Route::resource('honey-types', HoneyTypeController::class)->only([
         'index', 'create', 'store'
     ]);
 
     Route::resource('species', SpecieController::class)->only([
         'index', 'create', 'store'
+    ]);
+
+    Route::resource('task-types', TaskTypeController::class)->only([
+        'index', 'create'
     ]);
 
     Route::resource('state_types', StateTypeController::class)->only([

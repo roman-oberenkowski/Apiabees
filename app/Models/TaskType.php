@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Validation\Rule;
 
 /**
  * @property int $id
@@ -14,6 +15,20 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class TaskType extends Model
 {
     use SoftDeletes;
+
+    /**
+     * The primary key for the model.
+     *
+     * @var string
+     */
+    protected $primaryKey = 'name';
+
+    /**
+     * Indicates if the IDs are auto-incrementing.
+     *
+     * @var bool
+     */
+    public $incrementing = false;
 
     /**
      * @var array
@@ -34,4 +49,10 @@ class TaskType extends Model
     {
         return $this->hasMany('App\Models\TaskAssignment');
     }
+
+    public static function validationRulesCreate()
+    {
+        return ['name' => ['required', 'string', 'max:32', 'min:2', Rule::unique('task_types')]];
+    }
+
 }

@@ -17,6 +17,9 @@
             <x-sidebar-nav-link href="{{ route('apiaries.index') }}" :active="request()->is('apiaries')"> <i class="fab fa-accusoft pr-1"></i>  {{ __('Apiaries') }} </x-sidebar-nav-link>
             <x-sidebar-nav-link href="{{ route('bee-families.index') }}" :active="request()->is('bee-families')"> <i class="fab fa-accusoft pr-1"></i>  {{ __('Bee Families') }} </x-sidebar-nav-link>
             <x-sidebar-nav-link href="{{ route('task-assignments.index') }}" :active="request()->is('task-assignments')"> <i class="fab fa-accusoft pr-1"></i>  {{ __('Task assignments') }} </x-sidebar-nav-link>
+            <x-sidebar-nav-link href="{{ route('task-types.index') }}" :active="request()->is('task_types/*')"> <i class="fab fa-accusoft pr-1"></i>  {{ __('Task types') }} </x-sidebar-nav-link>
+            <x-sidebar-nav-link href="{{ route('honey-types.index') }}" :active="request()->is('honey_types/*')"> <i class="fab fa-accusoft pr-1"></i>  {{ __('Honey types') }} </x-sidebar-nav-link>
+            <x-sidebar-nav-link href="{{ route('species.index') }}" :active="request()->is('species/*')"> <i class="fab fa-accusoft pr-1"></i>  {{ __('Species') }} </x-sidebar-nav-link>
         </div>
     </div>
 </aside>

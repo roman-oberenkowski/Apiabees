@@ -3,18 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Specie;
 
-class SpecieController extends Controller
+class TaskTypeController extends Controller
 {
-    /*
-    * Display a listing of the resource.
-    *
-    * @return \Illuminate\Http\Response
-    */
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
-        return view('species.index');
+        return view('task-type.index');
     }
 
     /**
@@ -24,6 +23,6 @@ class SpecieController extends Controller
      */
     public function create()
     {
-        return view('species.create');
+        return view('task-type.create');
     }
 }
