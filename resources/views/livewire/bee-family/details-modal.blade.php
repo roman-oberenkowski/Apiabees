@@ -164,8 +164,8 @@
                         {{ __('(Re)assign hive') }}
                     </x-jet-button>
                 @endif
-                <x-jet-button wire:click="closeModal" wire:loading.attr="disabled">
-                    {{ __('[More states history]') }}
+                <x-jet-button wire:click="openFamilyStateIndexModal" wire:loading.attr="disabled">
+                    {{ __('More states history') }}
                 </x-jet-button>
             @endif
             @if($this->hive_id!=null)

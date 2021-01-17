@@ -124,6 +124,10 @@ class DetailsModal extends Component
         }
     }
 
+    public function openFamilyStateIndexModal(){
+        $this->emit('openFamilyStateIndexModal', $this->bee_family_id);
+    }
+
     public function render()
     {
         return view('livewire.bee-family.details-modal', []);

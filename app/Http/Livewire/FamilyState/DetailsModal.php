@@ -25,15 +25,13 @@ class DetailsModal extends Component
     public function openModal($family_state_id)
     {
         try{
+            $this->reset();
             $state=FamilyState::findOrFail($family_state_id);
             $this->family_state_id = $family_state_id;
             $this->checked_at = $state->checked_at;
             $this->inspection_description = $this->loadOpt($state->inspection_description);
             $this->bee_family_id = $this->loadOpt($state->bee_family_id);
             $this->state_type_name = $state->state_type_name;
-
-
-
             $this->isModalOpen = true;
         }
         catch(ModelNotFoundException $e){
@@ -49,7 +47,7 @@ class DetailsModal extends Component
 
     public function closeModal(){
         $this->isModalOpen = false;
-        $this->emit('closedFamilyStatesDetailsModal');
+        $this->emit('closedFamilyStateDetailsModal');
     }
 
     public function render(){
