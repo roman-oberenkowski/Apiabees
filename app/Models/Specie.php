@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Validation\Rule;
 
 /**
  * @property string $name
@@ -59,4 +60,14 @@ class Specie extends Model
     {
         return $this->hasMany('App\Models\BeeFamily', 'species_name', 'name');
     }
+
+    public static function validationRulesCreate()
+    {
+        return [
+            'name' => ['required', 'string', 'max:32', 'min:2', Rule::unique('species')],
+            'latin_name' => ['required', 'string', 'max:32', 'min:2'],
+            'is_aggressive' => ['required', 'boolean']
+            ];
+    }
+
 }
