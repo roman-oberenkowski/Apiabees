@@ -18,11 +18,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class TaskAssignment extends Model
 {
-    /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
+    public static function validationRulesCreate(){
+        return [
+            'apiary_code_name' => ['required','exists:apiaries,code_name'],
+            'task_type_name' => ['required','exists:task_types,name'],
+            'employee_PESEL'=> ['required','exists:employees,PESEL']
+        ];
+    }
+
     protected $table = 'task_assignments';
 
     /**

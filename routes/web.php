@@ -38,6 +38,14 @@ Route::middleware(['auth:sanctum'])->group(function () {
         'index'
     ]);
 
+    Route::get('/task-assignments/create', function () {
+        return view('task-assignment.create');
+    })->name('task-assignments.create');
+
+    Route::get('/task-assignments/', function () {
+        return view('task-assignment.index');
+    })->name('task-assignments.index');;
+
     Route::get('/', function () {
         return view('dashboard');
     })->name('dashboard');
