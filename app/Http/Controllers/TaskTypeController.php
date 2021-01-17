@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\HoneyType;
 
-class HoneyTypeController extends Controller
+class TaskTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +13,7 @@ class HoneyTypeController extends Controller
      */
     public function index()
     {
-        return view('honey-type.index');
+        return view('task-type.index');
     }
 
     /**
@@ -24,7 +23,6 @@ class HoneyTypeController extends Controller
      */
     public function create()
     {
-        return view('honey-type.create');
+        return view('task-type.create');
     }
-
 }
