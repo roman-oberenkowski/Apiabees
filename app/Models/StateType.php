@@ -12,7 +12,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class StateType extends Model
 {
-    use SoftDeletes;
     /**
      * The primary key for the model.
      *

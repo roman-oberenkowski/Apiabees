@@ -13,7 +13,6 @@ use Illuminate\Validation\Rule;
  */
 class HoneyType extends Model
 {
-    use SoftDeletes;
     /**
      * The primary key for the model.
      *

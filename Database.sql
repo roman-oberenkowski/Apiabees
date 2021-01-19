@@ -7,9 +7,7 @@
 USE apiabees;
 
 CREATE TABLE action_types (
-	name VARCHAR(32) NOT NULL PRIMARY KEY,
-	deleted_at TIMESTAMP NULL
-
+	name VARCHAR(32) NOT NULL PRIMARY KEY
 );
 
 CREATE TABLE actions (
@@ -30,8 +28,8 @@ CREATE TABLE apiaries (
 	parcel VARCHAR(8) NOT NULL,
 	street VARCHAR(32) NOT NULL,
 	city VARCHAR(32) NOT NULL,
-	col_num INTEGER NOT NULL CHECK (col_num >= 0),
-	row_num INTEGER NOT NULL CHECK (row_num >= 0),
+	col_num INTEGER NOT NULL CHECK (col_num >= 1),
+	row_num INTEGER NOT NULL CHECK (row_num >= 1),
 	latitude DECIMAL(10, 7) NOT NULL CHECK (latitude > 0),
 	longitude DECIMAL(10, 7) NOT NULL CHECK (longitude > 0)
 );
@@ -77,7 +75,6 @@ CREATE TABLE family_states (
 	checked_at TIMESTAMP NOT NULL,
 	inspection_description TEXT NULL,
 	bee_family_id INTEGER NOT NULL,
-	deleted_at TIMESTAMP NULL,
 	state_type_name VARCHAR(32) NOT NULL
 );
 
@@ -107,8 +104,7 @@ CREATE TABLE honey_productions (
 CREATE UNIQUE INDEX honey_productions__idx ON honey_productions ( apiary_code_name, produced_at );
 
 CREATE TABLE honey_types (
-	name VARCHAR(32) NOT NULL PRIMARY KEY,
-	deleted_at TIMESTAMP NULL
+	name VARCHAR(32) NOT NULL PRIMARY KEY
 );
 
 CREATE TABLE task_assignments (
@@ -124,18 +120,15 @@ CREATE UNIQUE INDEX task_assignments__idx ON task_assignments ( employee_PESEL, 
 CREATE TABLE species (
 	name VARCHAR(32) NOT NULL PRIMARY KEY,
 	latin_name VARCHAR(32) NOT NULL,
-	is_aggressive BOOL NOT NULL,
-	deleted_at TIMESTAMP NULL
+	is_aggressive BOOL NOT NULL
 );
 
 CREATE TABLE state_types (
-	name VARCHAR(32) NOT NULL PRIMARY KEY,
-	deleted_at TIMESTAMP NULL
+	name VARCHAR(32) NOT NULL PRIMARY KEY
 );
 
 CREATE TABLE task_types (
-	name VARCHAR(64) NOT NULL PRIMARY KEY,
-	deleted_at TIMESTAMP NULL
+	name VARCHAR(64) NOT NULL PRIMARY KEY
 );
 
 CREATE TABLE wax_productions (
@@ -147,7 +140,7 @@ CREATE TABLE wax_productions (
 
 CREATE UNIQUE INDEX wax_productions__idx ON wax_productions ( apiary_code_name, produced_at );
 
-ALTER TABLE actions ADD CONSTRAINT actions_action_types_fk FOREIGN KEY (type_name) REFERENCES action_types (name) ON UPDATE CASCADE;
+ALTER TABLE actions ADD CONSTRAINT actions_action_types_fk FOREIGN KEY (type_name) REFERENCES action_types (name);
 
 ALTER TABLE actions ADD CONSTRAINT actions_employees_fk FOREIGN KEY (employee_PESEL) REFERENCES employees (PESEL)  ON DELETE CASCADE;
 
@@ -161,19 +154,19 @@ ALTER TABLE bee_families ADD CONSTRAINT bee_families_hives_fk FOREIGN KEY (hive_
 
 ALTER TABLE family_states ADD CONSTRAINT family_states_bee_families_fk FOREIGN KEY (bee_family_id) REFERENCES bee_families (id) ON DELETE CASCADE;
 
-ALTER TABLE family_states ADD CONSTRAINT family_states_state_types_fk FOREIGN KEY (state_type_name) REFERENCES state_types (name) ON UPDATE CASCADE;
+ALTER TABLE family_states ADD CONSTRAINT family_states_state_types_fk FOREIGN KEY (state_type_name) REFERENCES state_types (name);
 
 ALTER TABLE hives ADD CONSTRAINT hives_bee_families_fk FOREIGN KEY (bee_family_id) REFERENCES bee_families (id);
 
 ALTER TABLE hives ADD CONSTRAINT hives_apiaries_fk FOREIGN KEY (apiary_code_name) REFERENCES apiaries (code_name) ON UPDATE CASCADE;
 
-ALTER TABLE honey_productions ADD CONSTRAINT honey_productions_types_fk FOREIGN KEY (honey_type_name) REFERENCES honey_types (name) ON UPDATE CASCADE;
+ALTER TABLE honey_productions ADD CONSTRAINT honey_productions_types_fk FOREIGN KEY (honey_type_name) REFERENCES honey_types (name);
 
 ALTER TABLE honey_productions ADD CONSTRAINT honey_productions_apiaries_fk FOREIGN KEY (apiary_code_name) REFERENCES apiaries (code_name);
 
 ALTER TABLE task_assignments ADD CONSTRAINT assigned_tasks_employees_fk FOREIGN KEY (employee_PESEL) REFERENCES employees (pesel) ON DELETE CASCADE;
 
-ALTER TABLE task_assignments ADD CONSTRAINT assigned_tasks_tasks_fk FOREIGN KEY (task_type_name) REFERENCES task_types (name) ON UPDATE CASCADE;
+ALTER TABLE task_assignments ADD CONSTRAINT assigned_tasks_tasks_fk FOREIGN KEY (task_type_name) REFERENCES task_types (name);
 
 ALTER TABLE task_assignments ADD CONSTRAINT assigned_tasks_apiaries_fk FOREIGN KEY (apiary_code_name) REFERENCES apiaries (code_name);
 

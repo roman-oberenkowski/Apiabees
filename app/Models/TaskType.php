@@ -14,7 +14,6 @@ use Illuminate\Validation\Rule;
  */
 class TaskType extends Model
 {
-    use SoftDeletes;
 
     /**
      * The primary key for the model.

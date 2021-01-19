@@ -15,7 +15,6 @@ use Illuminate\Validation\Rule;
  */
 class Specie extends Model
 {
-    use SoftDeletes;
     /**
      * The primary key for the model.
      *
