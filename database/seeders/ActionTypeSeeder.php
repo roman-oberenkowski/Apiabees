@@ -16,7 +16,7 @@ class ActionTypeSeeder extends Seeder
      */
     public function run()
     {
-        $arr=['Other','Honey retreive','Hive repair','NFC tag replacement','Inspection','Apply medicine','Clean'];
+        $arr=['Other','Paper work','Repairs','Inspection','Buy equipment','Cleaning'];
         foreach ($arr as $ht){
             $rec=new ActionType;
             $rec->name= $ht;

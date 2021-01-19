@@ -71,17 +71,6 @@ class Action extends Model
         return $this->belongsTo('App\Models\Hive');
     }
 
-    public static function validationRulesCreate()
-    {
-        return [
-            'employee_PESEL' => ['required', 'string', 'size:11', Rule::exists('employees','PESEL'), 'regex:/^\d{11}?$/'],
-            //performed_at => [null],
-            'description' => ['nullable', 'string', 'min:2','max:65000','requiredIf:type_name,'.ActionType::special_action_other],
-            'hive_id' => ['nullable', 'integer','exists:hives,id','requiredIf:type_name,'.ActionType::special_action_inspection],
-            'type_name' => ['required','exists:action_types,name'],
-            //inspection only:
-            //'state_type_name' => ['exists:state_types,name', 'requiredIf:type_name,'.ActionType::special_action_inspection]
-        ];
-    }
+
 
 }

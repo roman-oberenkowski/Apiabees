@@ -12,13 +12,13 @@
 
                                 <div class="col-span-6 sm:col-span-3">
                                     <x-jet-label for="employee_PESEL" value="Choose yourself:" />
-                                    <x-select for="employee_PESEL" wire:model="employee_PESEL" :options="$employees_dropdown"  />
+                                    <x-select for="employee_PESEL" wire:model="employee_PESEL" :options="$employee_dropdown"  />
                                     <x-jet-input-error for="employee_PESEL" class="mt-2" />
                                 </div>
 
                                 <div class="col-span-6 sm:col-span-3">
                                     <x-jet-label for="type_name"  value="Choose action type:" />
-                                    <x-select for="type_name" wire:model="type_name" :options="$type_names_dropdown"  />
+                                    <x-select for="type_name" wire:model="type_name" :options="$type_name_dropdown"  />
                                     <x-jet-input-error for="type_name" class="mt-2" />
                                 </div>
 
@@ -50,12 +50,24 @@
                                 @endif
 
                                 @if($type_name==\App\Models\ActionType::special_action_inspection)
-                                    REST OF THE FORM FOR INSP
+                                    <div class="col-span-6 sm:col-span-3">
+                                        <x-jet-label for="state_type_name"  value="Choose family state type:" />
+                                        <x-select for="state_type_name" wire:model="state_type_name" :options="$state_type_name_dropdown"  />
+                                        <x-jet-input-error for="state_type_name" class="mt-2" />
+                                    </div>
+                                    <div class="col-span-6">
+                                        <x-jet-label for="inspection_description" value="Inspection description" />
+                                        <x-text-area for="inspection_description" wire:model="inspection_description" placeholder="Please provide inspection description if needed" rows="3"></x-text-area>
+                                        <x-jet-input-error for="inspection_description" class="mt-2" />
+                                    </div>
+                                    @if($state_type_name==\App\Models\StateType::special_state_population_changed)
+                                        <div class="col-span-6 sm:col-span-3">
+                                            <x-jet-label for="population" value="{{ __('Population') }}" />
+                                            <x-jet-input id="population" type="text" class="mt-1 block w-full" wire:model="population" autocomplete="population"  />
+                                            <x-jet-input-error for="population" class="mt-2" />
+                                        </div>
+                                    @endif
                                 @endif
-
-
-
-
                             </div>
                         </div>
                     </div>

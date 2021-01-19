@@ -16,10 +16,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class FamilyState extends Model
 {
-    use SoftDeletes;
-    /**
-     * @var array
-     */
     protected $fillable = [
         'checked_at',
         'bee_family_id',
