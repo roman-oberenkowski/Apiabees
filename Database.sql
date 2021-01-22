@@ -160,16 +160,16 @@ ALTER TABLE hives ADD CONSTRAINT hives_bee_families_fk FOREIGN KEY (bee_family_i
 
 ALTER TABLE hives ADD CONSTRAINT hives_apiaries_fk FOREIGN KEY (apiary_code_name) REFERENCES apiaries (code_name) ON UPDATE CASCADE;
 
-ALTER TABLE honey_productions ADD CONSTRAINT honey_productions_types_fk FOREIGN KEY (honey_type_name) REFERENCES honey_types (name);
+ALTER TABLE honey_productions ADD CONSTRAINT honey_productions_types_fk FOREIGN KEY (honey_type_name) REFERENCES honey_types (name) ON DELETE CASCADE;
 
-ALTER TABLE honey_productions ADD CONSTRAINT honey_productions_apiaries_fk FOREIGN KEY (apiary_code_name) REFERENCES apiaries (code_name);
+ALTER TABLE honey_productions ADD CONSTRAINT honey_productions_apiaries_fk FOREIGN KEY (apiary_code_name) REFERENCES apiaries (code_name) ON DELETE CASCADE;
 
 ALTER TABLE task_assignments ADD CONSTRAINT assigned_tasks_employees_fk FOREIGN KEY (employee_PESEL) REFERENCES employees (pesel) ON DELETE CASCADE;
 
-ALTER TABLE task_assignments ADD CONSTRAINT assigned_tasks_tasks_fk FOREIGN KEY (task_type_name) REFERENCES task_types (name);
+ALTER TABLE task_assignments ADD CONSTRAINT assigned_tasks_tasks_fk FOREIGN KEY (task_type_name) REFERENCES task_types (name) ON DELETE CASCADE;
 
-ALTER TABLE task_assignments ADD CONSTRAINT assigned_tasks_apiaries_fk FOREIGN KEY (apiary_code_name) REFERENCES apiaries (code_name);
+ALTER TABLE task_assignments ADD CONSTRAINT assigned_tasks_apiaries_fk FOREIGN KEY (apiary_code_name) REFERENCES apiaries (code_name) ON DELETE CASCADE;
 
-ALTER TABLE wax_productions ADD CONSTRAINT wax_productions_apiaries_fk FOREIGN KEY (apiary_code_name) REFERENCES apiaries (code_name);
+ALTER TABLE wax_productions ADD CONSTRAINT wax_productions_apiaries_fk FOREIGN KEY (apiary_code_name) REFERENCES apiaries (code_name) ON DELETE CASCADE;
 
 COMMIT;

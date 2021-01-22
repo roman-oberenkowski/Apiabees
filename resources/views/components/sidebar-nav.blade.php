@@ -20,6 +20,7 @@
             <x-sidebar-nav-link href="{{ route('task-types.index') }}" :active="request()->is('task_types/*')"> <i class="fab fa-accusoft pr-1"></i>  {{ __('Task types') }} </x-sidebar-nav-link>
             <x-sidebar-nav-link href="{{ route('honey-types.index') }}" :active="request()->is('honey_types/*')"> <i class="fab fa-accusoft pr-1"></i>  {{ __('Honey types') }} </x-sidebar-nav-link>
             <x-sidebar-nav-link href="{{ route('species.index') }}" :active="request()->is('species/*')"> <i class="fab fa-accusoft pr-1"></i>  {{ __('Species') }} </x-sidebar-nav-link>
+            <x-sidebar-nav-link href="{{ route('productions.index') }}" :active="request()->is('productions/*')"> <i class="fab fa-accusoft pr-1"></i>  {{ __('Productions') }} </x-sidebar-nav-link>
         </div>
     </div>
 </aside>

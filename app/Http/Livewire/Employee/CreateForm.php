@@ -54,6 +54,7 @@ class CreateForm extends Component
 
     public function store()
     {
+
         $validated = $this->validate();
         $employee = Employee::create($validated);
         $user = new User;

@@ -1,11 +1,11 @@
 <div>
     <x-jet-dialog-modal wire:model="isModalOpen">
         <x-slot name="title">
-            {{ __('Delete hive?') }}
+            {{ __('Delete production?') }}
         </x-slot>
 
         <x-slot name="content">
-            {{ __("Are you sure you want to delete selected hive? All actions assosiated with this hive will remain, but information about this hive will be deleted") }}
+            {{ __("Are you sure you want to delete selected production?") }}
         </x-slot>
 
         <x-slot name="footer">

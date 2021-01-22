@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Hive;
 
+use App\Models\Action;
 use App\Models\BeeFamily;
 use App\Models\Hive;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -45,6 +46,8 @@ class DeleteModal extends Component
                 $this->closeModal();
                 return;
             }
+            Action::where('hive_id', $this->hive_id)
+                ->update(['hive_id' => null]);
             $tbd->delete();
             flash("Hive has been deleted.")->success()->livewire($this);
         }
