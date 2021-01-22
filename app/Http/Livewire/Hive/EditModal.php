@@ -4,7 +4,9 @@ namespace App\Http\Livewire\Hive;
 
 use App\Models\Apiary;
 use App\Models\Hive;
+use App\Models\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
 
@@ -26,6 +28,18 @@ class EditModal extends Component
     protected $listeners = [
         'openHiveEditModal' => 'openModal',
     ];
+
+    public function loadScanNFCQR(){
+        $user=User::find(Auth::id());
+        if($user!=null){
+            if($user->last_scanned_nfc!=null){
+                $this->nfc_tag=$user->last_scanned_nfc;
+            }
+            if($user->last_scanned_qr!=null){
+                $this->qr_code=$user->last_scanned_qr;
+            }
+        }
+    }
 
     protected function rules(){
         return [

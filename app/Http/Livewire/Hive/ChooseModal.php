@@ -3,6 +3,8 @@
 namespace App\Http\Livewire\Hive;
 
 use App\Models\Apiary;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use App\Models\Hive;
 use Livewire\WithPagination;
@@ -16,10 +18,31 @@ class ChooseModal extends Component
     public string $filter_apiary_code_name='';
     public string $filter_state='';
     public array $filter_state_dropdown=[];
+    public string $filter_qr='';
+    public string $filter_nfc='';
 
     protected $listeners = [
         'openHiveChooseModal' => 'openModal'
     ];
+
+    public function resetFilters(){
+        $this->filter_nfc='';
+        $this->filter_qr='';
+        $this->filter_state='';
+        $this->filter_apiary_code_name='';
+    }
+
+    public function loadScanNFCQR(){
+        $user=User::find(Auth::id());
+        if($user!=null){
+            if($user->last_scanned_nfc!=null){
+                $this->filter_nfc=$user->last_scanned_nfc;
+            }
+            if($user->last_scanned_qr!=null){
+                $this->filter_qr=$user->last_scanned_qr;
+            }
+        }
+    }
 
     public function updated($propertyName){
         $this->resetPage();
@@ -68,9 +91,20 @@ class ChooseModal extends Component
                     return $query->whereNull('bee_family_id');
                 else
                     return $query->whereNotNull('bee_family_id');
-            })
-
-            ->paginate($pages_num);
+            })->
+            when($this->filter_nfc, function($query,$filter_nfc){
+                if($filter_nfc!=null)
+                    return $query->where('nfc_tag', 'like', "%{$filter_nfc}%");
+                else
+                    return $query;
+            })->
+            when($this->filter_qr, function($query,$filter_qr){
+                if($filter_qr!=null)
+                    return $query->where('qr_code', 'like', "%{$filter_qr}%");
+                else
+                    return $query;
+            })->
+            paginate($pages_num);
 
     }
 

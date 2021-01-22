@@ -34,8 +34,7 @@ class EditModalForm extends Component
         'openEmployeeEditModalForm' => 'openModal',
     ];
 
-    protected function rules()
-    {
+    protected function rules(){
         $emprules = Employee::validationRulesUpdate();
         if (isset($this->user_id)) {
             $emprules['email'] = ['required', 'string', 'email', 'min:5', 'max:255', Rule::unique('users')->ignore($this->user_id)];
@@ -44,13 +43,11 @@ class EditModalForm extends Component
         return $emprules;
     }
 
-    public function updated($propertyName)
-    {
+    public function updated($propertyName){
         $this->validateOnly($propertyName);
     }
 
-    public function update()
-    {
+    public function update(){
         $this->validate();
         $data = $this->modelData();
         try {
@@ -91,16 +88,14 @@ class EditModalForm extends Component
 
     }
 
-    public function openModal(Employee $employee)
-    {
+    public function openModal(Employee $employee){
         $this->resetValidation();
         $this->reset();
         $this->loadData($employee);
         $this->isModalOpen = true;
     }
 
-    public function loadData(Employee $employee)
-    {
+    public function loadData(Employee $employee){
         if (isset($employee->user)) {
             $this->name = $employee->user->name;
             //$this->password = $employee->user->password;
@@ -125,8 +120,7 @@ class EditModalForm extends Component
         $this->city = $employee->city;
     }
 
-    public function modelData()
-    {
+    public function modelData(){
         return [
             'name' => $this->name,
             'email' => $this->email,
@@ -142,16 +136,14 @@ class EditModalForm extends Component
         ];
     }
 
-    public function closeModal()
-    {
+    public function closeModal(){
         $this->resetValidation();
         $this->reset();
         $this->isModalOpen = false;
         $this->emit('closedEditModalForm');
     }
 
-    public function render()
-    {
+    public function render(){
         return view('livewire.employee.edit-modal-form');
     }
 }

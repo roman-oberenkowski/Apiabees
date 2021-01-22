@@ -20,6 +20,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'last_scanned_at',
+        'last_scanned_qr',
+        'last_scanned_nfc'
+
     ];
 
     protected $hidden = [

@@ -18,12 +18,27 @@
                         <x-select for="filter_state" wire:model="filter_state" :options="$filter_state_dropdown"  />
                         <x-jet-input-error for="filter_state" class="mt-2" />
                     </div>
-                    <div class="col-span-6 sm:col-span-4">
-                        @if (session()->has('message'))
-                            <div class="alert alert-success">
-                                {{ session('message') }}
-                            </div>
-                        @endif
+                    <div class="col-span-6 sm:col-span-2">
+                        <x-jet-label for="filter_nfc" value="{{ __('Filter by NFC tag') }}" />
+                        <x-jet-input id="filter_nfc" type="text" class="mt-1 block w-full" wire:model="filter_nfc" autocomplete="filter_nfc"/>
+                        <x-jet-input-error for="filter_nfc" class="mt-2" />
+                    </div>
+                    <div class="col-span-6 sm:col-span-2">
+                        <x-jet-label for="filter_qr" value="{{ __('Filter by QR code') }}" />
+                        <x-jet-input id="filter_qr" type="text" class="mt-1 block w-full" wire:model="filter_qr" autocomplete="filter_qr"/>
+                        <x-jet-input-error for="filter_qr" class="mt-2" />
+                    </div>
+                    <div class="col-span-6 sm:col-span-2">
+                        <x-jet-label  value="{{ __('Fast NFC/QR scan') }}" />
+                        <x-jet-secondary-button wire:click="loadScanNFCQR()" wire:loading.attr="disabled">
+                            {{ __('Load') }}
+                        </x-jet-secondary-button>
+                    </div>
+                    <div class="col-span-6 sm:col-span-2">
+                        <x-jet-label  value="{{ __('Filter') }}" />
+                        <x-jet-secondary-button wire:click="resetFilters()" wire:loading.attr="disabled">
+                            {{ __('Reset') }}
+                        </x-jet-secondary-button>
                     </div>
                 </div>
 

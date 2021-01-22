@@ -22,6 +22,9 @@ class CreateUsersTable extends Migration
             $table->foreignId('current_team_id')->nullable();
             $table->text('profile_photo_path')->nullable();
             $table->timestamps();
+            $table->timestamp('last_scanned_at')->nullable();
+            $table->string('last_scanned_qr')->nullable();
+            $table->string('last_scanned_nfc')->nullable();
             $table->char('employee_PESEL', 11)->nullable();
         });
     }

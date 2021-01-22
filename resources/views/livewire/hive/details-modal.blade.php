@@ -138,7 +138,7 @@
 {{--                    {{ __('[hives at this apiary]') }}--}}
 {{--                </x-jet-secondary-button>--}}
                 <x-jet-secondary-button wire:click="openHiveEditModal" wire:loading.attr="disabled">
-                    {{ __('[Edit]') }}
+                    {{ __('Edit') }}
                 </x-jet-secondary-button>
             @endif
             @if($this->bee_family_id!=null)

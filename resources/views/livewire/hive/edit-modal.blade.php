@@ -34,6 +34,12 @@
                                     <x-jet-input id="qr_code" type="text" class="mt-1 block w-full" wire:model="qr_code" autocomplete="qr_code"  />
                                     <x-jet-input-error for="qr_code" class="mt-2" />
                                 </div>
+                                <div class="col-span-6 sm:col-span-2">
+                                    <x-jet-label  value="{{ __('Fast NFC/QR scan') }}" />
+                                    <x-jet-secondary-button wire:click="loadScanNFCQR()" wire:loading.attr="disabled">
+                                        {{ __('Load') }}
+                                    </x-jet-secondary-button>
+                                </div>
                             </div>
                         </div>
                     </div>

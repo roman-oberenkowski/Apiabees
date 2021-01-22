@@ -55,6 +55,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
         return view('production.index');
     })->name('productions.index');
 
+    Route::get('/scan/', function () {
+        return view('scanner.scan');
+    })->name('scanner.scan');
+
 
 
 
