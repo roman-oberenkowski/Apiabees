@@ -18,8 +18,9 @@ CREATE TABLE actions (
 	hive_id INTEGER,
 	type_name VARCHAR(32) NOT NULL
 );
+CREATE INDEX actions_performed_at__idx ON actions (performed_at desc);
 
-CREATE UNIQUE INDEX UC_actions__idx ON actions  (employee_PESEL, performed_at);
+
 
 CREATE TABLE apiaries (
 	code_name VARCHAR(32) NOT NULL PRIMARY KEY,
@@ -34,6 +35,8 @@ CREATE TABLE apiaries (
 	longitude DECIMAL(10, 7) NOT NULL CHECK (longitude > 0)
 );
 
+CREATE UNIQUE INDEX UC_apiaries__idx ON apiaries  (name);
+
 CREATE TABLE attendances (
 	id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	started_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
@@ -41,7 +44,6 @@ CREATE TABLE attendances (
 	employee_PESEL CHAR(11) NOT NULL,
 	CHECK (finished_at >= started_at OR finished_at IS NULL)
 );
-
 CREATE UNIQUE INDEX UC_attendances__idx ON attendances (employee_PESEL, started_at);
 
 
@@ -77,8 +79,8 @@ CREATE TABLE family_states (
 	bee_family_id INTEGER NOT NULL,
 	state_type_name VARCHAR(32) NOT NULL
 );
+CREATE INDEX family_states_checked_at__idx ON family_states (bee_family_id,checked_at desc);
 
-CREATE UNIQUE INDEX family_states__idx ON family_states (bee_family_id, checked_at);
 
 CREATE TABLE hives (
 	id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -92,16 +94,19 @@ CREATE TABLE hives (
 );
 
 CREATE UNIQUE INDEX hives__idx ON hives ( bee_family_id );
+CREATE UNIQUE INDEX hives_location__idx ON hives (apiary_code_name, location_row,location_column);
+CREATE UNIQUE INDEX hives_nfc__idx ON hives ( nfc_tag );
+CREATE UNIQUE INDEX hives_qr__idx ON hives ( qr_code );
 
 CREATE TABLE honey_productions (
     id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	produced_at DATE NOT NULL,
+	produced_at TIMESTAMP NOT NULL,
 	produced_weight DECIMAL(10, 2) NOT NULL,
 	honey_type_name VARCHAR(32) NOT NULL,
 	apiary_code_name VARCHAR(32) NOT NULL
 );
+CREATE INDEX honey_productions_performed_at__idx ON honey_productions (produced_at desc);
 
-CREATE UNIQUE INDEX honey_productions__idx ON honey_productions ( apiary_code_name, produced_at );
 
 CREATE TABLE honey_types (
 	name VARCHAR(32) NOT NULL PRIMARY KEY
@@ -109,13 +114,12 @@ CREATE TABLE honey_types (
 
 CREATE TABLE task_assignments (
     id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	assignment_date DATE DEFAULT CURRENT_TIMESTAMP NOT NULL,
+	assignment_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
 	employee_PESEL CHAR(11) NOT NULL,
 	task_type_name VARCHAR(64) NOT NULL,
 	apiary_code_name VARCHAR(32) NOT NULL
 );
-
-CREATE UNIQUE INDEX task_assignments__idx ON task_assignments ( employee_PESEL, task_type_name, apiary_code_name, assignment_date );
+CREATE UNIQUE INDEX task_assignments__idx ON task_assignments ( employee_PESEL, task_type_name, apiary_code_name);
 
 CREATE TABLE species (
 	name VARCHAR(32) NOT NULL PRIMARY KEY,
@@ -133,12 +137,11 @@ CREATE TABLE task_types (
 
 CREATE TABLE wax_productions (
     id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	produced_at DATE NOT NULL,
+	produced_at TIMESTAMP NOT NULL,
 	produced_weight DECIMAL(10, 2) NOT NULL,
 	apiary_code_name VARCHAR(32) NOT NULL
 );
-
-CREATE UNIQUE INDEX wax_productions__idx ON wax_productions ( apiary_code_name, produced_at );
+CREATE INDEX wax_productions_performed_at__idx ON wax_productions (produced_at desc);
 
 ALTER TABLE actions ADD CONSTRAINT actions_action_types_fk FOREIGN KEY (type_name) REFERENCES action_types (name);
 
