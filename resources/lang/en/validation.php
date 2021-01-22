@@ -147,6 +147,16 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'employee_PESEL'=>'employee',
+        'type_name'=>'action type',
+        'bee_family_id'=>'bee family',
+        'state_type_name'=>'state type',
+        'acquired_at'=>'date of acquisition',
+        'hive_id'=>'hive',
+        //'apiary_code_name'=>'apiary',
+        'task_type_name'=>'task type',
+        'honey_type_name'=>'honey type'
+        ],
 
 ];

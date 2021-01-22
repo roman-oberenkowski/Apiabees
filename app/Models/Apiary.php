@@ -35,8 +35,8 @@ class Apiary extends Model
             'city' => ['required', 'string', 'min:3','max:31'],
             'col_num' => ['required', 'integer', 'gt:0','lte:50'],
             'row_num' => ['required', 'integer', 'gt:0','lte:50'],
-            'latitude' => ['required', 'numeric', 'gte:0','lte:90'],
-            'longitude' => ['required', 'numeric', 'gte:0','lte:180'],
+            'latitude' => ['required', 'numeric', 'gt:0','lt:90'],
+            'longitude' => ['required', 'numeric', 'gt:0','lt:180'],
         ];
     }
     public static function validationRulesUpdate()

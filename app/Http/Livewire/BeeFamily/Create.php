@@ -83,7 +83,6 @@ class Create extends Component
     public function render()
     {
         return view('livewire.bee-family.create', [
-
         ]);
     }
 
@@ -99,8 +98,15 @@ class Create extends Component
         $hive=Hive::find($choosen_hive);
         if(isset($hive)){
             $this->hive_id=$choosen_hive;
-            $this->choosen_hive_info='Hive_nfc: '.$hive->nfc_tag.' Apiary code name: '.$hive->apiary_code_name;
             $this->validateOnly('hive_id');
         }
+    }
+
+    public function openHiveDetailsModal(){
+        if($this->hive_id!=null)
+            $this->emit('openHiveDetailsModal',$this->hive_id);
+    }
+    public function resetSelectedHive(){
+        $this->hive_id='';
     }
 }

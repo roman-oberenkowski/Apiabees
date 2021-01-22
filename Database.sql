@@ -1,7 +1,5 @@
 -- laravel will take care of dropping and creating the database
-
 -- DROP DATABASE IF EXISTS apiabees;
-
 -- CREATE DATABASE apiabees;
 
 USE apiabees;
@@ -151,7 +149,7 @@ ALTER TABLE actions ADD CONSTRAINT actions_hives_fk FOREIGN KEY (hive_id) REFERE
 
 ALTER TABLE attendances ADD CONSTRAINT attendances_employees_fk FOREIGN KEY (employee_PESEL) REFERENCES employees (PESEL) ON DELETE CASCADE;
 
-ALTER TABLE bee_families ADD CONSTRAINT bee_families_species_fk FOREIGN KEY (species_name) REFERENCES species (name) ON UPDATE CASCADE;
+ALTER TABLE bee_families ADD CONSTRAINT bee_families_species_fk FOREIGN KEY (species_name) REFERENCES species (name);
 
 ALTER TABLE bee_families ADD CONSTRAINT bee_families_hives_fk FOREIGN KEY (hive_id) REFERENCES hives (id);
 

@@ -30,19 +30,29 @@
                                         <x-jet-input id="acquired_at" type="date" class="mt-1 block w-full" wire:model="acquired_at" autocomplete="acquired_at" required/>
                                         <x-jet-input-error for="acquired_at" class="mt-2" />
                                     </div>
-
                                     <div class="col-span-6 sm:col-span-3">
-                                        <x-jet-label for="hive_id" value="{{ __('hive_id') }}" />
-                                        <x-jet-input id="hive_id" type="text" class="mt-1 block w-full" wire:model="hive_id" autocomplete="hive_id" />
+                                        <x-jet-label for="hive_id" value="{{ __('Hive') }}" />
+                                        @if($this->hive_id!=null)
+                                            Hive chosen
+                                        @else
+                                            No hive chosen
+                                        @endif
                                         <x-jet-input-error for="hive_id" class="mt-2" />
-                                        <x-jet-button wire:click.prevent="chooseHive" wire:loading.attr="disabled">
-                                            {{ __('Choose Hive') }}
-                                        </x-jet-button>
-                                        <div class="col-span-6 sm:col-span-3">
-                                            <x-jet-label value="{{ __('Choosen Hive info') }}" />
-                                            {{$choosen_hive_info}}
-                                        </div>
                                     </div>
+                                    <div class="col-span-6 sm:col-span-6">
+                                        <x-jet-secondary-button wire:click.prevent="chooseHive" wire:loading.attr="disabled" class="">
+                                            {{ __('Choose Hive') }}
+                                        </x-jet-secondary-button>
+                                        @if($this->hive_id!=null)
+                                            <x-jet-secondary-button wire:click.prevent="openHiveDetailsModal" wire:loading.attr="disabled">
+                                                {{ __('Hive Details') }}
+                                            </x-jet-secondary-button>
+                                            <x-jet-secondary-button wire:click.prevent="resetSelectedHive" wire:loading.attr="disabled">
+                                                {{ __('Reset Hive selection') }}
+                                            </x-jet-secondary-button>
+                                        @endif
+                                    </div>
+
 
 
                                 </div>

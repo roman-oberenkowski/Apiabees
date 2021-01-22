@@ -8,6 +8,8 @@
             @livewire('action.table')
             @livewire('action.delete-modal')
             @livewire('action.details-modal')
+            @livewire('bee-family.details-modal')
+            @livewire('hive.details-modal')
         </x-section>
     </x-slot>
 </x-app-layout>

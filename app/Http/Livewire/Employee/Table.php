@@ -43,6 +43,8 @@ class Table extends Component
     {
         return Employee::where('first_name', 'like', "%{$this->search__first_name}%")
             ->where('last_name', 'like', "%{$this->search__last_name}%")
+            ->orderBy('last_name','asc')
+            ->orderBy('first_name','asc')
             ->paginate(10);
     }
 

@@ -1,5 +1,12 @@
 <div>
     <x-flash/>
+    <div class="col-span-6 sm:col-span-6">
+        @if (session()->has('message'))
+            <div class="alert alert-success">
+                {{ session('message') }}
+            </div>
+        @endif
+    </div>
     <div class="grid grid-cols-6 gap-6 p-3">
         <div class="col-span-6 sm:col-span-2">
             <x-jet-label for="search_code_name" value="{{ __('Filter by code name') }}"/>
@@ -13,14 +20,13 @@
                          autocomplete="search_name"/>
             <x-jet-input-error for="search_name" class="mt-2"/>
         </div>
-        <div> add reset button?</div>
-        <div class="col-span-6 sm:col-span-6">
-            @if (session()->has('message'))
-                <div class="alert alert-success">
-                    {{ session('message') }}
-                </div>
-            @endif
+        <div class="col-span-6 sm:col-span-2">
+            <x-jet-label  value="{{ __('Filter') }}" />
+            <x-jet-secondary-button wire:click="resetFilters()" wire:loading.attr="disabled" class="mt-1.5">
+                {{ __('Reset') }}
+            </x-jet-secondary-button>
         </div>
+
     </div>
 
     <table class="min-w-full divide-y divide-gray-200">
