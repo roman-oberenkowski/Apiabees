@@ -2,7 +2,7 @@
     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-2">
         <!-- Logo -->
         <div class="flex-shrink-0 flex items-center">
-            <a href="{{ route('dashboard') }}" class="mx-3">
+            <a href="{{ route('actions.index') }}" class="mx-3">
                 <x-jet-application-mark class="block h-9 w-auto" />
             </a>
             <h1 class="font-semibold text-3xl">Apiabees</h1>

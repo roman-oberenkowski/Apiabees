@@ -64,8 +64,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
 
     Route::get('/', function () {
-        return view('dashboard');
-    })->name('dashboard');
+        return redirect()->route('actions.index');
+    });
 
 
     //APIARIES
