@@ -20,12 +20,6 @@ class UserSeeder extends Seeder
     public function run()
     {
 
-        User::create([
-            'email' => env('ADMIN_EMAIL'),
-            'name' => env('ADMIN_NAME'),
-            'password' => Hash::make(env('ADMIN_PASSWORD'))
-        ]);
-
     }
 }
 
