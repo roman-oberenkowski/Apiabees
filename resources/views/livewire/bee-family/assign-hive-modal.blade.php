@@ -47,18 +47,17 @@
                                 <div class="grid grid-cols-6 gap-6">
                                     <div class="col-span-6 sm:col-span-6">
                                         <div class="col-span-6 sm:col-span-6">
-                                            @if($this->new_hive_id!=null)
-                                                <div>
-                                                    Selected <br />
-                                                <x-jet-button wire:click="openNewHiveDetailsModal" wire:loading.attr="disabled" class="pm-3">
-                                                    {{ __('Details') }}
-                                                </x-jet-button>
-                                                </div>
-                                            @else
-                                                <div class="col-span-6 sm:col-span-3">
-                                                    None selected
-                                                </div>
-                                            @endif
+                                            <div class="col-span-6 sm:col-span-3 mb-3">
+                                                @if($this->new_hive_id!=null)
+
+                                                        Selected <br />
+                                                    <x-jet-button wire:click="openNewHiveDetailsModal" wire:loading.attr="disabled" class="pm-3">
+                                                        {{ __('Details') }}
+                                                    </x-jet-button>
+                                                @else
+                                                        None selected
+                                                    </div>
+                                                @endif
                                         </div>
                                         <div class="col-span-6 sm:col-span-6">
                                             <x-jet-button wire:click.prevent="chooseHive" wire:loading.attr="disabled">
@@ -77,8 +76,8 @@
         </x-slot>
 
         <x-slot name="footer">
-            <div class="col-span-12 flex items-center justify-end px-4 py-3 bg-gray-50 text-right sm:px-6 mt-4 rounded ">
-                <x-jet-secondary-button wire:click="closeModal" wire:loading.attr="disabled" class="pm-3">
+            <div class="col-span-12 flex items-center justify-end bg-gray-50 text-right sm:px-6 mt-4 rounded ">
+                <x-jet-secondary-button wire:click="closeModal" wire:loading.attr="disabled" class="mr-3">
                     {{ __('Cancel') }}
                 </x-jet-secondary-button>
 

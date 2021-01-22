@@ -31,7 +31,7 @@
         </div>
         <div class="col-span-6 sm:col-span-2">
             <x-jet-label  value="{{ __('Filter') }}" />
-            <x-jet-secondary-button wire:click="resetFilters()" wire:loading.attr="disabled">
+            <x-jet-secondary-button wire:click="resetFilters()" wire:loading.attr="disabled" class="mt-1.5">
                 {{ __('Reset') }}
             </x-jet-secondary-button>
         </div>

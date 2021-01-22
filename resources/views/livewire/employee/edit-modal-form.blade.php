@@ -107,8 +107,8 @@
         </x-slot>
 
         <x-slot name="footer">
-            <div class="col-span-12 flex items-center justify-end px-4 py-3 bg-gray-50 text-right sm:px-6 mt-4 rounded ">
-                <x-jet-secondary-button wire:click="closeModal" wire:loading.attr="disabled" class="pm-3">
+            <div class="col-span-12 flex items-center justify-end px-4 py-3 text-right sm:px-6 rounded ">
+                <x-jet-secondary-button wire:click="closeModal" wire:loading.attr="disabled" class="mr-3">
                     {{ __('Cancel') }}
                 </x-jet-secondary-button>
 

@@ -37,16 +37,16 @@
                                     @endif
                                     <x-jet-input-error for="hive_id" class="mt-2" />
                                 </div>
-                                <x-jet-button wire:click.prevent="chooseHive" wire:loading.attr="disabled">
+                                <x-jet-secondary-button wire:click.prevent="chooseHive" wire:loading.attr="disabled" class="">
                                     {{ __('Choose Hive') }}
-                                </x-jet-button>
+                                </x-jet-secondary-button>
                                 @if($this->hive_id!=null)
-                                <x-jet-button wire:click.prevent="openHiveDetailsModal" wire:loading.attr="disabled">
+                                <x-jet-secondary-button wire:click.prevent="openHiveDetailsModal" wire:loading.attr="disabled">
                                     {{ __('Hive Details') }}
-                                </x-jet-button>
-                                <x-jet-button wire:click.prevent="resetSelectedHive" wire:loading.attr="disabled">
+                                </x-jet-secondary-button>
+                                <x-jet-secondary-button wire:click.prevent="resetSelectedHive" wire:loading.attr="disabled">
                                     {{ __('Reset Hive selection') }}
-                                </x-jet-button>
+                                </x-jet-secondary-button>
                                 @endif
 
                                 @if($type_name==\App\Models\ActionType::special_action_inspection)

@@ -162,23 +162,23 @@
 
             @if($this->extended)
                 @if($this->die_off_date==$this->alive_text)
-                    <x-jet-secondary-button wire:click="openBeeFamilyAssignHiveModal" wire:loading.attr="disabled">
+                    <x-jet-secondary-button wire:click="openBeeFamilyAssignHiveModal" wire:loading.attr="disabled" class="mr-3">
                         {{ __('Assign hive') }}
                     </x-jet-secondary-button>
                 @endif
-                <x-jet-secondary-button wire:click="openFamilyStateIndexModal" wire:loading.attr="disabled">
+                <x-jet-secondary-button wire:click="openFamilyStateIndexModal" wire:loading.attr="disabled" class="mr-3">
                     {{ __('All family states') }}
                 </x-jet-secondary-button>
             @endif
             @if($this->hive_id!=null)
 
-                    <x-jet-secondary-button wire:click="openHiveDetailsModal" wire:loading.attr="disabled">
+                    <x-jet-secondary-button wire:click="openHiveDetailsModal" wire:loading.attr="disabled" class="mr-3">
                         {{ __('Hive details') }}
                     </x-jet-secondary-button>
 
             @endif
 
-                <x-jet-secondary-button wire:click="closeModal" wire:loading.attr="disabled">
+                <x-jet-secondary-button wire:click="closeModal" wire:loading.attr="disabled" class="mr-3">
                     {{ __('Close') }}
                 </x-jet-secondary-button>
 
