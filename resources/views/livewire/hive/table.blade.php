@@ -22,14 +22,13 @@
             <x-jet-input-error for="filter_qr" class="mt-2" />
         </div>
         <div class="col-span-6 sm:col-span-2">
-            <x-jet-label  value="{{ __('Fast NFC/QR scan') }}" />
-            <x-jet-secondary-button wire:click="loadScanNFCQR()" wire:loading.attr="disabled">
+            <x-jet-label  value="{{ __('Load last scan') }}" />
+            <x-jet-secondary-button wire:click="loadScanNFCQR()" wire:loading.attr="disabled" class="mt-1">
                 {{ __('Load') }}
             </x-jet-secondary-button>
         </div>
         <div class="col-span-6 sm:col-span-2">
-            <x-jet-label  value="{{ __('Filter') }}" />
-            <x-jet-secondary-button wire:click="resetFilters()" wire:loading.attr="disabled">
+            <x-jet-secondary-button wire:click="resetFilters()" wire:loading.attr="disabled" class="mt-7">
                 {{ __('Reset') }}
             </x-jet-secondary-button>
         </div>
@@ -138,10 +137,10 @@
                                 class="fas fa-edit pr-2"></i>Edit</a>
                         <a href="#" class="text-gray-400 hover:text-gray-900"
                            wire:click="openHiveDetailsModal('{{$hive->id}}')" wire:loading.attr="disabled"><i
-                                class="fas fa-address-card pr-2"></i>Details</a>
+                                class="fas fa-address-card pl-2 pr-2"></i>Details</a>
                         <a href="#" class="text-red-600 hover:text-red-900"
                            wire:click="openHiveDeleteModal('{{$hive->id}}')" wire:loading.attr="disabled"><i
-                                class="fas fa-times pr-2"></i>Delete</a>
+                                class="fas fa-times pl-2 pr-2"></i>Delete</a>
                     </td>
                 </tr>
             </div>

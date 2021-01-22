@@ -19,23 +19,26 @@
             <x-select for="apiary_code_name" wire:model="apiary_code_name" :options="$apiary_code_name_dropdown"  />
             <x-jet-input-error for="apiary_code_name" class="mt-2" />
         </div>
+        <div class="col-span-6 sm:col-span-3">
+            <x-jet-label for="from_date" value="{{ __('From date') }}" />
+            <x-jet-input id="from_date" type="date" class="mt-1 block w-full" wire:model="from_date" autocomplete="from_date"/>
+            <x-jet-input-error for="from_date" class="mt-2" />
+        </div>
+        <div class="col-span-6 sm:col-span-3">
+            <x-jet-label for="to_date" value="{{ __('To date') }}" />
+            <x-jet-input id="to_date" type="date" class="mt-1 block w-full" wire:model="to_date" autocomplete="to_date"/>
+            <x-jet-input-error for="to_date" class="mt-2" />
+        </div>
         @if($isHoney)
             <div class="col-span-6 sm:col-span-3">
                 <x-jet-label for="honey_type_name" value="Honey type" />
                 <x-select for="honey_type_name" wire:model="honey_type_name" :options="$honey_type_name_dropdown"  />
                 <x-jet-input-error for="honey_type_name" class="mt-2" />
             </div>
+        @else
+            <div class="col-span-6 sm:col-span-3">
+            </div>
         @endif
-        <div class="col-span-6 sm:col-span-3">
-            <x-jet-label for="from_date" value="{{ __('from date') }}" />
-            <x-jet-input id="from_date" type="date" class="mt-1 block w-full" wire:model="from_date" autocomplete="from_date"/>
-            <x-jet-input-error for="from_date" class="mt-2" />
-        </div>
-        <div class="col-span-6 sm:col-span-3">
-            <x-jet-label for="to_date" value="{{ __('to date') }}" />
-            <x-jet-input id="to_date" type="date" class="mt-1 block w-full" wire:model="to_date" autocomplete="to_date"/>
-            <x-jet-input-error for="to_date" class="mt-2" />
-        </div>
         <div class="col-span-6 sm:col-span-2">
             <x-jet-label  value="{{ __('Filter') }}" />
             <x-jet-secondary-button wire:click="resetFilters()" wire:loading.attr="disabled">

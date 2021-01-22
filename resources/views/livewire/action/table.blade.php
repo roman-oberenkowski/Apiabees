@@ -10,22 +10,22 @@
             @endif
         </div>
         <div class="col-span-6 sm:col-span-2">
-            <x-jet-label for="filter_employee_PESEL" value="by employee:" />
+            <x-jet-label for="filter_employee_PESEL" value="Filter by employee:" />
             <x-select for="filter_employee_PESEL" wire:model="filter_employee_PESEL" :options="$filter_employees_dropdown"  />
             <x-jet-input-error for="filter_employee_PESEL" class="mt-2" />
         </div>
         <div class="col-span-6 sm:col-span-2">
-            <x-jet-label for="filter_type_name"  value="by action type" />
+            <x-jet-label for="filter_type_name"  value="Filter by action type" />
             <x-select for="filter_type_name" wire:model="filter_type_name" :options="$filter_type_names_dropdown"  />
             <x-jet-input-error for="filter_type_name" class="mt-2" />
         </div>
         <div class="col-span-6 sm:col-span-2">
-            <x-jet-label for="filter_description" value="{{ __('by description') }}" />
+            <x-jet-label for="filter_description" value="{{ __('Filter by description') }}" />
             <x-jet-input id="filter_description" type="text" class="mt-1 block w-full" wire:model="filter_description" autocomplete="filter_description"/>
             <x-jet-input-error for="filter_description" class="mt-2" />
         </div>
         <div class="col-span-6 sm:col-span-2">
-            <x-jet-label for="filter_date" value="{{ __('by date') }}" />
+            <x-jet-label for="filter_date" value="{{ __('Filter by date') }}" />
             <x-jet-input id="filter_date" type="date" class="mt-1 block w-full" wire:model="filter_date" autocomplete="filter_date"/>
             <x-jet-input-error for="filter_date" class="mt-2" />
         </div>
@@ -55,6 +55,7 @@
             <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                 description
             </th>
+            <th class="pr-4 py-3 bg-gray-50"></th>
             <th class="pr-4 py-3 bg-gray-50"></th>
         </tr>
         </thead>

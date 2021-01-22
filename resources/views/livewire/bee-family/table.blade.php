@@ -2,7 +2,7 @@
     <x-flash/>
     <div class="grid grid-cols-6 gap-6 p-3">
         <div class="col-span-6 sm:col-span-2">
-            <x-jet-label for="filter_state" value="By status:" />
+            <x-jet-label for="filter_state" value="Filter by status:" />
             <x-select for="filter_state" wire:model="filter_state" :options="$filter_state_dropdown"  />
             <x-jet-input-error for="filter_state" class="mt-2" />
         </div>
@@ -89,10 +89,10 @@
                         @endif
                         <a href="#" class="text-gray-400 hover:text-gray-900"
                            wire:click="openBeeFamilyDetailsModal('{{$family->id}}')" wire:loading.attr="disabled">
-                            <i class="fas fa-address-card pr-2"></i>Details</a>
+                            <i class="fas fa-address-card pl-2 pr-2"></i>Details</a>
                         <a href="#" class="text-red-600 hover:text-red-900"
                            wire:click="openBeeFamilyDeleteModal('{{$family->id}}')" wire:loading.attr="disabled">
-                            <i class="fas fa-times pr-2"></i>Delete</a>
+                            <i class="fas fa-times pl-2 pr-2"></i>Delete</a>
                     </td>
                 </tr>
             </div>

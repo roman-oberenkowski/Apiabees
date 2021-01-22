@@ -3,20 +3,19 @@
 
     <div class="grid grid-cols-6 gap-6 p-3">
         <div class="col-span-6 sm:col-span-2">
-            <x-jet-label for="search__first_name" value="{{ __('Filter by First name') }}" />
+            <x-jet-label for="search__first_name" value="{{ __('Filter by first name') }}" />
             <x-jet-input id="search__first_name" type="text" class="mt-1 block w-full" wire:model="search__first_name" autocomplete="search__first_name"/>
             <x-jet-input-error for="search__first_name" class="mt-2" />
         </div>
 
         <div class="col-span-6 sm:col-span-2">
-            <x-jet-label for="search__last_name" value="{{ __('Filter by Last name') }}" />
+            <x-jet-label for="search__last_name" value="{{ __('Filter by last name') }}" />
             <x-jet-input id="search__last_name" type="text" class="mt-1 block w-full" wire:model="search__last_name" autocomplete="search__last_name" />
             <x-jet-input-error for="search__last_name" class="mt-2" />
         </div>
 
         <div class="col-span-6 sm:col-span-2">
-            <x-jet-label  value="{{ __('Filter') }}" />
-            <x-jet-secondary-button wire:click="resetSearch()" wire:loading.attr="disabled">
+            <x-jet-secondary-button wire:click="resetSearch()" wire:loading.attr="disabled" class="mt-7">
                 {{ __('Reset') }}
             </x-jet-secondary-button>
         </div>
@@ -57,7 +56,7 @@
                     </td>
                     <td class="pr-4 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
                         <a href="#" class="text-gray-400 hover:text-gray-900 pr-3" wire:click="openModal('details', '{{$employee->PESEL}}')" wire:loading.attr="disabled"><i class="fas fa-address-card pr-2"></i>Details</a>
-                        <a href="#" class="text-green-400 hover:text-green-900 pr-3" wire:click="openModal('edit', '{{$employee->PESEL}}')" wire:loading.attr="disabled"><i class="fas fa-trash pr-2"></i>Edit</a>
+                        <a href="#" class="text-green-400 hover:text-green-900 pr-3" wire:click="openModal('edit', '{{$employee->PESEL}}')" wire:loading.attr="disabled"><i class="fas fa-edit pr-2"></i>Edit</a>
                         <a href="#" class="text-red-600 hover:text-red-900" wire:click="openModal('delete', '{{$employee->PESEL}}')" wire:loading.attr="disabled"><i class="fas fa-times pr-2"></i>Delete</a>
                     </td>
                 </tr>
