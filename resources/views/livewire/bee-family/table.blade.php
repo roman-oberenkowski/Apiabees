@@ -83,13 +83,13 @@
                     <td class="pr-4 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
 
                         @if($family->die_off_date==null)
-                        <a href="#" class="text-red-600 hover:text-red-900"
+                        <a href="#" class="text-green-400 hover:text-green-900"
                            wire:click="openBeeFamilyAssignHiveModal('{{$family->id}}')" wire:loading.attr="disabled">
-                            <i class="fas fa-times pr-2"></i>Assign hive</a>
+                            <i class="fas fa-edit pr-2"></i>Assign hive</a>
                         @endif
-                        <a href="#" class="text-red-600 hover:text-red-900"
+                        <a href="#" class="text-gray-400 hover:text-gray-900"
                            wire:click="openBeeFamilyDetailsModal('{{$family->id}}')" wire:loading.attr="disabled">
-                            <i class="fas fa-times pr-2"></i>Details</a>
+                            <i class="fas fa-address-card pr-2"></i>Details</a>
                         <a href="#" class="text-red-600 hover:text-red-900"
                            wire:click="openBeeFamilyDeleteModal('{{$family->id}}')" wire:loading.attr="disabled">
                             <i class="fas fa-times pr-2"></i>Delete</a>

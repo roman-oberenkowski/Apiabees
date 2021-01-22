@@ -101,7 +101,7 @@
                         </div>
                     </td>
                     <td class="pr-4 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
-                        <a href="#" class="text-red-600 hover:text-red-900" wire:click="openActionDetailsModal('{{$action->id}}')" wire:loading.attr="disabled"><i class="fas fa-times pr-2"></i>Details</a>
+                        <a href="#" class="text-gray-400 hover:text-gray-900" wire:click="openActionDetailsModal('{{$action->id}}')" wire:loading.attr="disabled"><i class="fas fa-address-card  pr-2"></i>Details</a>
                     </td>
                     <td class="pr-4 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
                          <a href="#" class="text-red-600 hover:text-red-900" wire:click="openActionDeleteModal('{{$action->id}}')" wire:loading.attr="disabled"><i class="fas fa-times pr-2"></i>Delete</a>

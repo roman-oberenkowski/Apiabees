@@ -133,9 +133,9 @@
                                 </td>
 
                                 <td class="pr-4 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
-                                    <a href="#" class="text-red-600 hover:text-red-900"
+                                    <a href="#" class="text-gray-400 hover:text-gray-900"
                                        wire:click="choose('{{$hive->id}}')" wire:loading.attr="disabled"><i
-                                            class="fas fa-times pr-2"></i>Choose</a>
+                                            class="fas fa-check-square pr-2"></i>Choose</a>
                                 </td>
                             </tr>
                         </div>
