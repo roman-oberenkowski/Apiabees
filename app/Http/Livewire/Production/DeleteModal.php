@@ -10,7 +10,7 @@ class DeleteModal extends Component
 {
     public bool $isModalOpen = false;
 
-    public ?int $production_id=null;
+    public string $production_id='';
     public ?bool $isHoney=null;
 
     protected $listeners = [
@@ -18,17 +18,17 @@ class DeleteModal extends Component
         'openHoneyProductionDeleteModal' => 'openHoneyModal',
     ];
 
-    public function openWaxModal($id)
+    public function openWaxModal($id_prod)
     {
         $this->isHoney=false;
-        $this->openModal($id);
+        $this->openModal($id_prod);
     }
-    public function openHoneyModal($id){
+    public function openHoneyModal($id_prod){
         $this->isHoney=true;
-        $this->openModal($id);
+        $this->openModal($id_prod);
     }
-    public function openModal($id){
-        $this->production_id=$id;
+    public function openModal($id_prod){
+        $this->production_id=$id_prod;
         $this->isModalOpen=true;
     }
 

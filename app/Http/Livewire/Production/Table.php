@@ -140,7 +140,6 @@ class Table extends Component
                 ->setAnimated($this->firstRun)
                 ->multiLine()
             );
-        dd($line_chart);
         return $line_chart;
     }
 
@@ -153,7 +152,7 @@ class Table extends Component
         return view(
             'livewire.production.table',
                 [
-                    'productions' => $data->paginate(10),
+                    'productions' => $this->get_data()->paginate(10),
                     'column_chart' => $column_chart,
                     'line_chart' => $line_chart,
                 ]

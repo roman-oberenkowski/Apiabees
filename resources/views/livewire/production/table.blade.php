@@ -46,6 +46,7 @@
             </x-jet-secondary-button>
         </div>
     </div>
+    @if(sizeof($productions)>=2)
     <div class="h-96 mb-4 mx-5">
         <livewire:livewire-column-chart
             key="{{ $column_chart->reactiveKey() }}"
@@ -59,7 +60,7 @@
             :line-chart-model="$line_chart"
         />
     </div>
-
+    @endif
 
     <table class="min-w-full divide-y divide-gray-200">
             <thead>
@@ -126,7 +127,8 @@
                             </div>
                         </td>
                         <td class="pr-4 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
-                        <a href="#" class="text-red-600 hover:text-red-900"
+                            <a href="#" class="text-red-600 hover:text-red-900"
+
                            wire:click="openProductionDeleteModal('{{$production->id}}')" wire:loading.attr="disabled"><i
                                 class="fas fa-times pr-2"></i>Delete</a>
                         </td>
