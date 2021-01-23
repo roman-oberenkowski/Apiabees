@@ -22,6 +22,10 @@ class AssignHiveModal extends Component
         'HiveChooseModalChoosen'=>'hiveChoosen'
     ];
 
+    public function resetSelectedTargetHive(){
+        $this->new_hive_id='';
+    }
+
     public function unassign_hive($bee_family){
         if($bee_family->hive != null){
             $bee_family->hive->bee_family_id=null;
@@ -41,7 +45,6 @@ class AssignHiveModal extends Component
 
     public function assign()
     {
-        //$validated = $this->validate();
         try {
             $bee_family=BeeFamily::findOrFail($this->bee_family_id);
         }catch (ModelNotFoundException $e) {
@@ -49,11 +52,18 @@ class AssignHiveModal extends Component
             $this->closeModal();
             return;
         }
-        try {
-            $new_hive=Hive::findOrFail($this->new_hive_id);
-        }catch (ModelNotFoundException $e) {
-            $this->addError('choosen_hive',"Cannot find chosen hive. Please check if that hive is still in the database and try again");
-            return;
+        if($this->new_hive_id!=null){
+            try {
+                $new_hive=Hive::findOrFail($this->new_hive_id);
+            }catch (ModelNotFoundException $e) {
+                $this->addError('choosen_hive',"Cannot find chosen hive. Please check if that hive is still in the database and try again");
+                return;
+            }
+        }
+        else{
+            $this->unassign_hive($this->bee_family_id);
+            flash("Bee family successfully removed from hive (moved to storage).")->success()->livewire($this);
+            $this->closeModal();
         }
         if($bee_family->die_off_date!=null){
             $this->addError('choosen_hive',"That bee family is dead!");
@@ -67,7 +77,7 @@ class AssignHiveModal extends Component
         $this->unassign_hive($bee_family);
         $this->assign_hive($bee_family,$new_hive);
 
-        flash("BeeFamily successsfully assigned to new hive.")->success()->livewire($this);
+        flash("Bee family successfully assigned to new hive.")->success()->livewire($this);
         $this->closeModal();
 
 

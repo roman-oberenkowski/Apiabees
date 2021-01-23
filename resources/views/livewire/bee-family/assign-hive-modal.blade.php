@@ -18,9 +18,9 @@
                                 <div class="grid grid-cols-6 gap-6">
                                     <div class="col-span-6 sm:col-span-3">
                                         @if($this->old_hive_id!=null)
-                                            <x-jet-button wire:click="openOldHiveDetailsModal" wire:loading.attr="disabled" class="pm-3">
+                                            <x-jet-secondary-button wire:click="openOldHiveDetailsModal" wire:loading.attr="disabled" class="pm-3">
                                                 {{ __('Details') }}
-                                            </x-jet-button>
+                                            </x-jet-secondary-button>
                                         @else
                                             <div class="col-span-6 sm:col-span-3">
                                                 None
@@ -51,18 +51,21 @@
                                                 @if($this->new_hive_id!=null)
 
                                                         Selected <br />
-                                                    <x-jet-button wire:click="openNewHiveDetailsModal" wire:loading.attr="disabled" class="pm-3">
+                                                    <x-jet-secondary-button wire:click="openNewHiveDetailsModal" wire:loading.attr="disabled" class="pm-3">
                                                         {{ __('Details') }}
-                                                    </x-jet-button>
+                                                    </x-jet-secondary-button>
+                                                    <x-jet-secondary-button wire:click="resetSelectedTargetHive" wire:loading.attr="disabled" class="pm-3">
+                                                        {{ __('Reset') }}
+                                                    </x-jet-secondary-button>
                                                 @else
                                                         None selected
                                                     </div>
                                                 @endif
                                         </div>
                                         <div class="col-span-6 sm:col-span-6">
-                                            <x-jet-button wire:click.prevent="chooseHive" wire:loading.attr="disabled">
+                                            <x-jet-secondary-button wire:click.prevent="chooseHive" wire:loading.attr="disabled">
                                                 {{ __('Choose Hive') }}
-                                            </x-jet-button>
+                                            </x-jet-secondary-button>
                                             <x-jet-input-error for="choosen_hive" class="mt-2" />
                                         </div>
                                     </div>
