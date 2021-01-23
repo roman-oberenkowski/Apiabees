@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\HoneyType;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use \App\Models\Employee;
@@ -17,18 +18,22 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             //Type seeders
+            HoneyTypesSeeder::class,
             ActionTypeSeeder::class,
-            HoneyTypeSeeder::class,
             TaskTypeSeeder::class,
             StateTypeSeeder::class,
             SpecieSeeder::class,
             //other seeders
+
             ApiarySeeder::class,
             HiveSeeder::class,
             BeeFamilySeeder::class,
             EmployeeSeeder::class,
             AttendanceSeeder::class,
             ActionSeeder::class,
+            HoneyProductionSeeder::class,
+            WaxProductionSeeder::class,
+
 
             //testing seeders
             UserSeeder::class,
