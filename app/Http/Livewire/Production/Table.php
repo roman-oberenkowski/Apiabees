@@ -8,6 +8,8 @@ use App\Models\Employee;
 use App\Models\HoneyProduction;
 use App\Models\HoneyType;
 use App\Models\WaxProduction;
+use Asantibanez\LivewireCharts\Models\ColumnChartModel;
+use Asantibanez\LivewireCharts\Models\LineChartModel;
 use Livewire\Component;
 use App\Models\Action;
 use Livewire\WithPagination;
@@ -23,6 +25,21 @@ class Table extends Component
     public array $apiary_code_name_dropdown=[];
     public string $from_date='';
     public string $to_date='';
+
+    public $firstRun = true;
+
+    private $iterator = 0;
+
+    private $colors = [
+        '#DFFF00',
+        '#FFBF00',
+        '#FF7F50',
+        '#DE3163',
+        '#9FE2BF',
+        '#40E0D0',
+        '#6495ED',
+        '#CCCCFF'
+    ];
 
     protected $listeners = [
         'closedProductionDeleteModal' => '$refresh',
@@ -72,8 +89,7 @@ class Table extends Component
                     return $query->whereDate('produced_at','>=', $date);
                 })->
                 orderBy('produced_at', 'desc')->
-                orderBy('apiary_code_name', 'asc')->
-                paginate(10);
+                orderBy('apiary_code_name', 'asc');
         }
         else{
             return WaxProduction::
@@ -85,8 +101,7 @@ class Table extends Component
                     return $query->whereDate('produced_at','>=', $date);
                 })->
                 orderBy('produced_at', 'desc')->
-                orderBy('apiary_code_name', 'asc')->
-                paginate(10);
+                orderBy('apiary_code_name', 'asc');
         }
     }
     public function openProductionDeleteModal($id){
@@ -96,13 +111,32 @@ class Table extends Component
             $this->emit('openWaxProductionDeleteModal',$id);
     }
 
+    public function get_chart_data($productions)
+    {
+        $iterator = 0;
+        $column_chart = $productions->get()->groupBy('apiary_code_name')
+            ->reduce(function (ColumnChartModel $columnChartModel, $data) {
+                $type = $data->first()->apiary_code_name;
+                $value = $data->sum('produced_weight');
+                $this->iterator++;
+                return $columnChartModel->addColumn($type, $value, $this->colors[$this->iterator%(count($this->colors))]);
+            }, (new ColumnChartModel())
+                ->setTitle('Productions from apiaries')
+                ->setAnimated($this->firstRun)
+                ->stacked()
+            );
+        return $column_chart;
+    }
     public function render()
     {
-
+        $data = $this->get_data();
+        $chart = $this->get_chart_data($data);
+        $this->firstRun = false;
         return view(
             'livewire.production.table',
                 [
-                    'productions' => $this->get_data()
+                    'productions' => $data->paginate(10),
+                    'chart' => $chart
                 ]
         );
 

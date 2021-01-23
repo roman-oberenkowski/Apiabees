@@ -46,8 +46,15 @@
             </x-jet-secondary-button>
         </div>
     </div>
+    <div class="h-96 mb-4 mx-5">
+        <livewire:livewire-column-chart
+            key="{{ $chart->reactiveKey() }}"
 
-        <table class="min-w-full divide-y divide-gray-200">
+            :column-chart-model="$chart"
+        />
+    </div>
+
+    <table class="min-w-full divide-y divide-gray-200">
             <thead>
             <tr>
                 <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
