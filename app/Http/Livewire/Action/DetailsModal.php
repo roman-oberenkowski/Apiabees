@@ -65,4 +65,8 @@ class DetailsModal extends Component
         return redirect()->route('actions.index');
     }
 
+    public function openHiveDetailsModal(){
+        $this->emit('openHiveDetailsModal',$this->hive_id);
+    }
+
 }

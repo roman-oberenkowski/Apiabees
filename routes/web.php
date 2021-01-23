@@ -30,23 +30,80 @@ use App\Http\Controllers\WaxProductionController;
 */
 
 Route::middleware(['auth:sanctum'])->group(function () {
-
-    Route::get('/example', function () {
-        return view('example');
+    //default
+    Route::get('/', function () {
+        return redirect()->route('attendances.index');
     });
 
-    Route::resource('attendances', AttendanceController::class)->only([
-        'index'
-    ]);
+    //actions
+    Route::get('/actions/create', function () {
+        return view('action.create');
+    })->name('actions.create');
 
-    Route::get('/task-assignments/create', function () {
-        return view('task-assignment.create');
-    })->name('task-assignments.create');
+    Route::get('/actions/', function () {
+        return view('action.index');
+    })->name('actions.index');;
 
-    Route::get('/task-assignments/', function () {
-        return view('task-assignment.index');
-    })->name('task-assignments.index');;
+    //action types
+    Route::get('/action-types/', function () {
+        return view('action-type.index');
+    })->name('action-types.index');
 
+    Route::get('/action-types/create', function () {
+        return view('action-type.create');
+    })->name('action-types.create');
+
+    //apiaries
+    Route::get('/apiaries/create', function () {
+        return view('apiary.create');
+    })->name('apiaries.create');
+
+    Route::get('/apiaries/', function () {
+        return view('apiary.index');
+    })->name('apiaries.index');;
+
+    //attendance
+    Route::get('/attendances/', function () {
+        return view('attendance.index');
+    })->name('attendances.index');
+
+    //bee families
+    Route::get('/bee-families/create', function () {
+        return view('bee-family.create');
+    })->name('bee-families.create');
+
+    Route::get('/bee-families/', function () {
+        return view('bee-family.index');
+    })->name('bee-families.index');;
+
+    //employees
+    Route::get('/employees/create', function () {
+        return view('employee.create');
+    })->name('employees.create');
+
+    Route::get('/employees/', function () {
+        return view('employee.index');
+    })->name('employees.index');;
+
+    //hives
+    Route::get('/hives/create', function () {
+        return view('hive.create');
+    })->name('hives.create');
+
+    Route::get('/hives/', function () {
+        return view('hive.index');
+    })->name('hives.index');;
+
+    //honey types
+    Route::get('/honey-types/create', function () {
+        return view('honey-type.create');
+    })->name('honey-types.create');
+
+    Route::get('/honey-types/', function () {
+        return view('honey-type.index');
+    })->name('honey-types.index');;
+
+    //productions
     Route::get('/productions/create', function () {
         return view('production.create');
     })->name('productions.create');
@@ -55,110 +112,37 @@ Route::middleware(['auth:sanctum'])->group(function () {
         return view('production.index');
     })->name('productions.index');
 
+    //scanner
     Route::get('/scan/', function () {
         return view('scanner.scan');
     })->name('scanner.scan');
 
+    //species
+    Route::get('/species/create', function () {
+        return view('species.create');
+    })->name('species.create');
 
+    Route::get('/species/', function () {
+        return view('species.index');
+    })->name('species.index');;
 
+    //task assignments
+    Route::get('/task-assignments/create', function () {
+        return view('task-assignment.create');
+    })->name('task-assignments.create');
 
+    Route::get('/task-assignments/', function () {
+        return view('task-assignment.index');
+    })->name('task-assignments.index');
 
-    Route::get('/', function () {
-        return redirect()->route('actions.index');
-    });
+    //task types
+    Route::get('/task-types/create', function () {
+        return view('task-type.create');
+    })->name('task-types.create');
 
-
-    //APIARIES
-    Route::resource('apiaries', ApiaryController::class)->only([
-        'index', 'create', 'store', 'show'
-    ]);
-//    Route::resource('apiaries.hives', HiveController::class)->shallow()->only([
-//        'index', 'create', 'store', 'show'
-//    ]);
-    Route::resource('apiaries.waxproducions', WaxProducionController::class)->only([
-        'index', 'create', 'store', 'show'
-    ]);
-    Route::resource('apiaries.honeyproducions', HoneyProducionController::class)->only([
-        'index', 'create', 'store', 'show'
-    ]);
-
-
-    //BEE_FAMILIIES
-    Route::resource('bee-families', BeeFamilyController::class)->only([
-        'index', 'create', 'store', 'show', 'edit', 'update'
-    ]);
-    Route::resource('bee-families.family_states', FamilyStateController::class)->only([
-        'index', 'create', 'store', 'show'
-    ]);
-
-
-    //EMPLOYEES
-    Route::resource('employees', EmployeeController::class)->only([
-        'index', 'create', 'store', 'show', 'edit', 'update'
-    ]);
-
-    Route::resource('actions', ActionController::class)->only([
-        'index', 'create', 'store', 'show'
-    ]);
-
-    //jeśli do action będzie slug to: Route::resource('employees.actions', ActionController::class)->shallow()->only([
-    Route::resource('employees.actions', ActionController::class)->only([
-        'index', 'create', 'store', 'show'
-    ]);
-
-    Route::resource('employees.attendances', AttendanceController::class)->only([
-        'index', 'create', 'store', 'show'
-    ]);
-
-    Route::resource('employees.employee_tasks', EmployeeTaskController::class)->only([
-        'index', 'create', 'store', 'show'
-    ]);
-
-    //HIVES
-    Route::resource('hives', HiveController::class)->only([
-        'index', 'create', 'store', 'show', 'edit', 'update'
-    ]);
-    Route::resource('hives.family_states', FamilyStateController::class)->only([
-        'index', 'create', 'store', 'show', 'edit', 'update'
-    ]);
-
-    //OTHER
-    Route::resource('employee_tasks', EmployeeTaskController::class)->only([
-        'index', 'create', 'store', 'show', 'destroy'
-    ]);
-
-    Route::resource('tasks', TaskController::class)->only([
-        'index', 'create', 'store', 'show', 'edit', 'update', 'destroy'
-    ]);
-
-    Route::resource('honey_productions', HoneyProductionController::class)->only([
-        'index', 'create', 'store', 'show', 'edit', 'update', 'destroy'
-    ]);
-
-    Route::resource('wax_productions', WaxProductionController::class)->only([
-        'index', 'create', 'store', 'show', 'edit', 'update', 'destroy'
-    ]);
-
-    //DICTIONARY TABLES //opcjonalnie dodac destroy lub
-    Route::resource('action-types', ActionTypeController::class)->only([
-        'index', 'create'
-    ]);
-
-    Route::resource('honey-types', HoneyTypeController::class)->only([
-        'index', 'create', 'store'
-    ]);
-
-    Route::resource('species', SpecieController::class)->only([
-        'index', 'create', 'store'
-    ]);
-
-    Route::resource('task-types', TaskTypeController::class)->only([
-        'index', 'create'
-    ]);
-
-    Route::resource('state_types', StateTypeController::class)->only([
-        'index', 'create', 'store'
-    ]);
+    Route::get('/task-types/', function () {
+        return view('task-type.index');
+    })->name('task-types.index');;
 });
 
 

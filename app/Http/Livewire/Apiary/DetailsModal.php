@@ -57,7 +57,7 @@ class DetailsModal extends Component
     }
 
     public function redirectApiariesHivesIndex(){
-        session(['hivess_selected_apiary'=>$this->apiary_code_name]);
+        session(['hives_selected_apiary'=>$this->apiary_code_name]);
         return redirect()->route('hives.index');
     }
 

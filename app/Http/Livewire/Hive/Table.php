@@ -50,6 +50,9 @@ class Table extends Component
         $this->resetPage();
         $this->setup_apiary_dropdown();
         $this->setup_state_dropdown();
+        if(session()->has('hives_selected_apiary')){
+            $this->filter_apiary_code_name=session()->pull('hives_selected_apiary');
+        }
     }
 
     public function setup_apiary_dropdown(){

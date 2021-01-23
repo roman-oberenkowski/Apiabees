@@ -21,6 +21,11 @@ class Table extends Component
         'closedApiaryEditModal' => '$refresh'
     ];
 
+    public function resetFilters(){
+        $this->search_name = '';
+        $this->search_code_name='';
+    }
+
     public function mount()
     {
         $this->resetPage();

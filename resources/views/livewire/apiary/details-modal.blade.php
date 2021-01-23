@@ -120,44 +120,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="px-4 py-5 bg-white sm:p-6">
-                                <div class="grid grid-cols-6 gap-6">
-                                    <div class="col-span-6">
-                                        <x-jet-label for="some more" value="{{ __('some more') }}" />
-                                        maybe something like density of hives/square meter?
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="p-6">
-                <div class="md:grid md:grid-cols-3 md:gap-6">
-                    <x-jet-section-title>
-                        <x-slot name="title">Other</x-slot>
-                        <x-slot name="description"></x-slot>
-                    </x-jet-section-title>
-
-                    <div class="mt-5 md:mt-0 md:col-span-2">
-                        <div class="shadow overflow-hidden sm:rounded-md">
-                            <div class="px-4 py-5 bg-white sm:p-6">
-                                <div class="grid grid-cols-6 gap-6">
-                                    <div class="col-span-6">
-                                        <x-jet-label for="rows" value="{{ __('Production') }}" />
-                                        some production info here
-                                    </div>
-                                    <div class="col-span-6">
-                                        <x-jet-label for="rows" value="{{ __('Tasks') }}" />
-                                        some tasks info here
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
         </x-slot>
 
         <x-slot name="footer">
