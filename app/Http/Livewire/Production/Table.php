@@ -28,8 +28,6 @@ class Table extends Component
 
     public $firstRun = true;
 
-    private $iterator = 0;
-
     private $colors = [
         '#DFFF00',
         '#FFBF00',
@@ -111,32 +109,53 @@ class Table extends Component
             $this->emit('openWaxProductionDeleteModal',$id);
     }
 
-    public function get_chart_data($productions)
+    public function get_column_chart_data($productions)
     {
-        $iterator = 0;
         $column_chart = $productions->get()->groupBy('apiary_code_name')
             ->reduce(function (ColumnChartModel $columnChartModel, $data) {
                 $type = $data->first()->apiary_code_name;
                 $value = $data->sum('produced_weight');
-                $this->iterator++;
-                return $columnChartModel->addColumn($type, $value, $this->colors[$this->iterator%(count($this->colors))]);
+                return $columnChartModel->addSeriesColumn('Produced', $type, $value);
             }, (new ColumnChartModel())
                 ->setTitle('Productions from apiaries')
                 ->setAnimated($this->firstRun)
-                ->stacked()
+                ->multiColumn()
             );
         return $column_chart;
     }
+
+    public function get_line_chart_data($productions)
+    {
+        $processed_productions = $productions->orderBy('produced_at', 'desc')->groupBy('apiary_code_name', 'produced_at')->selectRaw('apiary_code_name, produced_at, sum(produced_weight) as sum')->get();
+        $line_chart = $processed_productions
+            ->reverse()
+            ->reduce(function (LineChartModel $lineChartModel, $data) use ($processed_productions) {
+                $series = $data->apiary_code_name;
+                $type = $data->produced_at->toDateString();
+                $value = $data->sum;
+
+                return $lineChartModel->addSeriesPoint($series, $type, $value);
+            },(new LineChartModel())
+                ->setTitle('Productions from apiaries')
+                ->setAnimated($this->firstRun)
+                ->multiLine()
+            );
+        dd($line_chart);
+        return $line_chart;
+    }
+
     public function render()
     {
         $data = $this->get_data();
-        $chart = $this->get_chart_data($data);
+        $column_chart = $this->get_column_chart_data($data);
+        $line_chart = $this->get_line_chart_data($data);
         $this->firstRun = false;
         return view(
             'livewire.production.table',
                 [
                     'productions' => $data->paginate(10),
-                    'chart' => $chart
+                    'column_chart' => $column_chart,
+                    'line_chart' => $line_chart,
                 ]
         );
 

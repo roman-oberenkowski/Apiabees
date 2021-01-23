@@ -21,10 +21,10 @@ class WaxProductionSeeder extends Seeder
 
         $apiaries=Apiary::get();
 
-        for ($i=0;$i<10;$i++){
+        for ($i=0;$i<100;$i++){
             WaxProduction::create([
                 'produced_at' => $f->dateTimeBetween(),
-                'produced_weight' => $f->numberBetween(10,50)*200,
+                'produced_weight' => $f->numberBetween(10,50),
                 'apiary_code_name' => $apiaries[rand(0,sizeof($apiaries)-1)]->code_name
             ]);
 

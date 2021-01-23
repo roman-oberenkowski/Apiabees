@@ -48,11 +48,18 @@
     </div>
     <div class="h-96 mb-4 mx-5">
         <livewire:livewire-column-chart
-            key="{{ $chart->reactiveKey() }}"
-
-            :column-chart-model="$chart"
+            key="{{ $column_chart->reactiveKey() }}"
+            :column-chart-model="$column_chart"
         />
     </div>
+
+    <div class="h-96 mb-4 mx-5">
+        <livewire:livewire-line-chart
+            key="{{ $line_chart->reactiveKey() }}"
+            :line-chart-model="$line_chart"
+        />
+    </div>
+
 
     <table class="min-w-full divide-y divide-gray-200">
             <thead>
