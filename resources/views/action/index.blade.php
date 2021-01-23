@@ -10,6 +10,7 @@
             @livewire('action.details-modal')
             @livewire('bee-family.details-modal')
             @livewire('hive.details-modal')
+            @livewire('family-state.details-modal')
         </x-section>
     </x-slot>
 </x-app-layout>
