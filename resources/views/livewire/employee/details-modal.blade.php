@@ -93,7 +93,7 @@
                     </div>
                 </div>
             </div>
-            <div>Latest actions (max 5)</div>
+            <div>Latest actions</div>
             <table class="min-w-full divide-y divide-gray-200">
                 <thead>
                 <tr>
@@ -152,7 +152,7 @@
                 @endforeach
                 </tbody>
             </table>
-            <div>Latest attendances (max 3)</div>
+            <div>Latest attendances</div>
             <table class="min-w-full divide-y divide-gray-200">
                 <thead>
                 <tr>

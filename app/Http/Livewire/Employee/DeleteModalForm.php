@@ -42,7 +42,7 @@ class DeleteModalForm extends Component
                 $employee->user->delete();
             }
             $employee->delete();
-            flash("User {$employee->first_name} {$employee->last_name} has been deleted.")->success()->livewire($this);
+            flash("Employee {$employee->first_name} {$employee->last_name} has been deleted.")->success()->livewire($this);
 
             $this->closeModal();
         }
