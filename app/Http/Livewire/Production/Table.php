@@ -140,7 +140,6 @@ class Table extends Component
                 ->setAnimated($this->firstRun)
                 ->multiLine()
             );
-        dd($line_chart);
         return $line_chart;
     }
 
@@ -150,12 +149,18 @@ class Table extends Component
         $column_chart = $this->get_column_chart_data($data);
         $line_chart = $this->get_line_chart_data($data);
         $this->firstRun = false;
+
         return view(
             'livewire.production.table',
                 [
                     'productions' => $data->paginate(10),
                     'column_chart' => $column_chart,
                     'line_chart' => $line_chart,
+                    'produced' => DB::select('SELECT getProduced(?, ?, ?) AS produced', [
+                        $this->isHoney ? 'HONEY': 'WAX',
+                        $this->from_date == ''?Carbon::createFromTimestamp(0)->toDateTimeString():$this->from_date->toDateTimeString(),
+                        $this->to_date == ''?Carbon::now()->toDateTimeString():$this->from_date->toDateTimeString()
+                        ])[0]->produced,
                 ]
         );
 
