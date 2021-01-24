@@ -24,10 +24,6 @@ class Create extends Component
     public array $apiary_code_name_dropdown=[];
     public string $produced_at='';
 
-
-
-
-
     protected function rules()
     {
         $rules_honey=[

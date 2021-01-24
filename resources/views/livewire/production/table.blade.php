@@ -141,7 +141,7 @@
         {{ $productions->links() }}
     </div>
     @if($produced>0)
-    <div>
+    <div class="p-3">
         <p>Overall, during this time  {{$produced}} kg. of @if($isHoney) honey @else wax @endif has been produced.</p>
     </div>
     @endif

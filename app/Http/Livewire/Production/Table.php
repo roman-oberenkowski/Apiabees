@@ -30,6 +30,24 @@ class Table extends Component
 
     public $firstRun = true;
 
+
+    protected function rules()
+    {
+        $rules_honey=[
+            'apiary_code_name' => ['exists:apiaries,code_name'],
+            'honey_type_name'=>['exists:honey_types,name'],
+            'from_date' => ['date', 'before_or_equal:today'],
+            'to_date' => ['date', 'before_or_equal:today'],
+        ];
+        $rules_wax=[
+            'apiary_code_name' => ['exists:apiaries,code_name'],
+            'from_date' => ['date', 'before_or_equal:today'],
+            'to_date' => ['date', 'before_or_equal:today'],
+        ];
+        if($this->isHoney)return $rules_honey;
+        else return $rules_wax;
+    }
+
     private $colors = [
         '#DFFF00',
         '#FFBF00',
@@ -50,6 +68,12 @@ class Table extends Component
         $this->resetPage();
         $this->setup_dropdowns();
     }
+
+    public function updated($propertyName)
+    {
+        $this->validateOnly($propertyName);
+    }
+
     public function setup_dropdowns(){
         $this->apiary_code_name_dropdown=[];
         $apiaries=Apiary::get(['code_name']);
@@ -83,8 +107,8 @@ class Table extends Component
                 where('apiary_code_name', 'like', "%{$this->apiary_code_name}%")->
                 where('honey_type_name', 'like', "%{$this->honey_type_name}%")->
                 when($this->to_date, function($query,$date){
-                        return $query->whereDate('produced_at','<=', $date);
-                    })->
+                    return $query->whereDate('produced_at','<=', $date);
+                })->
                 when($this->from_date, function($query,$date){
                     return $query->whereDate('produced_at','>=', $date);
                 })->
@@ -147,16 +171,23 @@ class Table extends Component
 
     public function render()
     {
+//        $this->validate();
         $data = $this->get_data();
         $column_chart = $this->get_column_chart_data($data);
         $line_chart = $this->get_line_chart_data($data);
         $this->firstRun = false;
-        $production = DB::select('SELECT getProduced(?, ?, ?) AS produced', [
-            $this->isHoney == true ? 'HONEY': 'WAX',
-            $this->from_date == '' ? Carbon::createFromTimestamp(0)->toDateTimeString() : $this->from_date,
-            $this->to_date == '' ? Carbon::now()->toDateTimeString() : $this->from_date
-        ]);
-        $production = $production->count() > 0 ? $production[0]->produced : 0;
+        try {
+            Carbon::parse($this->from_date);
+            Carbon::parse($this->from_date);
+            $production = DB::select('SELECT getProduced(?, ?, ?) AS produced', [
+                $this->isHoney == true ? 'HONEY': 'WAX',
+                $this->from_date == '' ? Carbon::createFromTimestamp(0)->toDateTimeString() : $this->from_date,
+                $this->to_date == '' ? Carbon::now()->toDateTimeString() : $this->to_date
+            ]);
+            } catch (\Exception $exception) {
+                $production = [];
+        }
+        $production = count($production) > 0 ? $production[0]->produced : 0;
 
         return view(
             'livewire.production.table',

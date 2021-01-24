@@ -110,6 +110,15 @@ Route::middleware(['auth:sanctum'])->group(function () {
         return view('species.index');
     })->name('species.index');;
 
+    //state types
+    Route::get('/state-types/create', function () {
+        return view('state-type.create');
+    })->name('state-types.create');
+
+    Route::get('/state-types/', function () {
+        return view('state-type.index');
+    })->name('state-types.index');;
+
     //task assignments
     Route::get('/task-assignments/create', function () {
         return view('task-assignment.create');
