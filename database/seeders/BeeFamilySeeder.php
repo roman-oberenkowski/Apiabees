@@ -2,61 +2,50 @@
 
 namespace Database\Seeders;
 
-use App\Models\Attendance;
 use App\Models\BeeFamily;
 use App\Models\Hive;
 use App\Models\Specie;
 use DateInterval;
 use Illuminate\Database\Seeder;
-use \Faker\Factory;
-use \App\Models\Employee;
-use Illuminate\Support\Facades\Hash;
+
 
 class BeeFamilySeeder extends Seeder
 {
 
     public function run()
     {
-        $f=\Faker\Factory::create('pl_PL');
-        $species=Specie::get('name');
+        $f = \Faker\Factory::create('pl_PL');
+        $species = Specie::get('name');
 
-
-        for($i=0;$i<20;$i++){
-            $bee_family=new BeeFamily();
-            $bee_family->species_name=$species[$f->numberBetween(0,sizeof($species)-1)]->name;
-            if($f->numberBetween(0,7)>6) {
+        for ($i = 0; $i < 20; $i++) {
+            $bee_family = new BeeFamily();
+            $bee_family->species_name = $species[$f->numberBetween(0, sizeof($species) - 1)]->name;
+            if ($f->numberBetween(0, 7) > 6) {
                 //dead
                 $date = $f->dateTimeBetween();
-                $bee_family->die_off_date=$date;
+                $bee_family->die_off_date = $date;
                 $date->sub(new DateInterval('P2Y4D'));
+
                 $bee_family->acquired_at = $date;
-                $bee_family->population=0;
+                $bee_family->population = 0;
                 $bee_family->save();
-            }
-            else{
+            } else {
                 //alive
                 $date = $f->dateTimeBetween();
                 $bee_family->acquired_at = $date;
-                $bee_family->population=$f->numberBetween(10,999);
-                $bee_family->die_off_date=null;
+                $bee_family->population = $f->numberBetween(10, 999);
+                $bee_family->die_off_date = null;
 
-                if(rand(0,9)){
-                    $hive=Hive::whereNull('bee_family_id')->first();
-                    $bee_family->hive_id=$hive->id;
+                if (rand(0, 9)) {
+                    $hive = Hive::whereNull('bee_family_id')->first();
+                    $bee_family->hive_id = $hive->id;
                     $bee_family->save();
-                    $hive->bee_family_id=$bee_family->id;
+                    $hive->bee_family_id = $bee_family->id;
                     $hive->save();
-                }else{
+                } else {
                     $bee_family->save();
                 }
-
-
-
-
             }
-
-
-
         }
     }
 }

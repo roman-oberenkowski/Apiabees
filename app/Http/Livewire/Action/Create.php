@@ -178,8 +178,6 @@ class Create extends Component
                     $this->noBeeFamilyInHive();
                 }
             }
-
-            //flash("Hive successfully chosen")->success()->livewire($this);
         }
     }
 

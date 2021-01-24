@@ -56,7 +56,7 @@ class DetailsModal extends Component
             $this->attendances=Attendance::
             where('employee_PESEL',$this->PESEL)->
             orderBy('started_at', 'desc')->
-            take(3)->
+            take(5)->
             get(['started_at','finished_at'])->
             toArray();
             if(sizeof($this->attendances)==0){

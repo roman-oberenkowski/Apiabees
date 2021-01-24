@@ -95,7 +95,12 @@ class EditModalForm extends Component
         $this->isModalOpen = true;
     }
 
-    public function loadData(Employee $employee){
+    public function loadData($PESEL){
+        $employee=Employee::find($PESEL);
+        if($employee==null){
+            flash("Cannot edit chosen user. Please check if user is still in the database and try again")->error()->livewire($this);
+            return;
+        }
         if (isset($employee->user)) {
             $this->name = $employee->user->name;
             //$this->password = $employee->user->password;
