@@ -12,9 +12,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class StateType extends Model
 {
-    public const special_state_population_changed="Population changed";
-    public const special_state_family_dead="Family dead";
-    public const special_state_other="Other";
+    public const special_state_population_changed="Zmiana populacji";
+    public const special_state_family_dead="Śmierć rodziny";
+    public const special_state_other="Inna";
     /**
      * The primary key for the model.
      *

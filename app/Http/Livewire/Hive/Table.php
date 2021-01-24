@@ -30,7 +30,10 @@ class Table extends Component
     }
 
     public function resetFilters(){
-        $this->reset();
+        $this->filter_apiary_code_name='';
+        $this->filter_state='';
+        $this->filter_qr='';
+        $this->filter_nfc='';
     }
 
     public function loadScanNFCQR(){

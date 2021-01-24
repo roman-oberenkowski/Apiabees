@@ -49,8 +49,8 @@
                             <div class="px-4 py-5 bg-white sm:p-6">
                                 <div class="grid grid-cols-6 gap-6">
                                     <div class="col-span-6">
-                                        @if ($this->hive_id!=null)
                                         <x-jet-label for="hive" value="{{ __('Hive') }}" />
+                                        @if ($this->hive_id!=null)
                                         <x-jet-secondary-button wire:click="openHiveDetailsModal" wire:loading.attr="disabled">
                                             {{ __('Hive details') }}
                                         </x-jet-secondary-button>

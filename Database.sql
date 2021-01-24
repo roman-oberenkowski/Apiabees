@@ -173,4 +173,10 @@ ALTER TABLE task_assignments ADD CONSTRAINT assigned_tasks_apiaries_fk FOREIGN K
 
 ALTER TABLE wax_productions ADD CONSTRAINT wax_productions_apiaries_fk FOREIGN KEY (apiary_code_name) REFERENCES apiaries (code_name) ON DELETE CASCADE;
 
+INSERT INTO action_types(name) VALUES('Inna');
+INSERT INTO action_types(name) VALUES('Inspekcja');
+
+INSERT INTO state_types(name) VALUES('Zmiana populacji');
+INSERT INTO state_types(name) VALUES('Śmierć rodziny');
+INSERT INTO state_types(name) VALUES('Inna');
 COMMIT;

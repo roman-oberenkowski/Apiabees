@@ -15,7 +15,7 @@ class StateTypeSeeder extends Seeder
      */
     public function run()
     {
-        $arr=['Everything OK','Little movement','Disease','Population changed','Family dead','Other'];
+        $arr=['Wszystko ok','Mała ruchliwość','Choroba'];
         foreach ($arr as $ht){
             $rec=new StateType;
             $rec->name= $ht;
