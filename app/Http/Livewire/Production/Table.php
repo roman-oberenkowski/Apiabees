@@ -171,7 +171,6 @@ class Table extends Component
 
     public function render()
     {
-//        $this->validate();
         $data = $this->get_data();
         $column_chart = $this->get_column_chart_data($data);
         $line_chart = $this->get_line_chart_data($data);
