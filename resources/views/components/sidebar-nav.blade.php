@@ -19,6 +19,7 @@
             <x-sidebar-nav-link href="{{ route('productions.index') }}" :active="request()->is('productions/*')"> <i class="fab fa-houzz pr-5"></i>  {{ __('Productions') }} </x-sidebar-nav-link>
             <x-sidebar-nav-link href="{{ route('scanner.scan') }}" :active="request()->is('scanner.scan')"> <i class="fas fa-qrcode pr-3"></i>  {{ __('Scanner') }} </x-sidebar-nav-link>
             <x-sidebar-nav-link href="{{ route('species.index') }}" :active="request()->is('species/*')"> <i class="fas fa-paw pr-3"></i>  {{ __('Species') }} </x-sidebar-nav-link>
+            <x-sidebar-nav-link href="{{ route('state-types.index') }}" :active="request()->is('state_types/*')"> <i class="fas fa-thermometer pr-3"></i>  {{ __('State types') }} </x-sidebar-nav-link>
             <x-sidebar-nav-link href="{{ route('task-assignments.index') }}" :active="request()->is('task-assignments')"> <i class="fas fa-tasks pr-4"></i>  {{ __('Task assignments') }} </x-sidebar-nav-link>
             <x-sidebar-nav-link href="{{ route('task-types.index') }}" :active="request()->is('task_types/*')"> <i class="fas fa-stream pr-3"></i>  {{ __('Task types') }} </x-sidebar-nav-link>
         </div>
