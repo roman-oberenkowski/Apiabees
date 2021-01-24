@@ -78,6 +78,9 @@ class Create extends Component
         if(isset($this->species_dropdown[0])){
             $this->species_name=$this->species_dropdown[0]['name'];
         }
+        else{
+            $this->species_name='';
+        }
     }
 
     public function render()

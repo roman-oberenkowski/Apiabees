@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Validation\Rule;
 
 /**
@@ -13,47 +12,24 @@ use Illuminate\Validation\Rule;
  */
 class ActionType extends Model
 {
-    public const special_action_inspection="Inspection";
-    public const special_action_other="Other";
+    public const special_action_inspection="Inspekcja";
+    public const special_action_other="Inna";
     public static function isSpecial($action){
         if($action==self::special_action_inspection)return true;
         if($action==self::special_action_other)return true;
         return false;
     }
 
-    /**
-     * The primary key for the model.
-     *
-     * @var string
-     */
     protected $primaryKey = 'name';
 
-    /**
-     * The "type" of the auto-incrementing ID.
-     *
-     * @var string
-     */
     protected $keyType = 'string';
 
-    /**
-     * Indicates if the IDs are auto-incrementing.
-     *
-     * @var bool
-     */
     public $incrementing = false;
 
-    /**
-     * @var array
-     */
     protected $fillable = [
         'name'
     ];
 
-    /**
-     * Indicates if the model should be timestamped.
-     *
-     * @var bool
-     */
     public $timestamps = false;
 
     public static function validationRulesCreate()
@@ -61,10 +37,6 @@ class ActionType extends Model
         return ['name' => ['required', 'string', 'max:32', 'min:2', Rule::unique('action_types')]];
     }
 
-
-    /**
-     * @return HasMany
-     */
     public function actions()
     {
         return $this->hasMany('App\Models\Action', 'type_name', 'name');
