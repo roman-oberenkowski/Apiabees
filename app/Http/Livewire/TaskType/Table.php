@@ -38,6 +38,7 @@ class Table extends Component
     }
 
     public function openDeleteModal($id){
+        $id=base64_decode($id);
         $this->emit('openDeleteModal', $id);
     }
 }

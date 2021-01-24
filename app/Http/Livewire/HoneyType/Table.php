@@ -12,7 +12,7 @@ class Table extends Component
     public string $search__name = '';
 
     protected $listeners = [
-        //'closedDeleteModalForm' => '$refresh',
+        'closedDeleteModalForm' => '$refresh',
     ];
 
     public function mount()
@@ -38,6 +38,8 @@ class Table extends Component
     }
 
     public function openDeleteModal($id){
+        $id=base64_decode($id);
         $this->emit('openDeleteModal', $id);
+        $this->reset();
     }
 }

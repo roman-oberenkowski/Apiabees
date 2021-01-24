@@ -49,7 +49,6 @@ class DeleteModal extends Component
         }
         $honey_type_to_delete->delete();
         flash("Honey type {$honey_type_to_delete->name} has been deleted.")->success()->livewire($this);
-        return redirect()->to('/honey-types')->back();
         $this->closeModal();
     }
 

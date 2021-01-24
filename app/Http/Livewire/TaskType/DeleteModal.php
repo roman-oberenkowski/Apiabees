@@ -49,7 +49,7 @@ class DeleteModal extends Component
 
         $task_type_to_delete->delete();
         flash("Task type {$task_type_to_delete->name} has been deleted.")->success()->livewire($this);
-        return redirect()->to('/honey-types')->back();
+        //return redirect()->to('/honey-types')->back();
         $this->closeModal();
     }
 

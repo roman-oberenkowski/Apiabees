@@ -69,7 +69,7 @@
                     </td>
 
                     <td class="pr-4 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
-                         <a href="#" class="text-red-600 hover:text-red-900" wire:click="openDeleteModal('{{$specie->name}}')" wire:loading.attr="disabled"><i class="fas fa-times pr-2"></i>Delete</a>
+                         <a href="#" class="text-red-600 hover:text-red-900" wire:click="openDeleteModal('{{base64_encode($specie->name)}}')" wire:loading.attr="disabled"><i class="fas fa-times pr-2"></i>Delete</a>
                     </td>
                 </tr>
             </div>

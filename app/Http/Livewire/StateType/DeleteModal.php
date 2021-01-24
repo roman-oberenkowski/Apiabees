@@ -59,7 +59,7 @@ class DeleteModal extends Component
 
         flash("State type {$state_type_to_delete->name} has been deleted.")->success()->livewire($this);
 
-        return redirect()->to('/state-types');
+        //return redirect()->to('/state-types');
         $this->closeModal();
     }
 
