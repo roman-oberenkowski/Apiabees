@@ -23,6 +23,14 @@ class Table extends Component
     public array $filter_apiary_code_name_dropdown = [];
     public string $filter_date = '';
 
+    public function rules(){
+        return ['filter_date' => ['date', 'before_or_equal:today']];
+    }
+
+    public function updated($propertyName)
+    {
+        $this->validateOnly($propertyName);
+    }
 
     protected $listeners = [
         'closedTaskAssignmentDeleteModal' => '$refresh',

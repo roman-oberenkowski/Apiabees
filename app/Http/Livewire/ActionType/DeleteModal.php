@@ -60,6 +60,7 @@ class DeleteModal extends Component
         $action_type_to_delete->delete();
         flash("Action type {$action_type_to_delete->name} has been deleted.")->success()->livewire($this);
         $this->closeModal();
+        return redirect()->to('/action-types')->back();
     }
 
 

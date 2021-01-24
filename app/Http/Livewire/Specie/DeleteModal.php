@@ -49,6 +49,7 @@ class DeleteModal extends Component
 
         $specie_to_delete->delete();
         flash("Specie {$specie_to_delete->name} has been deleted.")->success()->livewire($this);
+        return redirect()->to('/honey-types')->back();
         $this->closeModal();
     }
 

@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\HoneyType;
 
 use App\Models\HoneyType;
+use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 
 class DeleteModal extends Component
@@ -46,9 +47,9 @@ class DeleteModal extends Component
             $this->closeModal();
             return;
         }
-
         $honey_type_to_delete->delete();
         flash("Honey type {$honey_type_to_delete->name} has been deleted.")->success()->livewire($this);
+        return redirect()->to('/honey-types')->back();
         $this->closeModal();
     }
 

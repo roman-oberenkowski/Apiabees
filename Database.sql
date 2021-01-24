@@ -177,6 +177,6 @@ INSERT INTO action_types(name) VALUES('Inna');
 INSERT INTO action_types(name) VALUES('Inspekcja');
 
 INSERT INTO state_types(name) VALUES('Zmiana populacji');
-INSERT INTO state_types(name) VALUES('Śmierć rodziny');
+INSERT INTO state_types(name) VALUES('Wymarcie rodziny');
 INSERT INTO state_types(name) VALUES('Inna');
 COMMIT;

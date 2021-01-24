@@ -13,9 +13,16 @@ use Illuminate\Validation\Rule;
  */
 class StateType extends Model
 {
+
     public const special_state_population_changed="Zmiana populacji";
-    public const special_state_family_dead="Śmierć rodziny";
+    public const special_state_family_dead="Wymarcie rodziny";
     public const special_state_other="Inna";
+    public static function isSpecial($action){
+        if($action==self::special_state_population_changed)return true;
+        if($action==self::special_state_family_dead)return true;
+        if($action==self::special_state_other)return true;
+        return false;
+    }
     /**
      * The primary key for the model.
      *

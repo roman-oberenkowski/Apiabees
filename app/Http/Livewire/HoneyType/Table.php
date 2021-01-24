@@ -12,7 +12,7 @@ class Table extends Component
     public string $search__name = '';
 
     protected $listeners = [
-        'closedDeleteModalForm' => '$refresh',
+        //'closedDeleteModalForm' => '$refresh',
     ];
 
     public function mount()
