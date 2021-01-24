@@ -1,22 +1,6 @@
 <?php
 
-use App\Http\Controllers\TaskTypeController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ActionController;
-use App\Http\Controllers\ActionTypeController;
-use App\Http\Controllers\ApiaryController;
-use App\Http\Controllers\AttendanceController;
-use App\Http\Controllers\BeeFamilyController;
-use App\Http\Controllers\EmployeeController;
-use App\Http\Controllers\EmployeeTaskController;
-use App\Http\Controllers\FamilyStateController;
-use App\Http\Controllers\HiveController;
-use App\Http\Controllers\HoneyProducionController;
-use App\Http\Controllers\HoneyTypeController;
-use App\Http\Controllers\SpecieController;
-use App\Http\Controllers\StateTypeController;
-use App\Http\Controllers\TaskController;
-use App\Http\Controllers\WaxProductionController;
 
 /*
 |--------------------------------------------------------------------------

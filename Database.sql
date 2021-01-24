@@ -53,7 +53,7 @@ CREATE TABLE bee_families (
 	species_name VARCHAR(32) NOT NULL,
 	hive_id INTEGER,
 	CHECK ( die_off_date >= acquired_at OR die_off_date IS NULL ),
-	CHECK ( population=0 OR die_off_date is NULL )
+	CHECK ( (population=0 AND die_off_date is NULL) OR (population>0 AND die_off_date is NOT NULL) )
 );
 
 CREATE UNIQUE INDEX bee_families__idx ON bee_families ( hive_id ASC );

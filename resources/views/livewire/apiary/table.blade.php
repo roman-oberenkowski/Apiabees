@@ -45,7 +45,7 @@
             <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                 Hives/Max hives
             </th>
-            <th class="pr-4 py-3 bg-gray-50" colspan="3">Actions</th>
+            <th class="pr-4 py-3 bg-gray-50" colspan="3"></th>
         </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">

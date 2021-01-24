@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
+ * @property int $id
  * @property string $produced_at
  * @property string $apiary_code_name
  * @property float $produced_weight
@@ -17,6 +18,7 @@ class WaxProduction extends Model
      * @var array
      */
     protected $fillable = [
+        'id',
         'produced_at',
         'produced_weight',
         'apiary_code_name'

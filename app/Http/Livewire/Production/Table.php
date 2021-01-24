@@ -153,7 +153,7 @@ class Table extends Component
         return view(
             'livewire.production.table',
                 [
-                    'productions' => $data->paginate(10),
+                    'productions' => $this->get_data()->paginate(10),
                     'column_chart' => $column_chart,
                     'line_chart' => $line_chart,
                     'produced' => DB::select('SELECT getProduced(?, ?, ?) AS produced', [
