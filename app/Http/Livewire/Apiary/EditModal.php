@@ -93,6 +93,11 @@ $this->closeModal();
 public
 function openModal($code_name)
 {
+    $a=Apiary::find($code_name);
+    if($a==null){
+        flash("Cannot find selected apiary.")->error()->livewire($this);
+        return;
+    }
     $this->resetValidation();
     $this->reset();
     $this->loadData($code_name);

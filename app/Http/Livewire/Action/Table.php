@@ -27,6 +27,15 @@ class Table extends Component
         $this->resetPage();
     }
 
+    public function rules(){
+        return ['filter_date' => ['date', 'before_or_equal:today']];
+    }
+
+    public function updated($propertyName)
+    {
+        $this->validateOnly($propertyName);
+    }
+
     public function resetFilters(){
         $this->filter_description = '';
         $this->filter_employee_PESEL='';

@@ -21,6 +21,11 @@ class DeleteModal extends Component
 
     public function openModal(string $name)
     {
+        $ac=ActionType::find($name);
+        if($ac==null){
+            flash("Cannot selected action type - probably already deleted.")->info()->livewire($this);
+            return;
+        }
         $this->resetValidation();
         $this->name = $name;
         $this->isModalOpen = true;

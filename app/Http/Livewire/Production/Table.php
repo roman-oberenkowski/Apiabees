@@ -177,7 +177,7 @@ class Table extends Component
         $this->firstRun = false;
         try {
             Carbon::parse($this->from_date);
-            Carbon::parse($this->from_date);
+            Carbon::parse($this->to_date);
             $production = DB::select('SELECT getProduced(?, ?, ?) AS produced', [
                 $this->isHoney == true ? 'HONEY': 'WAX',
                 $this->from_date == '' ? Carbon::createFromTimestamp(0)->toDateTimeString() : $this->from_date,
