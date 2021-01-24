@@ -10,6 +10,8 @@ use App\Models\HoneyType;
 use App\Models\WaxProduction;
 use Asantibanez\LivewireCharts\Models\ColumnChartModel;
 use Asantibanez\LivewireCharts\Models\LineChartModel;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use App\Models\Action;
 use Livewire\WithPagination;
@@ -158,8 +160,8 @@ class Table extends Component
                     'line_chart' => $line_chart,
                     'produced' => DB::select('SELECT getProduced(?, ?, ?) AS produced', [
                         $this->isHoney ? 'HONEY': 'WAX',
-                        $this->from_date == ''?Carbon::createFromTimestamp(0)->toDateTimeString():$this->from_date->toDateTimeString(),
-                        $this->to_date == ''?Carbon::now()->toDateTimeString():$this->from_date->toDateTimeString()
+                        $this->from_date == ''?Carbon::createFromTimestamp(0)->toDateTimeString():$this->from_date,
+                        $this->to_date == ''?Carbon::now()->toDateTimeString():$this->from_date
                         ])[0]->produced,
                 ]
         );

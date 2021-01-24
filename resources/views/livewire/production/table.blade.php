@@ -62,7 +62,7 @@
     </div>
     @endif
 
-    < class="min-w-full divide-y divide-gray-200">
+    <table class="min-w-full divide-y divide-gray-200">
             <thead>
             <tr>
                 <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
@@ -140,8 +140,9 @@
     <div class="p-3">
         {{ $productions->links() }}
     </div>
+    @if($produced>0)
     <div>
-        <p>Overall, during this time {{$produced}}kg. of @if($isHoney) honey @else wax @endif has been produced.</p>
+        <p>Overall, during this time  {{$produced}} kg. of @if($isHoney) honey @else wax @endif has been produced.</p>
     </div>
-
-</div>
+    @endif
+</table>
