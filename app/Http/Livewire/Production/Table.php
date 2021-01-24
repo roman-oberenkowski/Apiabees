@@ -151,6 +151,12 @@ class Table extends Component
         $column_chart = $this->get_column_chart_data($data);
         $line_chart = $this->get_line_chart_data($data);
         $this->firstRun = false;
+        $production = DB::select('SELECT getProduced(?, ?, ?) AS produced', [
+            $this->isHoney == true ? 'HONEY': 'WAX',
+            $this->from_date == '' ? Carbon::createFromTimestamp(0)->toDateTimeString() : $this->from_date,
+            $this->to_date == '' ? Carbon::now()->toDateTimeString() : $this->from_date
+        ]);
+        $production = $production->count() > 0 ? $production[0]->produced : 0;
 
         return view(
             'livewire.production.table',
@@ -158,11 +164,7 @@ class Table extends Component
                     'productions' => $this->get_data()->paginate(10),
                     'column_chart' => $column_chart,
                     'line_chart' => $line_chart,
-                    'produced' => DB::select('SELECT getProduced(?, ?, ?) AS produced', [
-                        $this->isHoney ? 'HONEY': 'WAX',
-                        $this->from_date == ''?Carbon::createFromTimestamp(0)->toDateTimeString():$this->from_date,
-                        $this->to_date == ''?Carbon::now()->toDateTimeString():$this->from_date
-                        ])[0]->produced,
+                    'produced' => $production,
                 ]
         );
 
