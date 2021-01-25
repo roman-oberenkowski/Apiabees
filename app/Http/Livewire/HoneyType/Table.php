@@ -31,7 +31,7 @@ class Table extends Component
         return view(
             'livewire.honey-type.table',
             [
-                'honey_types' => HoneyType::where('name', 'like', "%{$this->search__name}%")->orderBy('name', 'asc')->paginate(5)
+                'honey_types' => HoneyType::where('name', 'like', "%{$this->search__name}%")->orderBy('name', 'asc')->paginate(10)
             ]
         );
 

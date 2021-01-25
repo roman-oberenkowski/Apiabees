@@ -53,7 +53,7 @@ class IndexModal extends Component
     public function render()
     {
         return view('livewire.family-states.index-modal',
-            ['states'=> FamilyState::where('bee_family_id',$this->bee_family_id)->orderBy('checked_at', 'desc')->paginate(2)]);
+            ['states'=> FamilyState::where('bee_family_id',$this->bee_family_id)->orderBy('checked_at', 'desc')->paginate(10)]);
     }
 
 }

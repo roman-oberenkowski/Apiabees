@@ -36,7 +36,10 @@ class AssignHiveModal extends Component
     }
     public function assign_hive($bee_family,$new_hive){
         //bee family and new hive should be 'clean' (unassigned to any other)
-        if($bee_family->hive_id!=null || $new_hive->bee_family_id!=null){dd($this);}
+        if($bee_family->hive_id!=null || $new_hive->bee_family_id!=null){
+            $this->addError('choosen_hive',"Cannot assign to chosen hive. Please try again");
+            return;
+        }
         $bee_family->hive_id=$new_hive->id;
         $new_hive->bee_family_id=$bee_family->id;
         $bee_family->save();

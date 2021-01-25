@@ -74,7 +74,7 @@ class Table extends Component
                     ->when($this->filter_date, function($query,$date){
                         return $query->whereDate('performed_at', $date);
                     })
-                    ->orderBy('performed_at', 'desc')->paginate(5),
+                    ->orderBy('performed_at', 'desc')->paginate(10),
                 'filter_employees_dropdown' => $employee_dropdown,
                 'filter_type_names_dropdown' => $type_names_dropdown,
                 ]

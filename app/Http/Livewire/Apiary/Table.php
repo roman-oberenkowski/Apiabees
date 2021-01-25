@@ -40,7 +40,7 @@ class Table extends Component
                         Apiary::where('code_name', 'like', "%{$this->search_code_name}%")
                             ->where('name', 'like', "%{$this->search_name}%")
                             ->orderBy('code_name','asc')
-                            ->paginate(5),
+                            ->paginate(10),
                 ]
         );
     }

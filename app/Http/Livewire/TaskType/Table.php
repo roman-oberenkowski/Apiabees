@@ -31,7 +31,7 @@ class Table extends Component
         return view(
             'livewire.task-type.table',
             [
-                'task_types' => TaskType::where('name', 'like', "%{$this->search__name}%")->orderBy('name', 'asc')->paginate(5)
+                'task_types' => TaskType::where('name', 'like', "%{$this->search__name}%")->orderBy('name', 'asc')->paginate(10)
             ]
         );
 

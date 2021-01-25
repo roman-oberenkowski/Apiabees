@@ -31,7 +31,7 @@ class Table extends Component
         return view(
             'livewire.specie.table',
             [
-                'species' => Specie::where('name', 'like', "%{$this->search__name}%")->orderBy('name', 'asc')->paginate(5)
+                'species' => Specie::where('name', 'like', "%{$this->search__name}%")->orderBy('name', 'asc')->paginate(10)
             ]
         );
 

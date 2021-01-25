@@ -54,7 +54,7 @@
 
                                     <div class="col-span-6 ">
                                         <x-jet-label for="salary" value="{{ __('Salary') }}" />
-                                        {{$salary}}
+                                        {{$salary}}zł
                                     </div>
 
                                     <div class="col-span-6 ">

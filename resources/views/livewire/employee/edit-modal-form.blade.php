@@ -64,7 +64,7 @@
                                     </div>
 
                                     <div class="col-span-6 ">
-                                        <x-jet-label for="salary" value="{{ __('Salary') }}" />
+                                        <x-jet-label for="salary" value="{{ __('Salary [zł]') }}" />
                                         <x-jet-input id="salary" type="text" class="mt-1 block w-full" wire:model="salary" autocomplete="salary"/>
                                         <x-jet-input-error for="salary" class="mt-2" />
                                     </div>

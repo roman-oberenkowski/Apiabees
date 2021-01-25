@@ -56,13 +56,13 @@ class Employee extends Model
     ];
     public static function validationRulesCreate(){
         return [
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users', 'min:5'],
-            'password' => ['required', 'string', 'confirmed', 'min:6'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users', 'min:8'],
+            'password' => ['required', 'string', 'confirmed', 'min:8'],
 
             'PESEL' => ['required', 'string', 'size:11', 'unique:employees', 'regex:/^\d{11}?$/'],
             'first_name' => ['required', 'string', 'max:32', 'min:3'],
             'last_name' => ['required', 'string', 'max:32', 'min:3'],
-            'salary' => ['required', 'numeric', 'gt:0', 'regex:/^\d+(\.\d{1,2})?$/'],
+            'salary' => ['required', 'numeric', 'gt:0', 'regex:/^\d+(\.\d{1,2})?$/','lte:100000'],
             'date_of_employment' => ['required', 'date', 'before_or_equal:today'],
             'appartement' => ['nullable', 'string', 'min:1', 'max:4'],
             'house_number' => ['string', 'required', 'min:1', 'max:8'],
@@ -75,16 +75,14 @@ class Employee extends Model
         return [
              'password' => ['nullable', 'string', 'confirmed', 'min:8'],
 
-
-
             'first_name' => ['required', 'string', 'max:32', 'min:3'],
             'last_name' => ['required', 'string', 'max:32', 'min:3'],
-            'salary' => ['required', 'numeric', 'gt:0', 'regex:/^\d+(\.\d{1,2})?$/'],
+            'salary' => ['required', 'numeric', 'gt:0', 'regex:/^\d+(\.\d{1,2})?$/','lte:100000'],
             'date_of_employment' => ['required', 'date', 'before_or_equal:today'],
-            'appartement' => ['nullable', 'string', 'min:1','max:4'],
-            'house_number' => ['string', 'required', 'min:1'],
-            'street' => ['string', 'required', 'min:1'],
-            'city' => ['string', 'required', 'min:1'],
+            'appartement' => ['nullable', 'string', 'min:1', 'max:4'],
+            'house_number' => ['string', 'required', 'min:1', 'max:8'],
+            'street' => ['string', 'required', 'min:1','max:32'],
+            'city' => ['string', 'required', 'min:1','max:32'],
         ];
     }
 

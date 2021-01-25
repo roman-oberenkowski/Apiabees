@@ -32,7 +32,7 @@ class Table extends Component
         return view(
             'livewire.state-type.table',
             [
-                'state_types' => StateType::where('name', 'like', "%{$this->search__name}%")->orderBy('name', 'asc')->paginate(5)
+                'state_types' => StateType::where('name', 'like', "%{$this->search__name}%")->orderBy('name', 'asc')->paginate(10)
             ]
         );
 

@@ -16,6 +16,7 @@ class DeleteModal extends Component
 
     public function openModal($id)
     {
+        $this->reset();
         try {
             Action::findOrFail($id);
             $this->action_id=$id;
