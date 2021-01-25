@@ -31,7 +31,7 @@ class Table extends Component
         return view(
             'livewire.action-type.table',
             [
-                'action_types' => ActionType::where('name', 'like', "%{$this->search__name}%")->orderBy('name', 'asc')->paginate(5)
+                'action_types' => ActionType::where('name', 'like', "%{$this->search__name}%")->orderBy('name', 'asc')->paginate(10)
             ]
         );
 

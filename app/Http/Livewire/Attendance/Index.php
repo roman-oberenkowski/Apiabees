@@ -49,10 +49,14 @@ class Index extends Component
         $current_user=User::find(Auth::id());
         if(isset($current_user) && isset($current_user->employee_PESEL)){
             $this->employee_PESEL=$current_user->employee_PESEL;
-            $emp=Employee::findOrFail($this->employee_PESEL);
-            $this->employee=$emp->first_name.' '.$emp->last_name;
-
-            $this->isPresent();
+            $emp=Employee::find($this->employee_PESEL);
+            if($emp!=null){
+                $this->employee=$emp->first_name.' '.$emp->last_name;
+                $this->isPresent();
+            }
+            else{
+                $this->status='Cannot determine who you are!';
+            }
         }
         else{
             $this->status='Cannot determine who you are!';

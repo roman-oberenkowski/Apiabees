@@ -156,7 +156,9 @@ return [
         'hive_id'=>'hive',
         //'apiary_code_name'=>'apiary',
         'task_type_name'=>'task type',
-        'honey_type_name'=>'honey type'
+        'honey_type_name'=>'honey type',
+        'produced_at'=>'date of production'
+
         ],
 
 ];

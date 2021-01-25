@@ -10,13 +10,14 @@ use Livewire\Component;
 class DeleteModal extends Component
 {
     public bool $isModalOpen = false;
-    public string $beefamily_id;
+    public string $beefamily_id='';
     protected $listeners = [
         'openBeeFamilyDeleteModal' => 'openModal',
     ];
 
     public function openModal($id)
     {
+        $this->reset();
         try {
             BeeFamily::withTrashed()->findOrFail($id);
             $this->beefamily_id=$id;

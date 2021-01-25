@@ -28,7 +28,17 @@ class DeleteModal extends Component
         $this->openModal($id_prod);
     }
     public function openModal($id_prod){
+        $this->reset();
         $this->production_id=$id_prod;
+        if($this->isHoney)
+            $tbd = HoneyProduction::find($this->production_id);
+        else
+            $tbd= WaxProduction::find($this->production_id);
+        if (!isset($tbd)){
+            flash("Cannot delete production - probably already deleted.")->info()->livewire($this);
+            $this->closeModal();
+            return;
+        }
         $this->isModalOpen=true;
     }
 

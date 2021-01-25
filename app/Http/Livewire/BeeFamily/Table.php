@@ -14,7 +14,6 @@ class Table extends Component
 
     public string $filter_state='';
     public array $filter_state_dropdown=[];
-    public array $filter_specie_dropdown=[];
 
 
     protected $listeners = [
@@ -59,10 +58,12 @@ class Table extends Component
             case 'Dead':
                 //return BeeFamily::whereNotNull('die_off_date')
                 return BeeFamily::onlyTrashed()
+                    ->orderBy('acquired_at','desc')
                     ->paginate($num_pages);
             case 'Homeless':
                 return BeeFamily::where('hive_id',null)
                     ->whereNull('die_off_date')
+                    ->orderBy('acquired_at','desc')
                     ->paginate($num_pages);
             case 'In hive (storage)':
                 return BeeFamily::whereNull('die_off_date')
@@ -70,6 +71,7 @@ class Table extends Component
                         function($query){
                             $query->where('apiary_code_name',null);
                         })
+                    ->orderBy('acquired_at','desc')
                     ->paginate($num_pages);
             default:
                 //in hive on apiary
@@ -99,7 +101,6 @@ class Table extends Component
     }
     public function openBeeFamilyDetailsModal($id){
         $this->emit('openBeeFamilyDetailsModal', $id);
-        $this->emit('extendBeeFamilyDetailsModal');
     }
     public function openBeeFamilyEditModal($id){
         $this->emit('openBeeFamilyEditModal', $id);

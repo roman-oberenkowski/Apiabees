@@ -30,7 +30,6 @@ class DetailsModal extends Component
         if(Route::currentRouteName()=="hives.index"){
             $this->extended=true;
         }
-
     }
 
     public function openModal($input_hive_id)

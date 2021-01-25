@@ -57,24 +57,23 @@ class Create extends Component
 
     public function store()
     {
-            $validated=$this->validate();
-            $ta=TaskAssignment::where('task_type_name',$this->task_type_name)
-                ->where('employee_PESEL',$this->employee_PESEL)
-                ->where('apiary_code_name',$this->apiary_code_name)
-                ->first();
-            if($ta!=null){
-                $this->addError('apiary_code_name','That task assignment already exists!');
-                return;
-            }
-            $task_assignment=new TaskAssignment($validated);
-            $task_assignment->save();
-
-            $this->afterStore();
+        $validated=$this->validate();
+        $ta=TaskAssignment::where('task_type_name',$this->task_type_name)
+            ->where('employee_PESEL',$this->employee_PESEL)
+            ->where('apiary_code_name',$this->apiary_code_name)
+            ->first();
+        if($ta!=null){
+            $this->addError('apiary_code_name','That task assignment already exists!');
+            return;
+        }
+        $task_assignment=new TaskAssignment($validated);
+        $task_assignment->save();
+        flash("Task has been assigned.")->success()->session();
+        $this->afterStore();
     }
 
     public function afterStore()
     {
-        flash("Task has been assigned.")->success()->session();
         $this->reset();
         $this->resetValidation();
         $this->emit('newTaskAssignmentCreated');

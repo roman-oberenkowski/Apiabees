@@ -17,6 +17,8 @@ class DeleteModal extends Component
 
     public function openModal($input_code_name)
     {
+        $this->reset();
+        $this->resetValidation();
         try {
             Apiary::findOrFail($input_code_name);
             $this->apiary_code_name=$input_code_name;

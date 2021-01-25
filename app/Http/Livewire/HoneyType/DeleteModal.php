@@ -22,8 +22,20 @@ class DeleteModal extends Component
 
     public function openModal(string $name)
     {
+        $this->reset();
         $this->resetValidation();
         $this->name = $name;
+        $honey_type_to_delete = HoneyType::find($this->name);
+        if (!isset($honey_type_to_delete)){
+            flash("Cannot delete honey type {$this->name} - probably already deleted.")->error()->livewire($this);
+            $this->closeModal();
+            return;
+        }
+        if( ($cnt=$honey_type_to_delete->honeyProductions->count())>0){
+            flash("Cannot delete honey type {$this->name} - this honey type is used by {$cnt} honey production(s).")->error()->livewire($this);
+            $this->closeModal();
+            return;
+        }
         $this->isModalOpen = true;
     }
 

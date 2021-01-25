@@ -21,8 +21,20 @@ class DeleteModal extends Component
 
     public function openModal(string $name)
     {
+        $this->reset();
         $this->resetValidation();
         $this->name = $name;
+        $specie_to_delete = Specie::find($this->name);
+        if (!isset($specie_to_delete)){
+            flash("Cannot delete specie {$this->name} - probably already deleted.")->error()->livewire($this);
+            $this->closeModal();
+            return;
+        }
+        if( ($cnt=$specie_to_delete->beeFamilies->count())>0){
+            flash("Cannot delete specie {$this->name} - this specie is used by {$cnt} bee families.")->error()->livewire($this);
+            $this->closeModal();
+            return;
+        }
         $this->isModalOpen = true;
     }
 

@@ -24,8 +24,8 @@ class Scan extends Component
     protected function rules()
     {
         return [
-            'scanned_qr'=>['string','nullable'],
-            'scanned_nfc'=>['string','nullable'],
+            'scanned_qr'=>['string','nullable','max:128'],
+            'scanned_nfc'=>['string','nullable','max:32'],
         ];
     }
 

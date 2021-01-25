@@ -26,8 +26,6 @@ class Create extends Component
 
     public function updated($propertyName)
     {
-        //if($propertyName=='type_name')
-        //    $this->resetValidation();
         $this->validateOnly($propertyName);
     }
 

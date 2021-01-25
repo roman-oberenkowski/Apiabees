@@ -19,11 +19,12 @@ class DetailsModal extends Component
 
     public function openModal($input_code_name)
     {
+        $this->reset();
+        $this->resetValidation();
         try{
             $this->apiary=Apiary::findOrFail($input_code_name)->toArray();
             $this->apiary_code_name=$input_code_name;
             $this->isModalOpen = true;
-            $this->render();
         }
         catch(ModelNotFoundException $e){
             flash("Couldn't find that apiary.")->error()->livewire($this);

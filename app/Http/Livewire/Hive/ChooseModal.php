@@ -77,6 +77,7 @@ class ChooseModal extends Component
         $this->filter_state_dropdown[] = ['name' => 'Occupied', 'value' => 'Occupied', 'checked' => false];
 
     }
+
     public function get_hives(){
         $pages_num=10;
         return Hive::
@@ -110,15 +111,12 @@ class ChooseModal extends Component
 
     public function render()
     {
-
         return view(
             'livewire.hive.choose-modal',
             [
                 'hives' => $this->get_hives()
-
             ]
         );
-
     }
 
     public function choose($id){

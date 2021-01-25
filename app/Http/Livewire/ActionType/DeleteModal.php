@@ -21,12 +21,13 @@ class DeleteModal extends Component
 
     public function openModal(string $name)
     {
+        $this->reset();
+        $this->resetValidation();
         $ac=ActionType::find($name);
         if($ac==null){
             flash("Cannot selected action type - probably already deleted.")->info()->livewire($this);
             return;
         }
-        $this->resetValidation();
         $this->name = $name;
         $this->isModalOpen = true;
     }
@@ -42,7 +43,7 @@ class DeleteModal extends Component
     {
         $action_type_to_delete = ActionType::find($this->name);
         if (!isset($action_type_to_delete)){
-            flash("Cannot delete action type {$this->name} - probably already deleted.")->error()->livewire($this);
+            flash("Cannot delete action type {$this->name} - probably already deleted.")->info()->livewire($this);
             $this->closeModal();
             return;
         }

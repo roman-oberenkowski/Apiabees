@@ -27,25 +27,17 @@ class Apiary extends Model
 {
     public static function validationRulesCreate(){
         return [
-            'code_name' => ['required', 'string', 'min:2','max:31','unique:apiaries'],
-            'name' => ['required', 'string', 'min:2','max:63','unique:apiaries'],
-            'area' => ['required', 'numeric', 'gt:0','lte:1000000'],
-            'parcel' => ['required', 'string', 'min:1','max:7'],
-            'street' => ['required', 'string', 'min:3','max:31'],
-            'city' => ['required', 'string', 'min:3','max:31'],
-            'col_num' => ['required', 'integer', 'gt:0','lte:50'],
-            'row_num' => ['required', 'integer', 'gt:0','lte:50'],
-            'latitude' => ['required', 'numeric', 'gt:0','lt:90'],
-            'longitude' => ['required', 'numeric', 'gt:0','lt:180'],
+            'code_name' => ['required', 'string', 'min:2','max:32','unique:apiaries'],
+            'name' => ['required', 'string', 'min:2','max:64','unique:apiaries'],
+            'area' => ['required', 'numeric', 'gt:0','lte:1000000','regex:/^\d*(.\d{1,2})?$/'],
+            'parcel' => ['required', 'string', 'min:1','max:8'],
+            'street' => ['required', 'string', 'min:3','max:32'],
+            'city' => ['required', 'string', 'min:3','max:32'],
+            'col_num' => ['required', 'integer', 'gt:0','lte:100'],
+            'row_num' => ['required', 'integer', 'gt:0','lte:100'],
+            'latitude' => ['required', 'numeric', 'gt:0','lt:90','regex:/^\d*(.\d{1,4})?$/'],
+            'longitude' => ['required', 'numeric', 'gt:0','lt:180','regex:/^\d*(.\d{1,4})?$/'],
         ];
-    }
-    public static function validationRulesUpdate()
-    {
-
-        $rules=self::validationRulesCreate();
-        unset($rules['code_name']);
-        unset($rules['name']);
-        return $rules;
     }
     /**
      * The primary key for the model.

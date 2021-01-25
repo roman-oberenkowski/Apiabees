@@ -108,15 +108,12 @@ class Table extends Component
 
     public function render()
     {
-
         return view(
             'livewire.hive.table',
                 [
                     'hives' => $this->get_hives()
-
                 ]
         );
-
     }
 
     public function openHiveDeleteModal($id){

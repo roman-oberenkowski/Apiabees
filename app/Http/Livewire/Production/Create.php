@@ -27,13 +27,13 @@ class Create extends Component
     protected function rules()
     {
         $rules_honey=[
-            'produced_weight'=>['required','numeric','gt:0','lt:10000'],
+            'produced_weight'=>['required','numeric','gt:0','lt:10000','regex:/^\d*(.\d{1,2})?$/'],
             'apiary_code_name' => ['required','exists:apiaries,code_name'],
             'honey_type_name'=>['required','exists:honey_types,name'],
             'produced_at' => ['required', 'date', 'before_or_equal:today'],
         ];
         $rules_wax=[
-            'produced_weight'=>['required','numeric','gt:0','lt:10000'],
+            'produced_weight'=>['required','numeric','gt:0','lt:10000','regex:/^\d*(.\d{1,2})?$/'],
             'apiary_code_name' => ['required','exists:apiaries,code_name'],
             'produced_at' => ['required', 'date', 'before_or_equal:today'],
         ];

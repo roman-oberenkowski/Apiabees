@@ -112,7 +112,7 @@ class DetailsModal extends Component
         $this->date_of_employment = $employee->date_of_employment;
 
         if (strlen($employee->appartement)==0) {
-            $this->appartement = 'Brak';
+            $this->appartement = 'None';
         }
         else{
             $this->appartement = $employee->appartement;

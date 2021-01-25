@@ -25,12 +25,12 @@ class Hive extends Model
 {
     public static function validationRulesCreate(){
         return [
-            'material' => ['required','string','min:2','max:31'],
-            'nfc_tag' => ['nullable','string','min:2, max:127','unique:hives,nfc_tag'],
-            'qr_code' => ['nullable','string','min:2, max:31','unique:hives,qr_code'],
-            'apiary_code_name' => ['nullable','string', 'exists:apiaries,code_name','required_with:location_row','required_with:location_column'],
-            'location_row'=> ['nullable','integer','gte:1', 'lte:1000','required_with:apiary_code_name','required_with:location_column'],
-            'location_column'=> ['nullable','integer','gte:1', 'lte:1000', 'required_with:apiary_code_name','required_with:location_row'],
+            'material' => ['required','string','min:2','max:32'],
+            'nfc_tag' => ['nullable','string','min:2, max:128','unique:hives,nfc_tag'],
+            'qr_code' => ['nullable','string','min:2, max:32','unique:hives,qr_code'],
+            'apiary_code_name' => ['nullable','string', 'exists:apiaries,code_name','required_with:location_row','required_with:location_column','max:32'],
+            'location_row'=> ['nullable','integer','gte:1', 'lte:100','required_with:apiary_code_name','required_with:location_column'],
+            'location_column'=> ['nullable','integer','gte:1', 'lte:100', 'required_with:apiary_code_name','required_with:location_row'],
         ];
     }
 

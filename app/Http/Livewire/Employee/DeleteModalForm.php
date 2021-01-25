@@ -22,6 +22,13 @@ class DeleteModalForm extends Component
         $this->resetValidation();
         $this->reset();
         $this->PESEL = $PESEL;
+        try{
+            $employee = Employee::findOrFail($this->PESEL);
+        }
+        catch(ModelNotFoundException $e){
+            flash("Cannot delete chosen user. Please check if user is really in the database and try again")->error()->livewire($this);
+            $this->closeModal();
+        }
         $this->isModalOpen = true;
     }
 
