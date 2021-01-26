@@ -49,6 +49,8 @@ class Create extends Component
     public function store()
     {
         $validated = $this->validate();
+        if($validated['nfc_tag']==null)$validated['nfc_tag']=null;
+        if($validated['qr_code']==null)$validated['qr_code']=null;
         $error=false;
         if($validated['apiary_code_name']!=null) {
             $check_position = Hive::where('apiary_code_name', $this->apiary_code_name)
