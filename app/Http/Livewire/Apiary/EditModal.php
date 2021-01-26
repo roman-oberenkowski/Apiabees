@@ -107,8 +107,8 @@ class EditModal extends Component
             $this->city = $apiary->city;
             $this->street = $apiary->street;
             $this->parcel = $apiary->parcel;
-            $this->latitude = $apiary->latitude;
-            $this->longitude = $apiary->longitude;
+            $this->latitude = round($apiary->latitude,4);
+            $this->longitude = round($apiary->longitude,4);
             $this->row_num = $apiary->row_num;
             $this->col_num = $apiary->col_num;
             $this->isModalOpen = true;

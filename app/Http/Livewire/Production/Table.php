@@ -128,11 +128,11 @@ class Table extends Component
                 orderBy('apiary_code_name', 'asc');
         }
     }
-    public function openProductionDeleteModal($id){
+    public function openProductionDeleteModal($prod_id){
         if($this->isHoney)
-            $this->emit('openHoneyProductionDeleteModal',$id);
+            $this->emit('openHoneyProductionDeleteModal',$prod_id);
         else
-            $this->emit('openWaxProductionDeleteModal',$id);
+            $this->emit('openWaxProductionDeleteModal',$prod_id);
     }
 
     public function get_column_chart_data($productions)

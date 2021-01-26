@@ -9,7 +9,7 @@ use Livewire\Component;
 class DeleteModal extends Component
 {
     public bool $isModalOpen = false;
-    public ?int $action_id;
+    public string $action_id='';
     protected $listeners = [
         'openActionDeleteModal' => 'openModal',
     ];

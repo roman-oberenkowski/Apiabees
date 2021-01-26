@@ -11,7 +11,7 @@ class DeleteModal extends Component
     public bool $isModalOpen = false;
 
     public string $production_id='';
-    public ?bool $isHoney=null;
+    public bool $isHoney=true;
 
     protected $listeners = [
         'openWaxProductionDeleteModal' => 'openWaxModal',
@@ -28,7 +28,7 @@ class DeleteModal extends Component
         $this->openModal($id_prod);
     }
     public function openModal($id_prod){
-        $this->reset();
+
         $this->production_id=$id_prod;
         if($this->isHoney)
             $tbd = HoneyProduction::find($this->production_id);
@@ -40,12 +40,14 @@ class DeleteModal extends Component
             return;
         }
         $this->isModalOpen=true;
+
     }
 
     public function closeModal()
     {
         $this->isModalOpen = false;
         $this->emit('closedProductionDeleteModal');
+        $this->reset();
     }
 
     public function destroy()

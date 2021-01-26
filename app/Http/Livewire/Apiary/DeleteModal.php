@@ -10,7 +10,7 @@ use Livewire\Component;
 class DeleteModal extends Component
 {
     public bool $isModalOpen = false;
-    public string $apiary_code_name;
+    public string $apiary_code_name='';
     protected $listeners = [
         'openApiaryDeleteModal' => 'openModal',
     ];

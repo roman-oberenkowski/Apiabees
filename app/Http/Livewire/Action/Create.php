@@ -19,7 +19,7 @@ class Create extends Component
 {
     public string $employee_PESEL = '';
     public string $description='';
-    public ?int $hive_id = null;
+    public string $hive_id = '';
     public string $type_name = '';
     public array $type_name_dropdown=[];
     public array $employee_dropdown=[];

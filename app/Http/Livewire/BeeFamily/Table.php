@@ -18,7 +18,8 @@ class Table extends Component
 
     protected $listeners = [
         'closedBeeFamilyDeleteModal' => '$refresh',
-        'closedBeeFamilyEditModal' => '$refresh'
+        'closedBeeFamilyEditModal' => '$refresh',
+        'closedBeeFamilyAssignHiveModal' => '$refresh'
     ];
 
     public function mount()

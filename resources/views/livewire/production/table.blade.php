@@ -21,7 +21,7 @@
         </div>
         <div class="col-span-6 sm:col-span-3">
             <x-jet-label for="from_date" value="{{ __('From date') }}" />
-            <x-jet-input id="from_date" type="date" class="mt-1 block w-full" wire:model="from_date" autocomplete="from_date"/>
+            <x-jet-input id="from_date" type="date" class="mt-1 block w-full" disabl wire:model="from_date" autocomplete="from_date"/>
             <x-jet-input-error for="from_date" class="mt-2" />
         </div>
         <div class="col-span-6 sm:col-span-3">
@@ -145,4 +145,4 @@
         <p>Overall, during this time  {{$produced}} kg. of @if($isHoney) honey @else wax @endif has been produced.</p>
     </div>
     @endif
-</table>
+</div>

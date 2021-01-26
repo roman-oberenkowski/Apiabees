@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
+use Carbon\Carbon;
 use DateInterval;
+use DateTime;
 use Illuminate\Database\Seeder;
 use \Faker\Factory;
 use \App\Models\Attendance;
@@ -26,10 +28,11 @@ class AttendanceSeeder extends Seeder
 
             $att=new Attendance;
             $att->employee_PESEL=$employees[$f->numberBetween(0,Employee::count()-1)]->PESEL;
-            $data=$f->dateTimeBetween();
-            if($f->numberBetween(0,9)<8)
-                $att->finished_at=$data;
-            $data->sub(new DateInterval('PT8H'));
+            $data=new Carbon($f->dateTimeBetween());
+
+            $att->finished_at=$data;
+            //$data->sub(new DateInterval('PT8H'));
+            $data=$data->subHour(8);
             $att->started_at=$data;
 
             $att->save();

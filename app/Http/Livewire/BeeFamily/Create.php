@@ -13,7 +13,7 @@ class Create extends Component
 {
     public string $acquired_at='';
     public string $population='';
-    public ?string $die_off_date=null;
+    public string $die_off_date='';
     public string $species_name='';
     public string $hive_id='';
     public array $species_dropdown=[];
