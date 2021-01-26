@@ -62,7 +62,7 @@ class EditModal extends Component
             $row_col_error = false;
             if ($new_col_num < $old_col_num) {
 
-                $f = Hive::whereBetween('location_column', array($new_col_num + 1, $old_col_num))->take(1)->get(['id', 'location_row', 'location_column']);
+                $f = Hive::where('apiary_code_name',$this->old_code_name)-> whereBetween('location_column', array($new_col_num + 1, $old_col_num))->orderby('location_column','desc')-> take(1)->get(['id', 'location_row', 'location_column']);
                 if (!$f->isEmpty()) {
 
                     $this->addError('col_num', 'Cannot set smaller column size - there is a hive at column ' . $f[0]->location_column);
@@ -70,7 +70,7 @@ class EditModal extends Component
                 }
             }
             if ($new_row_num < $old_row_num) {
-                $f = Hive::whereBetween('location_row', array($new_row_num + 1, $old_row_num))->take(1)->get(['id', 'location_row', 'location_column']);
+                $f = Hive::where('apiary_code_name',$this->old_code_name)->whereBetween('location_row', array($new_row_num + 1, $old_row_num))->orderby('location_row','desc')->take(1)->get(['id', 'location_row', 'location_column']);
                 if (!$f->isEmpty()) {
                     $this->addError('row_num', 'Cannot set smaller row size - there is a hive at row ' . $f[0]->location_row);
                     $row_col_error = true;
