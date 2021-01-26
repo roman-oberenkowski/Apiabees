@@ -93,14 +93,14 @@
 
                     <td class="pr-4 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
                         <a href="#" class="text-red-600 hover:text-red-900"
-                           wire:click="openApiaryDeleteModal('{{$apiary->code_name}}')" wire:loading.attr="disabled">
+                           wire:click="openApiaryDeleteModal('{{base64_encode($apiary->code_name)}}')" wire:loading.attr="disabled">
                             <i class="fas fa-times pr-2"></i>Delete</a>
 
                         <a href="#" class="text-gray-400 hover:text-gray-900"
-                           wire:click="openApiaryDetailsModal('{{$apiary->code_name}}')" wire:loading.attr="disabled">
+                           wire:click="openApiaryDetailsModal('{{base64_encode($apiary->code_name)}}')" wire:loading.attr="disabled">
                             <i class="fas fa-address-card pl-2 pr-2"></i>Details</a>
                         <a href="#" class="text-green-400 hover:text-green-900"
-                           wire:click="openApiaryEditModal('{{$apiary->code_name}}')" wire:loading.attr="disabled">
+                           wire:click="openApiaryEditModal('{{base64_encode($apiary->code_name)}}')" wire:loading.attr="disabled">
                             <i class="fas fa-edit pl-2 pr-2"></i>Edit</a>
                     </td>
                 </tr>
