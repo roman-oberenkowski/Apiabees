@@ -70,7 +70,7 @@
                                     </div>
 
                                     <div class="col-span-6 ">
-                                        <x-jet-label for="date_of_employment" value="{{ __('Date of employment (optional)') }}" />
+                                        <x-jet-label for="date_of_employment" value="{{ __('Date of employment') }}" />
                                         <x-jet-input id="date_of_employment" type="date" class="mt-1 block w-full" wire:model="date_of_employment" autocomplete="date_of_employment"/>
                                         <x-jet-input-error for="date_of_employment" class="mt-2" />
                                     </div>
