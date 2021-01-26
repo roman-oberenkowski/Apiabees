@@ -19,7 +19,7 @@ class Create extends Component
 {
     public string $employee_PESEL = '';
     public string $description='';
-    public string $hive_id = '';
+    public ?int $hive_id = null;
     public string $type_name = '';
     public array $type_name_dropdown=[];
     public array $employee_dropdown=[];
@@ -49,7 +49,7 @@ class Create extends Component
                 'inspection_description'=>['nullable','string', 'min:2','max:65000','requiredIf:state_type_name,'.StateType::special_state_other],
             ];
             if($this->state_type_name==StateType::special_state_population_changed) {
-                $insp_rules['population'] =['required', 'integer','gte:1'];
+                $insp_rules['population'] =['required', 'integer','gte:1','lte:10000000'];
 
             }
             return array_merge($base_rules, $insp_rules);
@@ -72,6 +72,7 @@ class Create extends Component
     public function store()
     {
         $validated = $this->validate();
+        if($validated['hive_id']==null)$validated['hive_id']=null;
         if($this->type_name==ActionType::special_action_inspection){
             $bee_family=BeeFamily::find($this->bee_family_id);
             if($bee_family==null) {

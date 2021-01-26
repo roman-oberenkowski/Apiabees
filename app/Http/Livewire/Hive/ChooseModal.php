@@ -44,6 +44,11 @@ class ChooseModal extends Component
         }
     }
 
+    public function format_descr($in){
+        if(strlen($in)>13)
+            return substr($in,0,10).'...';
+        return $in;
+    }
     public function updated($propertyName){
         $this->resetPage();
     }

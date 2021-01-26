@@ -84,7 +84,7 @@
                                         <div>
                                             <div class="text-sm leading-5 font-medium text-gray-900">
                                                 @if($hive->apiary_code_name!=null)
-                                                    {{$hive->apiary_code_name}}
+                                                    {{$this->format_descr($hive->apiary_code_name)}}
                                                 @else
                                                     <i>Unassigned</i>
                                                 @endif
