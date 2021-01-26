@@ -34,8 +34,8 @@ class DetailsModal extends Component
     ];
 
     public function formatDescription($in){
-        if(strlen($in)>32)
-            return substr($in,0,29).'...';
+        if(strlen($in)>22)
+            return substr($in,0,19).'...';
         return $in;
     }
 
