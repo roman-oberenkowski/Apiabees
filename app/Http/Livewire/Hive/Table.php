@@ -102,6 +102,7 @@ class Table extends Component
                 else
                     return $query;
             })->
+            orderby('apiary_code_name','asc')->
             paginate($pages_num);
 
     }
