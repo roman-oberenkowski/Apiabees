@@ -64,9 +64,10 @@ class AssignHiveModal extends Component
             }
         }
         else{
-            $this->unassign_hive($this->bee_family_id);
+            $this->unassign_hive($bee_family);
             flash("Bee family successfully removed from hive (moved to storage).")->success()->livewire($this);
             $this->closeModal();
+            return;
         }
         if($bee_family->die_off_date!=null){
             $this->addError('choosen_hive',"That bee family is dead!");
