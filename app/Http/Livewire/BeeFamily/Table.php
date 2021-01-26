@@ -80,7 +80,7 @@ class Table extends Component
                     return BeeFamily::whereHas('hive',
                         function ($query) {
                             $query->where('apiary_code_name', substr($this->filter_state, 3));
-                        })->paginate($num_pages);
+                        })->orderBy('acquired_at','desc')->paginate($num_pages);
                 }
                 return [];
         }
