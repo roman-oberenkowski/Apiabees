@@ -96,6 +96,8 @@ class EditModal extends Component
     public function choose(){
         $validated=$this->validate();
         $error=false;
+        if($validated['nfc_tag']==null)$validated['nfc_tag']=null;
+        if($validated['qr_code']==null)$validated['qr_code']=null;
         if($validated['apiary_code_name']!=null) {
             $check_position = Hive::where('apiary_code_name', $this->apiary_code_name)
                 ->where('location_row', $this->location_row)

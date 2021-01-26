@@ -111,6 +111,7 @@ class ChooseModal extends Component
                     return $query;
             })->
             orderby('apiary_code_name','asc')->
+            orderby('id','asc')->
             paginate($pages_num);
 
     }
