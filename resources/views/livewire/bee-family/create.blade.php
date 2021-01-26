@@ -20,13 +20,13 @@
                                     </div>
 
                                     <div class="col-span-6 sm:col-span-3">
-                                        <x-jet-label for="population" value="{{ __('population') }}" />
+                                        <x-jet-label for="population" value="{{ __('Population') }}" />
                                         <x-jet-input id="population" type="text" class="mt-1 block w-full" wire:model="population" autocomplete="population"  required/>
                                         <x-jet-input-error for="population" class="mt-2" />
                                     </div>
 
                                     <div class="col-span-6 sm:col-span-3">
-                                        <x-jet-label for="acquired_at" value="{{ __('acquired  at') }}" />
+                                        <x-jet-label for="acquired_at" value="{{ __('Acquired  at') }}" />
                                         <x-jet-input id="acquired_at" type="date" class="mt-1 block w-full" wire:model="acquired_at" autocomplete="acquired_at" required/>
                                         <x-jet-input-error for="acquired_at" class="mt-2" />
                                     </div>

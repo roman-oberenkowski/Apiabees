@@ -55,7 +55,7 @@ class Table extends Component
         $num_pages=10;
         switch($this->filter_state){
             case '':
-                return BeeFamily::paginate($num_pages);
+                return BeeFamily::orderBy('acquired_at','desc')->paginate($num_pages);
             case 'Dead':
                 //return BeeFamily::whereNotNull('die_off_date')
                 return BeeFamily::onlyTrashed()
