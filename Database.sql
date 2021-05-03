@@ -1,7 +1,3 @@
--- laravel will take care of dropping and creating the database
--- DROP DATABASE IF EXISTS apiabees;
--- CREATE DATABASE apiabees;
-
 USE apiabees;
 
 CREATE TABLE action_types (
