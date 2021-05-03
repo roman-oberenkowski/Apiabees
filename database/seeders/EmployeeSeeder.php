@@ -45,26 +45,6 @@ class EmployeeSeeder extends Seeder
             //$userData['employee_Pesel'] = $emp->PESEL;
             $emp->user()->Create($userData);
         }
-        //create employee for test_user
-        $emp= Employee::create();
-        $emp->PESEL='11111111111';
-        $emp->first_name='Tester';
-        $emp->last_name='Test';
-        $emp->salary=$f->numberBetween(10,50)*200;
-        $emp->house_number=$f->numberBetween(1,200);
-        $emp->street=substr($f->streetName,0,32);
-        $emp->city=$f->city;
-        if($f->randomDigit%2==0){
-            $emp->appartement=$f->numberBetween(1,50);
-        }
-        $emp->date_of_employment=$f->dateTimeBetween();
-        $emp->save();
-        $userData = [];
-        $userData['name'] = $emp->first_name.' '.$emp->last_name;
-        $userData['email'] = 'test@test.pl';
-        $userData['password'] = Hash::make('qwerty');
-        //$userData['employee_Pesel'] = $emp->PESEL;
-        $emp->user()->Create($userData);
     }
 }
 
