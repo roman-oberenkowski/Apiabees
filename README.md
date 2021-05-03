@@ -20,3 +20,15 @@ To install the app follow these steps:
 11. `php artisan migrate:fresh --seed`,
 12. `php artisan serve`,
 13. Voila
+
+## Screenshots
+
+![newAction](https://github.com/roman-oberenkowski/Apiabees/blob/f5b27e81e3669e2009c34550aa84a709dad8777a/readme_resources/newAction.jpg)
+![specieList](https://github.com/roman-oberenkowski/Apiabees/blob/f5b27e81e3669e2009c34550aa84a709dad8777a/readme_resources/SpeciesList.jpg)
+![empEdit](https://github.com/roman-oberenkowski/Apiabees/blob/f5b27e81e3669e2009c34550aa84a709dad8777a/readme_resources/EmployeeEdit.jpg)
+![attencance](https://github.com/roman-oberenkowski/Apiabees/blob/f5b27e81e3669e2009c34550aa84a709dad8777a/readme_resources/Attendance.jpg)
+
+## DB stuff
+
+![relschema](https://github.com/roman-oberenkowski/Apiabees/blob/f5b27e81e3669e2009c34550aa84a709dad8777a/readme_resources/Relational%20schema.png)
+![entschema](https://github.com/roman-oberenkowski/Apiabees/blob/f5b27e81e3669e2009c34550aa84a709dad8777a/readme_resources/Entity%20schema.png)
