@@ -22,7 +22,7 @@ To install the app follow these steps:
 13. Voila
 
 ## Screenshots
-
+`all names in screenshots are fake (generated with php faker library)`
 ![newAction](https://github.com/roman-oberenkowski/Apiabees/blob/f5b27e81e3669e2009c34550aa84a709dad8777a/readme_resources/newAction.jpg)
 ![specieList](https://github.com/roman-oberenkowski/Apiabees/blob/f5b27e81e3669e2009c34550aa84a709dad8777a/readme_resources/SpeciesList.jpg)
 ![empEdit](https://github.com/roman-oberenkowski/Apiabees/blob/f5b27e81e3669e2009c34550aa84a709dad8777a/readme_resources/EmployeeEdit.jpg)
